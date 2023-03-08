@@ -10,10 +10,10 @@ CREATE OR REPLACE PACKAGE BODY pkg_czh_test IS
 
   FUNCTION f_test RETURN VARCHAR2 IS
   BEGIN
-    IF 1 = 1 THEN
+/*    IF 1 = 1 THEN
       NULL;
-      END IF;
-    RETURN '456456123123123';
+      END IF;*/
+    RETURN '123';
   END;
 END pkg_czh_test;
 /
