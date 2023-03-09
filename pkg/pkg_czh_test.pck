@@ -10,7 +10,7 @@ CREATE OR REPLACE PACKAGE BODY pkg_czh_test IS
 
   FUNCTION f_test RETURN VARCHAR2 IS
   BEGIN
-/*    IF 1 = 1 THEN
+/*    IF 1 = 1 THEN 12
       NULL;
       END IF;*/
     RETURN '123';
