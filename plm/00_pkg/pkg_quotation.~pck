@@ -981,7 +981,7 @@ CREATE OR REPLACE PACKAGE BODY PLM.pkg_quotation IS
           
             UPDATE quotation t
                SET t.freight           = p_quota_rec.freight,
-                   t.design_fee        = nvl(p_quota_rec.design_fee,0),
+                   t.design_fee        = p_quota_rec.design_fee,
                    t.processing_profit = p_quota_rec.processing_profit,
                    t.update_time       = p_quota_rec.update_time,
                    t.update_id         = p_quota_rec.update_id
