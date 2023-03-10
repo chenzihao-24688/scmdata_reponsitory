@@ -1,4 +1,5 @@
 CREATE OR REPLACE PACKAGE scmdata.pkg_ask_mange IS
+---ces
   --验厂管理==>待验厂页面
   FUNCTION f_query_uncheck_factory RETURN CLOB;
   --添加验厂报告  基础信息 item_id: a_check_101_1
