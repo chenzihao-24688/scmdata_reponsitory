@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE pkg_ask_mange IS
+CREATE OR REPLACE PACKAGE scmdata.pkg_ask_mange IS
   --验厂管理==>待验厂页面
   FUNCTION f_query_uncheck_factory RETURN CLOB;
   --添加验厂报告  基础信息 item_id: a_check_101_1
@@ -83,7 +83,7 @@ CREATE OR REPLACE PACKAGE pkg_ask_mange IS
                                       p_current_userid varchar2);
 end pkg_ask_mange;
 /
-CREATE OR REPLACE PACKAGE BODY pkg_ask_mange IS
+CREATE OR REPLACE PACKAGE BODY scmdata.pkg_ask_mange IS
 
   --验厂管理==>待验厂(item_id:a_check_101)
   FUNCTION f_query_uncheck_factory RETURN CLOB IS
