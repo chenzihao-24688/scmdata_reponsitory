@@ -1,2 +1,2 @@
-SCM测试环境
-test
+SCM开发环境
+dev
