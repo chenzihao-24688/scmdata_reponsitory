@@ -2,3 +2,4 @@ SCM开发环境
 dev
 lsl devloping 123456
 lsl update 456
+lsl 123456
