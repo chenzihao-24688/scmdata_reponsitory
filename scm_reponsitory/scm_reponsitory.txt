@@ -1,2 +1,2 @@
-SCM预发布环境
-release
+SCM测试环境
+test
