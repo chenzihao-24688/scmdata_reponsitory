@@ -1,7 +1,3 @@
 SCM开发环境
-<<<<<<< HEAD
 dev
 lsl devloping123456
-=======
-dev
->>>>>>> 4985cf25c9c10adfde5e7a8046747c254c21c7cc
