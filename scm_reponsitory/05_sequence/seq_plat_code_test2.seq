@@ -1,0 +1,8 @@
+﻿create sequence SCMDATA.SEQ_PLAT_CODE_TEST2
+minvalue 0
+maxvalue 9999
+start with 1
+increment by 1
+cache 2
+cycle;
+

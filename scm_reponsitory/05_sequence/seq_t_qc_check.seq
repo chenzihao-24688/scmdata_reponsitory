@@ -1,0 +1,8 @@
+﻿create sequence SCMDATA.SEQ_T_QC_CHECK
+minvalue 0
+maxvalue 99
+start with 74
+increment by 1
+cache 2
+cycle;
+

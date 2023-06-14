@@ -1,0 +1,7 @@
+﻿create sequence SCMDATA.SUPPLIER_INFO_T_S
+minvalue 1
+maxvalue 99999
+start with 5
+increment by 1
+cache 2;
+

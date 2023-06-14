@@ -1,0 +1,7 @@
+﻿create sequence SCMDATA.MRP_DETERMINE_SUPPLIER_COOPERATION_CATEGORY_MAPPING_ID_SEQ
+minvalue 1
+maxvalue 9999999999999999999999999999
+start with 1004
+increment by 1
+nocache;
+

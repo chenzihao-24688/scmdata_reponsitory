@@ -1,0 +1,8 @@
+﻿create sequence SCMDATA.SEQ_CA
+minvalue 0
+maxvalue 99
+start with 54
+increment by 1
+cache 2
+cycle;
+

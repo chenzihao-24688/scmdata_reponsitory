@@ -1,0 +1,8 @@
+﻿create sequence SCMDATA.SEQ_T_CLASS
+minvalue 1
+maxvalue 9999999999999999999999999
+start with 119
+increment by 1
+cache 2
+order;
+
