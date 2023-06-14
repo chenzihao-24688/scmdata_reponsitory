@@ -1,9 +1,0 @@
-declare
-begin
-insert into bwptest1.sys_port_http (PORT_NAME, URL, ACTION_TAG, APP_KEY, APP_SECRET, TOKEN_SQL, PORT_TYPE)
-values ('port_itf_a_supp_140', 'http://172.28.40.61:9090/lion/scm/null', 0, '18172543571', '428PSxZv+N8ZSE6L3Rkdug==', null, 11);
-
-insert into bwptest1.sys_port_http (PORT_NAME, URL, ACTION_TAG, APP_KEY, APP_SECRET, TOKEN_SQL, PORT_TYPE)
-values ('port_itf_a_supp_141', 'http://172.28.40.61:9090/lion/scm/null', 0, '18172543571', '428PSxZv+N8ZSE6L3Rkdug==', null, 11);
-
-end;
