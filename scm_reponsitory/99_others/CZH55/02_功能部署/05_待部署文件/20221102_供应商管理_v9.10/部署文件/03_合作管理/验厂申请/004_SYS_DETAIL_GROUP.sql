@@ -1,0 +1,1452 @@
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^sp_certificate_file_y,sp_supplier_gate_n,sp_supplier_office_n,sp_supplier_site_n,sp_supplier_product_n,sp_other_information_n^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''相关附件'' AND ITEM_ID = ''a_supp_151''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,4,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''相关附件'' AND ITEM_ID = ''a_supp_151''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''相关附件'',''a_supp_151'',0,4,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^factory_name,factory_abbreviation,fa_social_credit_code,fpcc,factory_detail_adress,factory_representative,fa_com_contact_phone,fa_contact_name,fa_contact_phone,factory_type,factory_coop_brand,factory_coop_brand_desc,factory_coop_model,FACTORY_COOP_MODEL_DESC,product_link,FA_RELA_SUPPLIER_ID_DESC^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''工厂信息'' AND ITEM_ID = ''a_coop_150_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,1,3,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''工厂信息'' AND ITEM_ID = ''a_coop_150_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''工厂信息'',''a_coop_150_3'',1,3,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^fa_certificate_file,factory_gate,factory_site,factory_office,factory_product ^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''工厂附件资料'' AND ITEM_ID = ''a_coop_150_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,1,5,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''工厂附件资料'' AND ITEM_ID = ''a_coop_150_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''工厂附件资料'',''a_coop_150_3'',1,5,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^supplier_code,inside_supplier_code,supplier_company_name,supplier_company_abbreviation,legal_representative,company_create_date,certificate_validity_start,certificate_validity_end,regist_address,regist_price,social_credit_code,company_type,company_person,company_contact_person,company_contact_phone,company_address,taxpayer,company_say,up_certificate_file,organization_file,sharing_type^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''基本信息'' AND ITEM_ID = ''a_supp_111''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 4,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''基本信息'' AND ITEM_ID = ''a_supp_111''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 4,''基本信息'',''a_supp_111'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^cooperation_method_sp,cooperation_type_sp,cooperation_model_sp,production_mode_sp,cooperation_classification_sp,cooperation_subcategory_sp^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''能力评估'' AND ITEM_ID = ''a_supp_111''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 2,0,4,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''能力评估'' AND ITEM_ID = ''a_supp_111''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 2,''能力评估'',''a_supp_111'',0,4,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ar_product_line_n,ar_product_line_num_n,ar_quality_step_n,ar_work_hours_day_y,ar_worker_total_num_y,ar_worker_num_y,ar_machine_num_y,ar_form_num_y,ar_product_efficiency_y,ar_pattern_cap_y,ar_fabric_purchase_cap_y,ar_fabric_check_cap_n^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''生产信息'' AND ITEM_ID = ''a_coop_150_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,3,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''生产信息'' AND ITEM_ID = ''a_coop_150_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''生产信息'',''a_coop_150_3'',0,3,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^fa_check_person_desc_y,fa_dept_name_desc_y,fa_check_person_y,fa_check_dept_name_y,fa_ask_date_n,fa_is_urgent_n,fa_is_urgent_desc_n,ar_cooperation_type_y,ar_cooperation_model_y,ar_coop_model_desc_y,ar_coop_class_desc_n,ar_product_type_y,ar_pay_term_n,fa_ask_say_y^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''申请信息'' AND ITEM_ID = ''a_coop_150_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''申请信息'' AND ITEM_ID = ''a_coop_150_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''申请信息'',''a_coop_150_3'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^public_accounts,public_payment,public_bank,public_id,public_phone,personal_account,personal_payment,personal_bank,personal_idcard,personal_phone,pay_type,settlement_type,reconciliation_user,reconciliation_phone^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''财务信息'' AND ITEM_ID = ''a_supp_111''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 4,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''财务信息'' AND ITEM_ID = ''a_supp_111''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 4,''财务信息'',''a_supp_111'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^AREA,ATTRIBUTOR,ADDRESS,COMPANY_TYPE,PRODUCT,RIVAL,ID_STATUS^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''其它资料'' AND ITEM_ID = ''a_supp_111_5''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 2,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''其它资料'' AND ITEM_ID = ''a_supp_111_5''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 2,''其它资料'',''a_supp_111_5'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ar_certificate_file_y,ar_supplier_gate_n,ar_supplier_office_n,ar_supplier_site_n,ar_supplier_product_n,ar_other_information_n^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''附件信息'' AND ITEM_ID = ''a_coop_150_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,4,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''附件信息'' AND ITEM_ID = ''a_coop_150_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''附件信息'',''a_coop_150_3'',0,4,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^CHECK_DEPT_NAME,CHECKAPPLY_PERSON,CHECKAPPLY_PHONE,ASK_COMPANY_NAME,PCC,COMPANY_ADDRESS,FACTORY_NAME,FPCC,ASK_ADDRESS,CONTACT_NAME,CONTACT_PHONE,FACTORY_ASK_DATE,CHECK_DATE,SOCIAL_CREDIT_CODE,COOPERATION_TYPE_DESC,RELA_SUPPLIER_ID,COOPERATION_MODEL_DESC,CHECKAPPLY_INTRO,ASK_FILES^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''需求信息'' AND ITEM_ID = ''a_coop_150_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,1,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''需求信息'' AND ITEM_ID = ''a_coop_150_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''需求信息'',''a_coop_150_3'',1,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^logo,company_name,logn_name,CREATE_TIME,tips,licence_type,licence_num,is_open^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''基础资料'' AND ITEM_ID = ''a_supp_111_5''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 1,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''基础资料'' AND ITEM_ID = ''a_supp_111_5''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 1,''基础资料'',''a_supp_111_5'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^sp_coop_state_y,sp_regist_status_n,sp_bind_status_n,sp_cooperation_type_y,sp_cooperation_model_y,sp_coop_position_n,ar_pay_term_n^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''合作信息'' AND ITEM_ID = ''a_supp_151''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,3,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''合作信息'' AND ITEM_ID = ''a_supp_151''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''合作信息'',''a_supp_151'',0,3,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^CHECK_DEPT_NAME,CHECKAPPLY_PERSON,CHECK_DATE,CHECK_APPLY_PHONE^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''需求信息'' AND ITEM_ID = ''a_coop_150_4''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 2,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''需求信息'' AND ITEM_ID = ''a_coop_150_4''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 2,''需求信息'',''a_coop_150_4'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ASK_COMPANY_NAME,PCC,COMPANY_ADDRESS,FACTORY_NAME,ASK_ADDRESS,CONTACT_NAME,CONTACT_PHONE,COOPERATION_TYPE_DESC,COOPERATION_CLASSIFICATION_DESC,COOPERATION_SUBCATEGORY_DESC,COOPERATION_MODEL_DESC,CHECKAPPLY_INTRO^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''验厂信息'' AND ITEM_ID = ''a_coop_150_4''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 2,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''验厂信息'' AND ITEM_ID = ''a_coop_150_4''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 2,''验厂信息'',''a_coop_150_4'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^sp_sup_company_name_y,sp_sup_company_abb_y,sp_social_credit_code_y,sp_supplier_code_n,sp_inside_supplier_code_n,sp_company_regist_date_y,sp_location_area_y,ar_company_vill_y,sp_company_address_y,sp_group_name_n,sp_legal_represent_n,sp_company_contact_phone_n,sp_contact_name_y,sp_contact_phone_y,sp_company_type_y,ar_is_our_factory_y,sp_factroy_area_y,sp_remarks_n,^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''基本信息'' AND ITEM_ID = ''a_supp_151''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''基本信息'' AND ITEM_ID = ''a_supp_151''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''基本信息'',''a_supp_151'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^sp_product_type_y,brand_type,cooperation_brand,sp_coop_brand_desc_n,sp_product_link_n,sp_product_line_n,sp_product_line_num_n,sp_quality_step_y,sp_work_hours_day_y,sp_worker_total_num_y,sp_worker_num_y,sp_machine_num_y,sp_form_num_y,sp_product_efficiency_y,sp_pattern_cap_y,sp_fabric_purchase_cap_y,sp_fabric_check_cap_y^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''生产信息'' AND ITEM_ID = ''a_supp_151''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''生产信息'' AND ITEM_ID = ''a_supp_151''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''生产信息'',''a_supp_151'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ask_company_name,company_abbreviation,social_credit_code,pcc,company_vill,company_address,legal_representative,company_contact_phone,ask_user_name,ask_user_phone,COMPANY_TYPE_DESC,cooperation_brand_desc,cooperation_type_desc,cooperation_model,product_link_desc,ask_say,remarks^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''供应商基本信息'' AND ITEM_ID = ''a_coop_150_6''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''供应商基本信息'' AND ITEM_ID = ''a_coop_150_6''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''供应商基本信息'',''a_coop_150_6'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ASK_COMPANY_NAME,SAPPLY_USER,SAPPLY_PHONE,SOCIAL_CREDIT_CODE,PCC,COMPANY_ADDRESS,CERTIFICATE_FILE,OTHER_FILE^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''公司信息'' AND ITEM_ID = ''a_coop_150_6''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,1,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''公司信息'' AND ITEM_ID = ''a_coop_150_6''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''公司信息'',''a_coop_150_6'',1,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^COOPERATION_TYPE_DESC,COOPERATION_MODEL_DESC,ASK_SAY^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''意向信息'' AND ITEM_ID = ''a_coop_150_6''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 1,1,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''意向信息'' AND ITEM_ID = ''a_coop_150_6''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 1,''意向信息'',''a_coop_150_6'',1,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^certificate_file,supplier_gate,supplier_office,supplier_site,supplier_product^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''附件资料'' AND ITEM_ID = ''a_coop_150_6''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''附件资料'' AND ITEM_ID = ''a_coop_150_6''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''附件资料'',''a_coop_150_6'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ASK_COMPANY_NAME,SAPPLY_USER,SAPPLY_PHONE,SOCIAL_CREDIT_CODE,PCC,COMPANY_ADDRESS,CERTIFICATE_FILE,OTHER_FILE^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''公司信息'' AND ITEM_ID = ''a_coop_151''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,1,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''公司信息'' AND ITEM_ID = ''a_coop_151''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''公司信息'',''a_coop_151'',1,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ar_company_name_y,ar_company_abbreviation_y,ar_social_credit_code_y,ar_company_area_y,ar_company_vill_y,ar_company_vill_desc_y,ar_company_address_y,ar_company_regist_date_y,ar_legal_representative_n,ar_company_contact_phone_n,ar_cooperation_type_y,ar_cooperation_model_y,ar_company_type_y,ar_company_type_desc_y,ar_coop_model_desc_y,ar_pay_term_n,ar_product_type_y,ar_sapply_user_y,ar_sapply_phone_y,ar_coop_brand_desc_n,ar_product_link_n,ar_rela_supplier_id_y,ar_is_our_factory_y,ar_is_our_fac_desc_y,ar_factory_name_y,ar_factory_area_y,ar_factory_vill_y,ar_factory_vill_desc_y,ar_factroy_details_address_y,ar_factroy_area_y,ar_ask_say_n^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''基本信息'' AND ITEM_ID = ''a_coop_151''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''基本信息'' AND ITEM_ID = ''a_coop_151''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''基本信息'',''a_coop_151'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^COOPERATION_TYPE_DESC,COOPERATION_MODEL_DESC,ASK_SAY^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''意向信息'' AND ITEM_ID = ''a_coop_151''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 1,1,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''意向信息'' AND ITEM_ID = ''a_coop_151''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 1,''意向信息'',''a_coop_151'',1,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ar_product_line_n,ar_product_line_num_n,ar_quality_step_n,ar_work_hours_day_y,ar_worker_total_num_y,ar_worker_num_y,ar_machine_num_y,ar_form_num_y,ar_product_efficiency_y,ar_pattern_cap_y,ar_fabric_purchase_cap_y,ar_fabric_check_cap_n^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''生产信息'' AND ITEM_ID = ''a_coop_151''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''生产信息'' AND ITEM_ID = ''a_coop_151''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''生产信息'',''a_coop_151'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ar_certificate_file_y,ar_supplier_gate_n,ar_supplier_office_n,ar_supplier_site_n,ar_supplier_product_n,ar_other_information_n^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''附件信息'' AND ITEM_ID = ''a_coop_151''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,3,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''附件信息'' AND ITEM_ID = ''a_coop_151''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''附件信息'',''a_coop_151'',0,3,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ask_company_name,company_abbreviation,social_credit_code,pcc,company_vill,company_address,factory_name,fpcc,factory_vill,ask_address,legal_representative,company_contact_phone,ask_user_name,ask_user_phone,company_type,cooperation_brand,cooperation_brand_desc,product_link,product_link_desc,rela_supplier_id,rela_supplier_id_desc,remarks^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''供应商基本信息'' AND ITEM_ID = ''a_coop_221''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''供应商基本信息'' AND ITEM_ID = ''a_coop_221''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''供应商基本信息'',''a_coop_221'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^certificate_file,ask_files,supplier_gate,supplier_office,supplier_site,supplier_product^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''供应商附件资料'' AND ITEM_ID = ''a_coop_221''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,4,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''供应商附件资料'' AND ITEM_ID = ''a_coop_221''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''供应商附件资料'',''a_coop_221'',0,4,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^factory_name,factory_abbreviation,fa_social_credit_code,fpcc,factory_detail_adress,factory_representative,fa_com_contact_phone,fa_contact_name,fa_contact_phone,factory_type,factory_coop_brand,factory_coop_brand_desc,factory_coop_model,product_link,fa_rela_supplier_id^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''工厂信息'' AND ITEM_ID = ''a_coop_221''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,1,3,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''工厂信息'' AND ITEM_ID = ''a_coop_221''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''工厂信息'',''a_coop_221'',1,3,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^AREA,ATTRIBUTOR,ADDRESS,PRODUCT,RIVAL^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''其它资料'' AND ITEM_ID = ''a_coop_103''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 2,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''其它资料'' AND ITEM_ID = ''a_coop_103''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 2,''其它资料'',''a_coop_103'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^fa_certificate_file,factory_gate,factory_site,factory_office,factory_product^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''工厂附件资料'' AND ITEM_ID = ''a_coop_221''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,1,5,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''工厂附件资料'' AND ITEM_ID = ''a_coop_221''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''工厂附件资料'',''a_coop_221'',1,5,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^WORKER_NUM,MACHINE_NUM,RESERVE_CAPACITY,PRODUCT_EFFICIENCY,WORK_HOURS_DAY^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''生产信息'' AND ITEM_ID = ''a_coop_221''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,3,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''生产信息'' AND ITEM_ID = ''a_coop_221''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''生产信息'',''a_coop_221'',0,3,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^LOGO,COMPANY_NAME,LOGN_NAME,TIPS,LICENCE_TYPE,LICENCE_NUM^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''基础资料'' AND ITEM_ID = ''a_coop_103''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 1,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''基础资料'' AND ITEM_ID = ''a_coop_103''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 1,''基础资料'',''a_coop_103'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^AREA,ATTRIBUTOR,ADDRESS,COMPANY_TYPE,PRODUCT,RIVAL,ID_STATUS^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''其它资料'' AND ITEM_ID = ''a_coop_103_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 2,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''其它资料'' AND ITEM_ID = ''a_coop_103_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 2,''其它资料'',''a_coop_103_1'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^check_dept_name,checkapply_person,checkapply_phone,is_urgent,factory_ask_date,cooperation_type_desc,cooperation_classification_des,cooperation_model_desc,product_type,checkapply_intro^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''申请信息'' AND ITEM_ID = ''a_coop_221''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''申请信息'' AND ITEM_ID = ''a_coop_221''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''申请信息'',''a_coop_221'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^CHECK_DEPT_NAME,CHECKAPPLY_PERSON,CHECKAPPLY_PHONE,ASK_COMPANY_NAME,PCC,COMPANY_ADDRESS,FACTORY_NAME,FPCC,ASK_ADDRESS,CONTACT_NAME,CONTACT_PHONE,FACTORY_ASK_DATE,CHECK_DATE,SOCIAL_CREDIT_CODE,COOPERATION_TYPE_DESC,RELA_SUPPLIER_ID,COOPERATION_MODEL_DESC,CHECKAPPLY_INTRO,ASK_FILES^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''需求信息'' AND ITEM_ID = ''a_coop_221''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,1,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''需求信息'' AND ITEM_ID = ''a_coop_221''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''需求信息'',''a_coop_221'',1,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^logo,company_name,logn_name,CREATE_TIME,tips,licence_type,licence_num,is_open^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''基础资料'' AND ITEM_ID = ''a_coop_103_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 1,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''基础资料'' AND ITEM_ID = ''a_coop_103_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 1,''基础资料'',''a_coop_103_1'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ask_company_name,company_abbreviation,social_credit_code,pcc,company_address,legal_representative,company_contact_phone,ask_user_name,ask_user_phone,COMPANY_TYPE_DESC,cooperation_brand_desc,cooperation_type_desc,cooperation_model,product_link_desc,ask_say^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''供应商基本信息'' AND ITEM_ID = ''a_coop_121''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''供应商基本信息'' AND ITEM_ID = ''a_coop_121''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''供应商基本信息'',''a_coop_121'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ask_company_name,company_abbreviation,social_credit_code,pcc,company_vill,company_address,factory_name,fpcc,factory_vill,ask_address,legal_representative,company_contact_phone,ask_user_name,ask_user_phone,company_type,cooperation_brand,cooperation_brand_desc,product_link,product_link_desc,rela_supplier_id,rela_supplier_id_desc,remarks^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''供应商基本信息'' AND ITEM_ID = ''a_coop_311''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''供应商基本信息'' AND ITEM_ID = ''a_coop_311''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''供应商基本信息'',''a_coop_311'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^certificate_file,supplier_gate,supplier_office,supplier_site,supplier_product^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''供应商附件资料'' AND ITEM_ID = ''a_coop_311''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,4,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''供应商附件资料'' AND ITEM_ID = ''a_coop_311''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''供应商附件资料'',''a_coop_311'',0,4,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ASK_COMPANY_NAME,company_abbreviation,social_credit_code,COMPANY_ADDRESS,ask_user_name,ask_user_phone,PCC,legal_representative,COMPANY_CONTACT_PHONE,COMPANY_TYPE_DESC,COOPERATION_BRAND_DESC,PRODUCT_LINK,certificate_file,other_file
+
+^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''公司信息'' AND ITEM_ID = ''a_coop_121''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,1,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''公司信息'' AND ITEM_ID = ''a_coop_121''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''公司信息'',''a_coop_121'',1,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^cooperation_type_desc,cooperation_classification_des,cooperation_subcategory_desc,cooperation_model,production_mode,ask_say^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''意向信息'' AND ITEM_ID = ''a_coop_121''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 1,1,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''意向信息'' AND ITEM_ID = ''a_coop_121''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 1,''意向信息'',''a_coop_121'',1,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^check_dept_name,checkapply_person,checkapply_phone,is_urgent,factory_ask_date,cooperation_type_desc,cooperation_classification_des,cooperation_model_desc,product_type,checkapply_intro^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''申请信息'' AND ITEM_ID = ''a_coop_311''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''申请信息'' AND ITEM_ID = ''a_coop_311''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''申请信息'',''a_coop_311'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^CHECK_DEPT_NAME,CHECKAPPLY_PERSON,CHECKAPPLY_PHONE,ASK_COMPANY_NAME,PCC,COMPANY_ADDRESS,FACTORY_NAME,FPCC,ASK_ADDRESS,CONTACT_NAME,CONTACT_PHONE,FACTORY_ASK_DATE,CHECK_DATE,SOCIAL_CREDIT_CODE,COOPERATION_TYPE_DESC,RELA_SUPPLIER_ID,COOPERATION_MODEL_DESC,CHECKAPPLY_INTRO,ASK_FILES^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''需求信息'' AND ITEM_ID = ''a_coop_311''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,1,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''需求信息'' AND ITEM_ID = ''a_coop_311''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''需求信息'',''a_coop_311'',1,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^certificate_file,supplier_gate,supplier_office,supplier_site,supplier_product^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''附件资料'' AND ITEM_ID = ''a_coop_121''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''附件资料'' AND ITEM_ID = ''a_coop_121''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''附件资料'',''a_coop_121'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^AREA,ATTRIBUTOR,ADDRESS,PRODUCT,RIVAL^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''其他资料'' AND ITEM_ID = ''a_coop_150_0''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 2,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''其他资料'' AND ITEM_ID = ''a_coop_150_0''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 2,''其他资料'',''a_coop_150_0'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^CHECK_DEPT_NAME,CHECKAPPLY_PERSON,CHECKAPPLY_PHONE,ASK_COMPANY_NAME,PCC,COMPANY_ADDRESS,FACTORY_NAME,FPCC,ASK_ADDRESS,CONTACT_NAME,CONTACT_PHONE,FACTORY_ASK_DATE,CHECK_DATE,SOCIAL_CREDIT_CODE,COOPERATION_TYPE_DESC,RELA_SUPPLIER_ID,COOPERATION_MODEL_DESC,CHECKAPPLY_INTRO,ASK_FILES^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''需求信息'' AND ITEM_ID = ''a_coop_312''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''需求信息'' AND ITEM_ID = ''a_coop_312''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''需求信息'',''a_coop_312'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^contract_start_date,contract_stop_date,contract_file^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''合同管理'' AND ITEM_ID = ''a_supp_111''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 2,0,3,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''合同管理'' AND ITEM_ID = ''a_supp_111''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 2,''合同管理'',''a_supp_111'',0,3,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^LOGO,COMPANY_NAME,LOGN_NAME,TIPS,LICENCE_TYPE,LICENCE_NUM^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''基础资料'' AND ITEM_ID = ''a_coop_150_0''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 1,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''基础资料'' AND ITEM_ID = ''a_coop_150_0''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 1,''基础资料'',''a_coop_150_0'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'^ar_company_name_y,ar_company_abbreviation_y,ar_social_credit_code_y,ar_company_area_y,ar_company_vill_y,ar_company_vill_desc_y,ar_company_address_y,ar_company_regist_date_y,ar_legal_representative_n,ar_company_contact_phone_n,ar_sapply_user_y,ar_sapply_phone_y,ar_company_type_y,ar_company_type_desc_y,ar_coop_brand_desc_n,ar_product_link_n,ar_rela_supplier_id_n,ar_is_our_factory_y,ar_is_our_fac_desc_y,ar_factory_name_y,ar_factory_area_y,ar_factory_vill_y,ar_factory_vill_desc_y,ar_factroy_details_address_y,ar_factroy_area_y,ar_ask_say_n,ar_remarks_n^';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''基本信息'' AND ITEM_ID = ''a_coop_150_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 3,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''基本信息'' AND ITEM_ID = ''a_coop_150_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 3,''基本信息'',''a_coop_150_3'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+

@@ -1,0 +1,591 @@
+﻿<html><title>Reports About SQL:8tupapvvv8ucg</title><head>
+<style>
+th {font:bold 8pt Arial,Helvetica,Geneva,sans-serif; color:White; background:#0066CC;padding-left:4px; padding-right:4px;padding-bottom:2px}
+tr   {font:10pt SimSun,SimSun,SimSun,SimSun;}
+td   {border:1px solid; font:10pt SimSun,SimSun,SimSun,SimSun;}
+</style>
+</head><body>
+<b>sql_text</b><br>
+<table><tr><td>
+WITH supp AS
+ (SELECT sp.company_id, sp.supplier_code, sp.supplier_company_name
+    FROM scmdata.t_supplier_info sp),
+group_dict AS
+ (SELECT group_dict_type, group_dict_value, group_dict_name
+    FROM scmdata.sys_group_dict)
+SELECT t.product_gress_id,
+       t.company_id,
+       t.progress_status progress_status_pr,
+       t.product_gress_code product_gress_code_pr,
+       a.group_dict_name progress_status_desc,
+       t.order_id order_id_pr,
+       cf.rela_goo_id,
+       cf.style_number style_number_pr,
+       cf.style_name style_name_pr,
+       t.supplier_code supplier_code_pr,
+       sp2.supplier_company_name supplier_company_name_pr,
+       t.factory_code factory_code_pr,
+       sp1.supplier_company_name factory_company_name_pr,
+       oh.delivery_date delivery_date_pr,
+       oh.finish_time_scm finish_time_scm_pr,
+       t.forecast_delivery_date forecast_delivery_date_pr,
+       decode(sign(ceil(t.forecast_delivery_date - oh.delivery_date)),
+              -1,
+              0,
+              ceil(t.forecast_delivery_date - oh.delivery_date)) forecast_delay_day_pr,
+       MAX(od.delivery_date) over(PARTITION BY od.order_id) latest_planned_delivery_date_pr,
+       t.actual_delivery_date actual_delivery_date_pr,
+       t.actual_delay_day actual_delay_day_pr,
+       t.order_amount order_amount_pr,
+       t.delivery_amount delivery_amount_pr,
+       decode(sign(t.order_amount - t.delivery_amount),
+              -1,
+              0,
+              t.order_amount - t.delivery_amount) owe_amount_pr,
+       nvl(t.order_full_rate, 0) order_full_rate_pr,
+       t.delay_problem_class delay_problem_class_pr,
+       t.delay_cause_class delay_cause_class_pr,
+       t.delay_cause_detailed delay_cause_detailed_pr,
+       t.problem_desc problem_desc_pr,
+       t.approve_edition,
+       t.fabric_check fabric_check,
+       t.qc_check qc_check_pr,
+       t.qa_check qa_check_pr,
+       d
+ecode(t.exception_handle_status,
+              '01',
+              '处理中',
+              '02',
+              '已处理',
+              '无异常') exception_handle_status_pr,
+       (SELECT gd.group_dict_name
+          FROM scmdata.sys_group_dict gd
+         WHERE  gd.group_dict_type = 'HANDLE_RESULT'
+           AND gd.group_dict_value = t.handle_opinions) handle_opinions_pr,
+       t.goo_id goo_id_pr,
+       oh.create_time create_time_po,
+       oh.memo memo_po
+  FROM scmdata.t_ordered oh
+ INNER JOIN scmdata.t_orders od
+    ON oh.company_id = od.company_id
+   AND oh.order_code = od.order_id
+   AND oh.order_status IN ('OS01', 'OS02')
+ INNER JOIN t_production_progress t
+    ON t.company_id = od.company_id
+   AND t.order_id = od.order_id
+   AND t.goo_id = od.goo_id
+   AND t.progress_status = '01'
+ INNER JOIN group_dict a
+    ON a.group_dict_value = t.progress_status
+ INNER JOIN group_dict b
+    ON b.group_dict_value = a.group_dict_type
+   AND b.group_dict_value = 'PROGRESS_TYPE'
+ INNER JOIN scmdata.t_commodity_info cf
+    ON t.company_id = cf.company_id
+   AND t.goo_id = cf.goo_id
+  LEFT JOIN supp sp1
+    ON t.company_id = sp1.company_id
+   AND t.factory_code = sp1.supplier_code
+ INNER JOIN supp sp2
+    ON t.company_id = sp2.company_id
+   AND t.supplier_code = sp2.supplier_code
+ WHERE oh.company_id = 'a972dd1ffe3b3a10e0533c281cac8fd7'
+   AND (('0') = 1 OR instr('00', cf.category) > 0)
+ ORDER BY oh.finish_time_scm DESC
+
+
+</td></tr></table>
+<br>
+<b>explain plan for</b><table>
+</table>
+<br>
+<b>Execution Plan From V$SQLPLAN</b><br>
+SQL:8tupapvvv8ucg, PLAN_HASH_VALUE:3953244406
+<table>
+<tr><th>ID</th><th>DEP</th><th width="400px">OPERITION</th><th>NAME</th><th>ROWS</th><th>BYTES</th><th>COST(%CPU)</th><th>IO_COST</th><th>TIME</th></tr>
+<tr><td>0</td><td>0</td><td width="400px">SELECT STATEMENT </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>151&nbsp;</td><td> </td><td>00:00:00</td></tr>
+<tr><td>1</td><td>1</td><td width="400px">&nbsp;TABLE ACCESS BY INDEX ROWID</td><td>[TABLE]SCMDATA.SYS_GROUP_DICT&nbsp;</td><td>1&nbsp;</td><td>33&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>*2</td><td>2</td><td width="400px">&nbsp;&nbsp;INDEX UNIQUE SCAN</td><td>[INDEX (UNIQUE)]SCMDATA.IX_GROUPDICT_UNIQUE&nbsp;</td><td>1&nbsp;</td><td>&nbsp;</td><td>1(0)&nbsp;</td><td>1 </td><td>00:00:01</td></tr>
+<tr><td>3</td><td>1</td><td width="400px">&nbsp;SORT ORDER BY</td><td>&nbsp;</td><td>3&nbsp;</td><td>1758&nbsp;</td><td>151(2)&nbsp;</td><td>148 </td><td>00:00:01</td></tr>
+<tr><td>4</td><td>2</td><td width="400px">&nbsp;&nbsp;WINDOW SORT</td><td>&nbsp;</td><td>3&nbsp;</td><td>1758&nbsp;</td><td>151(2)&nbsp;</td><td>148 </td><td>00:00:01</td></tr>
+<tr><td>*5</td><td>3</td><td width="400px">&nbsp;&nbsp;&nbsp;HASH JOIN </td><td>&nbsp;</td><td>3&nbsp;</td><td>1758&nbsp;</td><td>145(0)&nbsp;</td><td>145 </td><td>00:00:01</td></tr>
+<tr><td>*6</td><td>4</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;HASH JOIN </td><td>&nbsp;</td><td>3&nbsp;</td><td>1542&nbsp;</td><td>130(0)&nbsp;</td><td>130 </td><td>00:00:01</td></tr>
+<tr><td>7</td><td>5</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NESTED LOOPS </td><td>&nbsp;</td><td>3&nbsp;</td><td>1542&nbsp;</td><td>130(0)&nbsp;</td><td>130 </td><td>00:00:01</td></tr>
+<tr><td>8</td><td>6</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NESTED LOOPS </td><td>&nbsp;</td><td>3&nbsp;</td><td>1542&nbsp;</td><td>130(0)&nbsp;</td><td>130 </td><td>00:00:01</td></tr>
+<tr><td>9</td><td>7</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATISTICS COLLECTOR </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td> </td><td>00:00:00</td></tr>
+<tr><td>*10</td><td>8</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HASH JOIN </td><td>&nbsp;</td><td>3&nbsp;</td><td>1350&nbsp;</td><td>124(0)&nbsp;</td><td>124 </td><td>00:00:01</td></tr>
+<tr><td>11</td><td>9</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NESTED LOOPS </td><td>&nbsp;</td><td>3&nbsp;</td><td>1350&nbsp;</td><td>124(0)&nbsp;</td><td>124 </td><td>00:00:01</td></tr>
+<tr><td>12</td><td>10</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATISTICS COLLECTOR </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td> </td><td>00:00:00</td></tr>
+<tr><td>*13</td><td>11</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HASH JOIN OUTER</td><td>&nbsp;</td><td>3&nbsp;</td><td>1134&nbsp;</td><td>106(0)&nbsp;</td><td>106 </td><td>00:00:01</td></tr>
+<tr><td>14</td><td>12</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NESTED LOOPS OUTER</td><td>&nbsp;</td><td>3&nbsp;</td><td>1134&nbsp;</td><td>106(0)&nbsp;</td><td>106 </td><td>00:00:01</td></tr>
+<tr><td>15</td><td>13</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATISTICS COLLECTOR </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td> </td><td>00:00:00</td></tr>
+<tr><td>*16</td><td>14</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HASH JOIN </td><td>&nbsp;</td><td>3&nbsp;</td><td>918&nbsp;</td><td>88(0)&nbsp;</td><td>88 </td><td>00:00:01</td></tr>
+<tr><td>*17</td><td>15</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS FULL</td><td>[TABLE]SCMDATA.T_COMMODITY_INFO&nbsp;</td><td>93&nbsp;</td><td>7533&nbsp;</td><td>68(0)&nbsp;</td><td>68 </td><td>00:00:01</td></tr>
+<tr><td>*18</td><td>15</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HASH JOIN </td><td>&nbsp;</td><td>75&nbsp;</td><td>16875&nbsp;</td><td>20(0)&nbsp;</td><td>20 </td><td>00:00:01</td></tr>
+<tr><td>19</td><td>16</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NESTED LOOPS </td><td>&nbsp;</td><td>1&nbsp;</td><td>41&nbsp;</td><td>3(0)&nbsp;</td><td>3 </td><td>00:00:01</td></tr>
+<tr><td>20</td><td>17</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID</td><td>[TABLE]SCMDATA.SYS_GROUP_DICT&nbsp;</td><td>1&nbsp;</td><td>33&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>*21</td><td>18</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX UNIQUE SCAN</td><td>[INDEX (UNIQUE)]SCMDATA.IX_GROUPDICT_UNIQUE&nbsp;</td><td>1&nbsp;</td><td>&nbsp;</td><td>1(0)&nbsp;</td><td>1 </td><td>00:00:01</td></tr>
+<tr><td>*22</td><td>17</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX (UNIQUE)]SCMDATA.IX_GROUPDICT_UNIQUE&nbsp;</td><td>1&nbsp;</td><td>8&nbsp;</td><td>1(0)&nbsp;</td><td>1 </td><td>00:00:01</td></tr>
+<tr><td>*23</td><td>16</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS FULL</td><td>[TABLE]SCMDATA.T_PRODUCTION_PROGRESS&nbsp;</td><td>74&nbsp;</td><td>13616&nbsp;</td><td>17(0)&nbsp;</td><td>17 </td><td>00:00:01</td></tr>
+<tr><td>*24</td><td>13</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID BATCHED</td><td>[TABLE]SCMDATA.T_SUPPLIER_INFO&nbsp;</td><td>1&nbsp;</td><td>72&nbsp;</td><td>18(0)&nbsp;</td><td>18 </td><td>00:00:01</td></tr>
+<tr><td>*25</td><td>14</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX]SCMDATA.IDX_T_SUPPLIER_INFO_COMPANY_ID&nbsp;</td><td>115&nbsp;</td><td>&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>26</td><td>12</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID BATCHED</td><td>[TABLE]SCMDATA.T_SUPPLIER_INFO&nbsp;</td><td>115&nbsp;</td><td>8280&nbsp;</td><td>18(0)&nbsp;</td><td>18 </td><td>00:00:01</td></tr>
+<tr><td>*27</td><td>13</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX]SCMDATA.IDX_T_SUPPLIER_INFO_COMPANY_ID&nbsp;</td><td>115&nbsp;</td><td>&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>*28</td><td>10</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID BATCHED</td><td>[TABLE]SCMDATA.T_SUPPLIER_INFO&nbsp;</td><td>1&nbsp;</td><td>72&nbsp;</td><td>18(0)&nbsp;</td><td>18 </td><td>00:00:01</td></tr>
+<tr><td>*29</td><td>11</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX]SCMDATA.IDX_T_SUPPLIER_INFO_COMPANY_ID&nbsp;</td><td>115&nbsp;</td><td>&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>30</td><td>9</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID BATCHED</td><td>[TABLE]SCMDATA.T_SUPPLIER_INFO&nbsp;</td><td>115&nbsp;</td><td>8280&nbsp;</td><td>18(0)&nbsp;</td><td>18 </td><td>00:00:01</td></tr>
+<tr><td>*31</td><td>10</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX]SCMDATA.IDX_T_SUPPLIER_INFO_COMPANY_ID&nbsp;</td><td>115&nbsp;</td><td>&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>*32</td><td>7</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX]NBW.IDX_SCM_TORDERS_ORDERID&nbsp;</td><td>1&nbsp;</td><td>&nbsp;</td><td>1(0)&nbsp;</td><td>1 </td><td>00:00:01</td></tr>
+<tr><td>*33</td><td>6</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID</td><td>[TABLE]SCMDATA.T_ORDERS&nbsp;</td><td>1&nbsp;</td><td>64&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>34</td><td>5</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID BATCHED</td><td>[TABLE]SCMDATA.T_ORDERS&nbsp;</td><td>1&nbsp;</td><td>64&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>*35</td><td>6</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX]SCMDATA.IX_T_ORDERS_COMPANY_ID&nbsp;</td><td>1&nbsp;</td><td>&nbsp;</td><td>1(0)&nbsp;</td><td>1 </td><td>00:00:01</td></tr>
+<tr><td>*36</td><td>4</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS FULL</td><td>[TABLE]SCMDATA.T_ORDERED&nbsp;</td><td>1684&nbsp;</td><td>121248&nbsp;</td><td>15(0)&nbsp;</td><td>15 </td><td>00:00:01</td></tr>
+</table><br>
+<p style="font:10pt SimSun,SimSun,SimSun,SimSun">
+Predicate Information (identified by operation id):<br>
+---------------------------------------------------------------------------<br>
+
+
+*2 => [access]"GD"."GROUP_DICT_VALUE"=:B1 AND "GD"."GROUP_DICT_TYPE"='HANDLE_RESULT'<br>
+
+
+*5 => [access]"OH"."COMPANY_ID"="OD"."COMPANY_ID" AND "OH"."ORDER_CODE"="OD"."ORDER_ID"<br>
+*6 => [access]"T"."COMPANY_ID"="OD"."COMPANY_ID" AND "T"."ORDER_ID"="OD"."ORDER_ID" AND "T"."GOO_ID"="OD"."GOO_ID"<br>
+
+
+
+*10 => [access]"T"."COMPANY_ID"="SP"."COMPANY_ID" AND "T"."SUPPLIER_CODE"="SP"."SUPPLIER_CODE"<br>
+
+
+*13 => [access]"T"."FACTORY_CODE"="SP"."SUPPLIER_CODE" AND "T"."COMPANY_ID"="SP"."COMPANY_ID"<br>
+
+
+*16 => [access]"T"."COMPANY_ID"="CF"."COMPANY_ID" AND "T"."GOO_ID"="CF"."GOO_ID"<br>
+*17 => [filter](INSTR('00',"CF"."CATEGORY")>0 AND "CF"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7')<br>
+*18 => [access]"GROUP_DICT_VALUE"="T"."PROGRESS_STATUS"<br>
+
+
+*21 => [access]"GROUP_DICT_VALUE"='01' AND "GROUP_DICT_TYPE"='PROGRESS_TYPE'<br>
+*22 => [access]"GROUP_DICT_VALUE"='PROGRESS_TYPE'<br>
+*23 => [filter]("T"."PROGRESS_STATUS"='01' AND "T"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7')<br>
+*24 => [filter]"T"."FACTORY_CODE"="SP"."SUPPLIER_CODE"<br>
+*25 => [access]"SP"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7'<br>
+
+*27 => [access]"SP"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7'<br>
+*28 => [filter]"T"."SUPPLIER_CODE"="SP"."SUPPLIER_CODE"<br>
+*29 => [access]"SP"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7'<br>
+
+*31 => [access]"SP"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7'<br>
+*32 => [access]"T"."ORDER_ID"="OD"."ORDER_ID"<br>
+*33 => [filter]("T"."GOO_ID"="OD"."GOO_ID" AND "OD"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7')<br>
+
+*35 => [access]"OD"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7'<br>
+*36 => [filter]("OH"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7' AND INTERNAL_FUNCTION("OH"."ORDER_STATUS"))<br>
+<p>
+SQL:8tupapvvv8ucg, PLAN_HASH_VALUE:2341621429
+<table>
+<tr><th>ID</th><th>DEP</th><th width="400px">OPERITION</th><th>NAME</th><th>ROWS</th><th>BYTES</th><th>COST(%CPU)</th><th>IO_COST</th><th>TIME</th></tr>
+<tr><td>0</td><td>0</td><td width="400px">SELECT STATEMENT </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>202&nbsp;</td><td> </td><td>00:00:00</td></tr>
+<tr><td>1</td><td>1</td><td width="400px">&nbsp;TABLE ACCESS BY INDEX ROWID</td><td>[TABLE]SCMDATA.SYS_GROUP_DICT&nbsp;</td><td>1&nbsp;</td><td>33&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>*2</td><td>2</td><td width="400px">&nbsp;&nbsp;INDEX UNIQUE SCAN</td><td>[INDEX (UNIQUE)]SCMDATA.IX_GROUPDICT_UNIQUE&nbsp;</td><td>1&nbsp;</td><td>&nbsp;</td><td>1(0)&nbsp;</td><td>1 </td><td>00:00:01</td></tr>
+<tr><td>3</td><td>1</td><td width="400px">&nbsp;SORT ORDER BY</td><td>&nbsp;</td><td>38&nbsp;</td><td>22268&nbsp;</td><td>202(1)&nbsp;</td><td>200 </td><td>00:00:01</td></tr>
+<tr><td>4</td><td>2</td><td width="400px">&nbsp;&nbsp;WINDOW SORT</td><td>&nbsp;</td><td>38&nbsp;</td><td>22268&nbsp;</td><td>202(1)&nbsp;</td><td>200 </td><td>00:00:01</td></tr>
+<tr><td>*5</td><td>3</td><td width="400px">&nbsp;&nbsp;&nbsp;HASH JOIN </td><td>&nbsp;</td><td>38&nbsp;</td><td>22268&nbsp;</td><td>190(0)&nbsp;</td><td>190 </td><td>00:00:01</td></tr>
+<tr><td>*6</td><td>4</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;HASH JOIN </td><td>&nbsp;</td><td>38&nbsp;</td><td>19532&nbsp;</td><td>175(0)&nbsp;</td><td>175 </td><td>00:00:01</td></tr>
+<tr><td>7</td><td>5</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NESTED LOOPS </td><td>&nbsp;</td><td>38&nbsp;</td><td>19532&nbsp;</td><td>175(0)&nbsp;</td><td>175 </td><td>00:00:01</td></tr>
+<tr><td>8</td><td>6</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NESTED LOOPS </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td> </td><td>00:00:00</td></tr>
+<tr><td>9</td><td>7</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATISTICS COLLECTOR </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td> </td><td>00:00:00</td></tr>
+<tr><td>*10</td><td>8</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HASH JOIN OUTER</td><td>&nbsp;</td><td>38&nbsp;</td><td>17100&nbsp;</td><td>124(0)&nbsp;</td><td>124 </td><td>00:00:01</td></tr>
+<tr><td>11</td><td>9</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NESTED LOOPS OUTER</td><td>&nbsp;</td><td>38&nbsp;</td><td>17100&nbsp;</td><td>124(0)&nbsp;</td><td>124 </td><td>00:00:01</td></tr>
+<tr><td>12</td><td>10</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATISTICS COLLECTOR </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td> </td><td>00:00:00</td></tr>
+<tr><td>*13</td><td>11</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HASH JOIN </td><td>&nbsp;</td><td>38&nbsp;</td><td>14364&nbsp;</td><td>106(0)&nbsp;</td><td>106 </td><td>00:00:01</td></tr>
+<tr><td>14</td><td>12</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NESTED LOOPS </td><td>&nbsp;</td><td>38&nbsp;</td><td>14364&nbsp;</td><td>106(0)&nbsp;</td><td>106 </td><td>00:00:01</td></tr>
+<tr><td>15</td><td>13</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATISTICS COLLECTOR </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td> </td><td>00:00:00</td></tr>
+<tr><td>*16</td><td>14</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HASH JOIN </td><td>&nbsp;</td><td>40&nbsp;</td><td>12240&nbsp;</td><td>88(0)&nbsp;</td><td>88 </td><td>00:00:01</td></tr>
+<tr><td>17</td><td>15</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NESTED LOOPS </td><td>&nbsp;</td><td>40&nbsp;</td><td>12240&nbsp;</td><td>88(0)&nbsp;</td><td>88 </td><td>00:00:01</td></tr>
+<tr><td>18</td><td>16</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;STATISTICS COLLECTOR </td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td> </td><td>00:00:00</td></tr>
+<tr><td>*19</td><td>17</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HASH JOIN </td><td>&nbsp;</td><td>75&nbsp;</td><td>16875&nbsp;</td><td>20(0)&nbsp;</td><td>20 </td><td>00:00:01</td></tr>
+<tr><td>20</td><td>18</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;NESTED LOOPS </td><td>&nbsp;</td><td>1&nbsp;</td><td>41&nbsp;</td><td>3(0)&nbsp;</td><td>3 </td><td>00:00:01</td></tr>
+<tr><td>21</td><td>19</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID</td><td>[TABLE]SCMDATA.SYS_GROUP_DICT&nbsp;</td><td>1&nbsp;</td><td>33&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>*22</td><td>20</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX UNIQUE SCAN</td><td>[INDEX (UNIQUE)]SCMDATA.IX_GROUPDICT_UNIQUE&nbsp;</td><td>1&nbsp;</td><td>&nbsp;</td><td>1(0)&nbsp;</td><td>1 </td><td>00:00:01</td></tr>
+<tr><td>*23</td><td>19</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX (UNIQUE)]SCMDATA.IX_GROUPDICT_UNIQUE&nbsp;</td><td>1&nbsp;</td><td>8&nbsp;</td><td>1(0)&nbsp;</td><td>1 </td><td>00:00:01</td></tr>
+<tr><td>*24</td><td>18</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS FULL</td><td>[TABLE]SCMDATA.T_PRODUCTION_PROGRESS&nbsp;</td><td>74&nbsp;</td><td>13616&nbsp;</td><td>17(0)&nbsp;</td><td>17 </td><td>00:00:01</td></tr>
+<tr><td>*25</td><td>16</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID</td><td>[TABLE]SCMDATA.T_COMMODITY_INFO&nbsp;</td><td>1&nbsp;</td><td>81&nbsp;</td><td>68(0)&nbsp;</td><td>68 </td><td>00:00:01</td></tr>
+<tr><td>*26</td><td>17</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX UNIQUE SCAN</td><td>[INDEX (UNIQUE)]SCMDATA.UX_T_COMMODITY_INFO&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td> </td><td>00:00:00</td></tr>
+<tr><td>*27</td><td>15</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS FULL</td><td>[TABLE]SCMDATA.T_COMMODITY_INFO&nbsp;</td><td>1071&nbsp;</td><td>86751&nbsp;</td><td>68(0)&nbsp;</td><td>68 </td><td>00:00:01</td></tr>
+<tr><td>*28</td><td>13</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID BATCHED</td><td>[TABLE]SCMDATA.T_SUPPLIER_INFO&nbsp;</td><td>1&nbsp;</td><td>72&nbsp;</td><td>18(0)&nbsp;</td><td>18 </td><td>00:00:01</td></tr>
+<tr><td>*29</td><td>14</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX]SCMDATA.IDX_T_SUPPLIER_INFO_COMPANY_ID&nbsp;</td><td>115&nbsp;</td><td>&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>30</td><td>12</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID BATCHED</td><td>[TABLE]SCMDATA.T_SUPPLIER_INFO&nbsp;</td><td>115&nbsp;</td><td>8280&nbsp;</td><td>18(0)&nbsp;</td><td>18 </td><td>00:00:01</td></tr>
+<tr><td>*31</td><td>13</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX]SCMDATA.IDX_T_SUPPLIER_INFO_COMPANY_ID&nbsp;</td><td>115&nbsp;</td><td>&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>*32</td><td>10</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID BATCHED</td><td>[TABLE]SCMDATA.T_SUPPLIER_INFO&nbsp;</td><td>1&nbsp;</td><td>72&nbsp;</td><td>18(0)&nbsp;</td><td>18 </td><td>00:00:01</td></tr>
+<tr><td>*33</td><td>11</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX]SCMDATA.IDX_T_SUPPLIER_INFO_COMPANY_ID&nbsp;</td><td>115&nbsp;</td><td>&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>34</td><td>9</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID BATCHED</td><td>[TABLE]SCMDATA.T_SUPPLIER_INFO&nbsp;</td><td>115&nbsp;</td><td>8280&nbsp;</td><td>18(0)&nbsp;</td><td>18 </td><td>00:00:01</td></tr>
+<tr><td>*35</td><td>10</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX]SCMDATA.IDX_T_SUPPLIER_INFO_COMPANY_ID&nbsp;</td><td>115&nbsp;</td><td>&nbsp;</td><td>2(0)&nbsp;</td><td>2 </td><td>00:00:01</td></tr>
+<tr><td>*36</td><td>7</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX]NBW.IDX_SCM_TORDERS_ORDERID&nbsp;</td><td>1685&nbsp;</td><td>&nbsp;</td><td>18(0)&nbsp;</td><td>18 </td><td>00:00:01</td></tr>
+<tr><td>*37</td><td>6</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID</td><td>[TABLE]SCMDATA.T_ORDERS&nbsp;</td><td>1&nbsp;</td><td>64&nbsp;</td><td>51(0)&nbsp;</td><td>51 </td><td>00:00:01</td></tr>
+<tr><td>38</td><td>5</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS BY INDEX ROWID BATCHED</td><td>[TABLE]SCMDATA.T_ORDERS&nbsp;</td><td>1685&nbsp;</td><td>107840&nbsp;</td><td>51(0)&nbsp;</td><td>51 </td><td>00:00:01</td></tr>
+<tr><td>*39</td><td>6</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INDEX RANGE SCAN</td><td>[INDEX]SCMDATA.IX_T_ORDERS_COMPANY_ID&nbsp;</td><td>1685&nbsp;</td><td>&nbsp;</td><td>18(0)&nbsp;</td><td>18 </td><td>00:00:01</td></tr>
+<tr><td>*40</td><td>4</td><td width="400px">&nbsp;&nbsp;&nbsp;&nbsp;TABLE ACCESS FULL</td><td>[TABLE]SCMDATA.T_ORDERED&nbsp;</td><td>1684&nbsp;</td><td>121248&nbsp;</td><td>15(0)&nbsp;</td><td>15 </td><td>00:00:01</td></tr>
+</table><br>
+<p style="font:10pt SimSun,SimSun,SimSun,SimSun">
+Predicate Information (identified by operation id):<br>
+---------------------------------------------------------------------------<br>
+
+
+*2 => [access]"GD"."GROUP_DICT_VALUE"=:B1 AND "GD"."GROUP_DICT_TYPE"='HANDLE_RESULT'<br>
+
+
+*5 => [access]"OH"."COMPANY_ID"="OD"."COMPANY_ID" AND "OH"."ORDER_CODE"="OD"."ORDER_ID"<br>
+*6 => [access]"T"."COMPANY_ID"="OD"."COMPANY_ID" AND "T"."ORDER_ID"="OD"."ORDER_ID" AND "T"."GOO_ID"="OD"."GOO_ID"<br>
+
+
+
+*10 => [access]"T"."FACTORY_CODE"="SP"."SUPPLIER_CODE" AND "T"."COMPANY_ID"="SP"."COMPANY_ID"<br>
+
+
+*13 => [access]"T"."COMPANY_ID"="SP"."COMPANY_ID" AND "T"."SUPPLIER_CODE"="SP"."SUPPLIER_CODE"<br>
+
+
+*16 => [access]"T"."COMPANY_ID"="CF"."COMPANY_ID" AND "T"."GOO_ID"="CF"."GOO_ID"<br>
+
+
+*19 => [access]"GROUP_DICT_VALUE"="T"."PROGRESS_STATUS"<br>
+
+
+*22 => [access]"GROUP_DICT_VALUE"='01' AND "GROUP_DICT_TYPE"='PROGRESS_TYPE'<br>
+*23 => [access]"GROUP_DICT_VALUE"='PROGRESS_TYPE'<br>
+*24 => [filter]("T"."PROGRESS_STATUS"='01' AND "T"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7')<br>
+*25 => [filter]INSTR('00',"CF"."CATEGORY")>0<br>
+*26 => [access]"CF"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7' AND "T"."GOO_ID"="CF"."GOO_ID"<br>
+*27 => [filter](INSTR('00',"CF"."CATEGORY")>0 AND "CF"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7')<br>
+*28 => [filter]"T"."SUPPLIER_CODE"="SP"."SUPPLIER_CODE"<br>
+*29 => [access]"SP"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7'<br>
+
+*31 => [access]"SP"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7'<br>
+*32 => [filter]"T"."FACTORY_CODE"="SP"."SUPPLIER_CODE"<br>
+*33 => [access]"SP"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7'<br>
+
+*35 => [access]"SP"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7'<br>
+*36 => [access]"T"."ORDER_ID"="OD"."ORDER_ID"<br>
+*37 => [filter]("T"."GOO_ID"="OD"."GOO_ID" AND "OD"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7')<br>
+
+*39 => [access]"OD"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7'<br>
+*40 => [filter]("OH"."COMPANY_ID"='a972dd1ffe3b3a10e0533c281cac8fd7' AND INTERNAL_FUNCTION("OH"."ORDER_STATUS"))<br>
+<p>
+<br>
+<b>SQL STATISTICS- V$SQLPLAN</b>
+<table><tr><th>ID</th><th>HASH</th><th>DB_TIME</th><th>MEM</th><th>VERS</th><th>EXES</th><th>DISKS</th><th>GETS</th><th>ROWS</th><th>CPU</th><th>ELAPSED</th><th>CLUSTER_WAIT</th><th>CONCURRENCE_WAIT</th></tr>
+<tr>
+<td>8tupapvvv8ucg</td>
+<td>3953244406</td>
+<td>237041217</td>
+<td>563640</td>
+<td>3</td>
+<td>4</td>
+<td>0</td>
+<td>2176</td>
+<td>148</td>
+<td>3478121</td>
+<td>3613547</td>
+<td>0</td>
+<td>201</td>
+</tr>
+</table></br>
+<b>Execution Plan From AWR</b><br><br>
+<b>Table Segment Size</b>
+<table><tr><th>owner</th><th>segment_name</th><th>MB</th>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>       0.19</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>       2.00</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>       0.44</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>       2.00</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>       0.50</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>       3.00</td></tr>
+</table></br>
+<b>Table Statistics</b>
+<table><tr><th>OWNER</th><th>table_name</th><th>num_rows</th><th>blocks</th><th>degree</th><th>last_analyzed</th><th>temporary</th><th>partitioned</th><th>pct_free</th><th>tablespace_name</th>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>535</td><td>23</td><td>         1</td><td>20-4月 -21</td><td>N</td><td>NO</td><td>10</td><td>SCMDATA</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>1912</td><td>244</td><td>         1</td><td>24-4月 -21</td><td>N</td><td>NO</td><td>10</td><td>SCMDATA</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>1835</td><td>50</td><td>         1</td><td>01-7月 -21</td><td>N</td><td>NO</td><td>10</td><td>SCMDATA</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>1835</td><td>244</td><td>         1</td><td>25-6月 -21</td><td>N</td><td>NO</td><td>10</td><td>SCMDATA</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>1835</td><td>58</td><td>         1</td><td>30-6月 -21</td><td>N</td><td>NO</td><td>10</td><td>SCMDATA</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>841</td><td>370</td><td>         1</td><td>21-6月 -21</td><td>N</td><td>NO</td><td>10</td><td>SCMDATA</td></tr>
+</table></br>
+<b>Table Column Statistics</b>
+<table><tr><th>OWNER</th><th>table_name</th><th>column_name</th><th>data_type</th><th>nullable</th><th>last_analyzed</th><th>avg_col_len</th></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>CREATE_ID</td><td>VARCHAR2</td><td>N</td><td>04/20/21 22:09:16</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>CREATE_TIME</td><td>DATE</td><td>N</td><td>04/20/21 22:09:16</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>DEL_FLAG</td><td>NUMBER</td><td>Y</td><td>04/20/21 22:09:16</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>DESCRIPTION</td><td>VARCHAR2</td><td>Y</td><td>04/20/21 22:09:16</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>GROUP_DICT_ID</td><td>VARCHAR2</td><td>N</td><td>04/20/21 22:09:16</td><td>33</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>GROUP_DICT_NAME</td><td>VARCHAR2</td><td>N</td><td>04/20/21 22:09:16</td><td>12</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>GROUP_DICT_SORT</td><td>NUMBER</td><td>N</td><td>04/20/21 22:09:16</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>GROUP_DICT_STATUS</td><td>VARCHAR2</td><td>N</td><td>04/20/21 22:09:16</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>GROUP_DICT_TYPE</td><td>VARCHAR2</td><td>N</td><td>04/20/21 22:09:16</td><td>13</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>GROUP_DICT_VALUE</td><td>VARCHAR2</td><td>N</td><td>04/20/21 22:09:16</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>IS_COMPANY_DICT_RELA</td><td>VARCHAR2</td><td>N</td><td>04/20/21 22:09:16</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>IS_INITIAL</td><td>NUMBER</td><td>N</td><td>04/20/21 22:09:16</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>IS_LEAF</td><td>NUMBER</td><td>N</td><td>04/20/21 22:09:16</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>PARENT_ID</td><td>VARCHAR2</td><td>Y</td><td>04/20/21 22:09:16</td><td>33</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>PARENT_IDS</td><td>VARCHAR2</td><td>Y</td><td>04/20/21 22:09:16</td><td>33</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>PAUSE</td><td>NUMBER</td><td>Y</td><td>04/20/21 22:09:16</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>REMARKS</td><td>VARCHAR2</td><td>Y</td><td>04/20/21 22:09:16</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>TREE_LEVEL</td><td>NUMBER</td><td>N</td><td>04/20/21 22:09:16</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>UPDATE_ID</td><td>VARCHAR2</td><td>N</td><td>04/20/21 22:09:16</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>UPDATE_TIME</td><td>DATE</td><td>N</td><td>04/20/21 22:09:16</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>BASE_SIZE</td><td>VARCHAR2</td><td>Y</td><td>04/24/21 14:08:36</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>CATEGORY</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>COLOR_LIST</td><td>VARCHAR2</td><td>Y</td><td>04/24/21 14:08:36</td><td>12</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>COMMODITY_INFO_ID</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>33</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>COMPANY_ID</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>33</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>CREATE_ID</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>CREATE_TIME</td><td>DATE</td><td>N</td><td>04/24/21 14:08:36</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>EVALUATOR</td><td>VARCHAR2</td><td>Y</td><td>04/24/21 14:08:36</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>EVALUAT_RESULT</td><td>VARCHAR2</td><td>Y</td><td>04/24/21 14:08:36</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>EXECUTIVE_STD</td><td>VARCHAR2</td><td>Y</td><td>04/24/21 14:08:36</td><td>11</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>GOO_ID</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>9</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>GOO_NAME</td><td>VARCHAR2</td><td>Y</td><td>04/24/21 14:08:36</td><td>9</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>INPRICE</td><td>NUMBER</td><td>N</td><td>04/24/21 14:08:36</td><td>4</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>ORIGIN</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>PAUSE</td><td>NUMBER</td><td>N</td><td>04/24/21 14:08:36</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>PRICE</td><td>NUMBER</td><td>Y</td><td>04/24/21 14:08:36</td><td>4</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>PRODUCT_CATE</td><td>VARCHAR2</td><td>Y</td><td>04/24/21 14:08:36</td><td>5</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>RELA_GOO_ID</td><td>VARCHAR2</td><td>Y</td><td>04/24/21 14:08:36</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>REMARKS</td><td>VARCHAR2</td><td>Y</td><td>04/24/21 14:08:36</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>SAMLL_CATEGORY</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>SEASON</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>SIZE_LIST</td><td>VARCHAR2</td><td>Y</td><td>04/24/21 14:08:36</td><td>24</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>STYLE_NAME</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>10</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>STYLE_NUMBER</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>19</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>STYLE_PIC</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>4</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>SUPPLIER_CODE</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>SUP_STYLE_NUMBER</td><td>VARCHAR2</td><td>Y</td><td>04/24/21 14:08:36</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>SYS_C00025_20111609:56:48$</td><td>VARCHAR2</td><td>Y</td><td></td><td></td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>UPDATE_ID</td><td>VARCHAR2</td><td>Y</td><td>04/24/21 14:08:36</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>UPDATE_TIME</td><td>DATE</td><td>Y</td><td>04/24/21 14:08:36</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>YEAR</td><td>VARCHAR2</td><td>N</td><td>04/24/21 14:08:36</td><td>5</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>APPROVE_ID</td><td>VARCHAR2</td><td>Y</td><td>07/01/21 22:07:45</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>APPROVE_STATUS</td><td>VARCHAR2</td><td>Y</td><td>07/01/21 22:07:45</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>APPROVE_TIME</td><td>DATE</td><td>Y</td><td>07/01/21 22:07:45</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>COMPANY_ID</td><td>VARCHAR2</td><td>N</td><td>07/01/21 22:07:45</td><td>33</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>CREATE_ID</td><td>VARCHAR2</td><td>N</td><td>07/01/21 22:07:45</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>CREATE_TIME</td><td>DATE</td><td>N</td><td>07/01/21 22:07:45</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>DELIVERY_DATE</td><td>DATE</td><td>N</td><td>07/01/21 22:07:45</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>FINISH_TIME</td><td>DATE</td><td>Y</td><td>07/01/21 22:07:45</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>FINISH_TIME_SCM</td><td>DATE</td><td>Y</td><td>07/01/21 22:07:45</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>MEMO</td><td>VARCHAR2</td><td>Y</td><td>07/01/21 22:07:45</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>MEMO_DEDU</td><td>VARCHAR2</td><td>Y</td><td>07/01/21 22:07:45</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>ORDER_CODE</td><td>VARCHAR2</td><td>N</td><td>07/01/21 22:07:45</td><td>14</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>ORDER_ID</td><td>VARCHAR2</td><td>N</td><td>07/01/21 22:07:45</td><td>33</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>ORDER_STATUS</td><td>VARCHAR2</td><td>N</td><td>07/01/21 22:07:45</td><td>5</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>ORDER_TYPE</td><td>VARCHAR2</td><td>N</td><td>07/01/21 22:07:45</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>ORIGIN</td><td>VARCHAR2</td><td>N</td><td>07/01/21 22:07:45</td><td>10</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>RECEIVE_COMPANY_ID</td><td>VARCHAR2</td><td>Y</td><td>07/01/21 22:07:45</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>RECEIVE_ORDERID</td><td>VARCHAR2</td><td>Y</td><td>07/01/21 22:07:45</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>RECEIVE_ORDER_DATE</td><td>DATE</td><td>Y</td><td>07/01/21 22:07:45</td><td>1</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>SEND_ORDER</td><td>VARCHAR2</td><td>N</td><td>07/01/21 22:07:45</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>SEND_ORDER_DATE</td><td>DATE</td><td>N</td><td>07/01/21 22:07:45</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>SUPPLIER_CODE</td><td>VARCHAR2</td><td>N</td><td>07/01/21 22:07:45</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>UPDATE_ID</td><td>VARCHAR2</td><td>Y</td><td>07/01/21 22:07:45</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>UPDATE_ID_DEDU</td><td>VARCHAR2</td><td>Y</td><td>07/01/21 22:07:45</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>UPDATE_TIME</td><td>DATE</td><td>Y</td><td>07/01/21 22:07:45</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>UPDATE_TIME_DEDU</td><td>DATE</td><td>Y</td><td>07/01/21 22:07:45</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>COMPANY_ID</td><td>VARCHAR2</td><td>N</td><td>06/25/21 22:05:43</td><td>33</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>DELIVERY_DATE</td><td>DATE</td><td>N</td><td>06/25/21 22:05:43</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>FACTORY_CODE</td><td>VARCHAR2</td><td>Y</td><td>06/25/21 22:05:43</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>GOO_ID</td><td>VARCHAR2</td><td>N</td><td>06/25/21 22:05:43</td><td>9</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>GOT_AMOUNT</td><td>NUMBER</td><td>N</td><td>06/25/21 22:05:43</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>MEMO</td><td>VARCHAR2</td><td>Y</td><td>06/25/21 22:05:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>ORDERS_CODE</td><td>VARCHAR2</td><td>N</td><td>06/25/21 22:05:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>ORDERS_ID</td><td>VARCHAR2</td><td>N</td><td>06/25/21 22:05:43</td><td>33</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>ORDER_AMOUNT</td><td>NUMBER</td><td>N</td><td>06/25/21 22:05:43</td><td>4</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>ORDER_ID</td><td>VARCHAR2</td><td>N</td><td>06/25/21 22:05:43</td><td>14</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>ORDER_PRICE</td><td>NUMBER</td><td>N</td><td>06/25/21 22:05:43</td><td>4</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>ACTUAL_DELAY_DAY</td><td>NUMBER</td><td>Y</td><td>06/30/21 22:04:43</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>ACTUAL_DELIVERY_DATE</td><td>DATE</td><td>Y</td><td>06/30/21 22:04:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>APPROVE_EDITION</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>COMPANY_ID</td><td>VARCHAR2</td><td>N</td><td>06/30/21 22:04:43</td><td>33</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>CREATE_ID</td><td>VARCHAR2</td><td>N</td><td>06/30/21 22:04:43</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>CREATE_TIME</td><td>DATE</td><td>N</td><td>06/30/21 22:04:43</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>DELAY_CAUSE_CLASS</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>DELAY_CAUSE_DETAILED</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>DELAY_PROBLEM_CLASS</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>DELIVERY_AMOUNT</td><td>NUMBER</td><td>N</td><td>06/30/21 22:04:43</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>EXCEPTION_HANDLE_STATUS</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>FABRIC_CHECK</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>5</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>FACTORY_CODE</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>FORECAST_DELAY_DAY</td><td>NUMBER</td><td>Y</td><td>06/30/21 22:04:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>FORECAST_DELIVERY_DATE</td><td>DATE</td><td>Y</td><td>06/30/21 22:04:43</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>GOO_ID</td><td>VARCHAR2</td><td>N</td><td>06/30/21 22:04:43</td><td>9</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>HANDLE_OPINIONS</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>IS_SUP_RESPONSIBLE</td><td>NUMBER</td><td>Y</td><td>06/30/21 22:04:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>LATEST_PLANNED_DELIVERY_DATE</td><td>DATE</td><td>Y</td><td>06/30/21 22:04:43</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>MEMO</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>ORDER_AMOUNT</td><td>NUMBER</td><td>N</td><td>06/30/21 22:04:43</td><td>4</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>ORDER_FULL_RATE</td><td>NUMBER</td><td>Y</td><td>06/30/21 22:04:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>ORDER_ID</td><td>VARCHAR2</td><td>N</td><td>06/30/21 22:04:43</td><td>14</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>ORDER_STATUS</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>ORIGIN</td><td>VARCHAR2</td><td>N</td><td>06/30/21 22:04:43</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>PROBLEM_DESC</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>PRODUCT_GRESS_CODE</td><td>VARCHAR2</td><td>N</td><td>06/30/21 22:04:43</td><td>14</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>PRODUCT_GRESS_ID</td><td>VARCHAR2</td><td>N</td><td>06/30/21 22:04:43</td><td>33</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>PROGRESS_STATUS</td><td>VARCHAR2</td><td>N</td><td>06/30/21 22:04:43</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>QA_CHECK</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>QC_CHECK</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>QC_QUALITY_CHECK</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>RESPONSIBLE_DEPT</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>RESPONSIBLE_DEPT_SEC</td><td>VARCHAR2</td><td>Y</td><td>06/30/21 22:04:43</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>SUPPLIER_CODE</td><td>VARCHAR2</td><td>N</td><td>06/30/21 22:04:43</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>BIND_STATUS</td><td>NUMBER</td><td>Y</td><td>06/21/21 22:08:57</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>CERTIFICATE_FILE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>4</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>CERTIFICATE_VALIDITY_END</td><td>DATE</td><td>Y</td><td>06/21/21 22:08:57</td><td>1</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>CERTIFICATE_VALIDITY_START</td><td>DATE</td><td>Y</td><td>06/21/21 22:08:57</td><td>1</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COMPANY_ADDRESS</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>47</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COMPANY_CITY</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COMPANY_CONTACT_PERSON</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>9</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COMPANY_CONTACT_PHONE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>12</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COMPANY_COUNTY</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COMPANY_CREATE_DATE</td><td>DATE</td><td>Y</td><td>06/21/21 22:08:57</td><td>1</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COMPANY_ID</td><td>VARCHAR2</td><td>N</td><td>06/21/21 22:08:57</td><td>33</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COMPANY_PERSON</td><td>NUMBER</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COMPANY_PROVINCE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COMPANY_SAY</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COMPANY_TYPE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>CONTRACT_FILE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>CONTRACT_START_DATE</td><td>DATE</td><td>Y</td><td>06/21/21 22:08:57</td><td>1</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>CONTRACT_STOP_DATE</td><td>DATE</td><td>Y</td><td>06/21/21 22:08:57</td><td>1</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COOPERATION_CLASSIFICATION</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COOPERATION_METHOD</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COOPERATION_MODEL</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>4</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COOPERATION_SUBCATEGORY</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>COOPERATION_TYPE</td><td>VARCHAR2</td><td>N</td><td>06/21/21 22:08:57</td><td>14</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>CREATE_DATE</td><td>DATE</td><td>Y</td><td>06/21/21 22:08:57</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>CREATE_ID</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>22</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>CREATE_SUPP_DATE</td><td>DATE</td><td>Y</td><td>06/21/21 22:08:57</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>INSIDE_SUPPLIER_CODE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>LEGAL_REPRESENTATIVE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>9</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>ORGANIZATION_FILE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PAUSE</td><td>NUMBER</td><td>N</td><td>06/21/21 22:08:57</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PAY_TYPE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PERSONAL_ACCOUNT</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PERSONAL_BANK</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PERSONAL_IDCARD</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PERSONAL_PAYMENT</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PERSONAL_PHONE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PRODUCTION_MODE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PUBLIC_ACCOUNTS</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PUBLIC_BANK</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PUBLIC_ID</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PUBLIC_PAYMENT</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PUBLIC_PHONE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PUBLISH_DATE</td><td>DATE</td><td>Y</td><td>06/21/21 22:08:57</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PUBLISH_ID</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>RECONCILIATION_PHONE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>RECONCILIATION_USER</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>REGIST_ADDRESS</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>REGIST_PRICE</td><td>NUMBER</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>REMARKS</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>20</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>SETTLEMENT_TYPE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>SHARING_TYPE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>SOCIAL_CREDIT_CODE</td><td>VARCHAR2</td><td>N</td><td>06/21/21 22:08:57</td><td>19</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>STATUS</td><td>NUMBER</td><td>Y</td><td>06/21/21 22:08:57</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>SUPPLIER_CODE</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>7</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>SUPPLIER_COMPANY_ABBREVIATION</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>SUPPLIER_COMPANY_ID</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>2</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>SUPPLIER_COMPANY_NAME</td><td>VARCHAR2</td><td>N</td><td>06/21/21 22:08:57</td><td>32</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>SUPPLIER_INFO_ID</td><td>VARCHAR2</td><td>N</td><td>06/21/21 22:08:57</td><td>31</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>SUPPLIER_INFO_ORIGIN</td><td>VARCHAR2</td><td>N</td><td>06/21/21 22:08:57</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>SUPPLIER_INFO_ORIGIN_ID</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>3</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>SYS_C00059_20110315:56:47$</td><td>VARCHAR2</td><td>Y</td><td></td><td></td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>TAXPAYER</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>0</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>UPDATE_DATE</td><td>DATE</td><td>Y</td><td>06/21/21 22:08:57</td><td>8</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>UPDATE_ID</td><td>VARCHAR2</td><td>Y</td><td>06/21/21 22:08:57</td><td>22</td></tr>
+</table></br>
+<b>Table Triggers</b>
+<table><tr><th>table_owner</th><th>table_name</th><th>base_object_type</th><th>tiggger_owner</th><th>trigger_name</th><th>trigger_type</th><th>triggering_event</th></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>TABLE</td><td>SCMDATA</td><td>TRG_AF_UPDATE_COMMODITY_INFO</td><td>AFTER EACH ROW</td><td>UPDATE</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>TABLE</td><td>SCMDATA</td><td>TRG_U_T_ORDERED</td><td>AFTER EACH ROW</td><td>UPDATE</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>TABLE</td><td>SCMDATA</td><td>T_ORDER_FACCODE_AFTER_UPDATE</td><td>AFTER EACH ROW</td><td>UPDATE</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>TABLE</td><td>SCMDATA</td><td>TRG_U_T_ORDERS</td><td>AFTER EACH ROW</td><td>UPDATE</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>TABLE</td><td>SCMDATA</td><td>TRG_BF_U_T_SUPPLIER_INFO</td><td>BEFORE EACH ROW</td><td>UPDATE</td></tr>
+</table></br>
+<b>Partition Statistics</b>
+<table><tr><th>OWNER</th><th>table_name</th><th>partitioning_type</th><th>partition_count</th>
+</table></br>
+<b>Partition Key Statistics</b>
+<table><tr><th>owner</th><th>name</th><th>object_type</th><th>column_name</th>
+</table>
+<b>Partition Range Statistics</b>
+<table><tr><th>owner</th><th>table_name</th><th>partition_name</th><th>high_value</th><th>tablespace_name</th>
+</table></br>
+<b>Index Segments</b>
+<table><tr><th>OWNER</th><th>table_name</th><th>segment_name</th><th>MB</th></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>IX_GROUPDICT_UNIQUE</td><td>       0.06</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>IX_GROUP_DICT_TYPE</td><td>       0.06</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>PK_SYS_GROUP_DICT</td><td>       0.13</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>IDX_T_COMMODITY_INFO_COMPANY_ID</td><td>       0.38</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>PK_T_COMMODITY_INFO</td><td>       0.44</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>UX_T_COMMODITY_INFO</td><td>       0.63</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>IX_T_ORDERED_COMPANY_ID</td><td>       0.38</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>PK_T_ORDERED</td><td>       0.25</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>IX_T_ORDERS_COMPANY_ID</td><td>       0.38</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>PK_T_ORDERS</td><td>       0.69</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>IX_T_PRODU_PROGRESS_GOC</td><td>       0.19</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>PK_T_PRODUCTION_PROGRESS</td><td>       0.25</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>IDX_T_SUPPLIER_INFO_COMPANY_ID</td><td>       0.19</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PK_T_SUPPLIER_INFO</td><td>       0.44</td></tr>
+</table></br>
+<b>Index Statistics</b>
+<table><tr><th>OWNER</th><th>table_name</th><th>name</th><th>rows</th><th>type</th><th>status</th><th>factor</th><th>blevel</th><th>distinct</th><th>leaf</th><th>unique</th><th>degree</th><th>analyzed</th></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>IX_GROUPDICT_UNIQUE</td><td>535</td><td>NORMAL</td><td>VALID</td><td>300</td><td>1</td><td>535</td><td>3</td><td>UNIQUE</td><td>1</td><td>04/20/21 22:09:17</td><tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>IX_GROUP_DICT_TYPE</td><td>535</td><td>NORMAL</td><td>VALID</td><td>183</td><td>1</td><td>100</td><td>3</td><td>NONUNIQUE</td><td>1</td><td>04/20/21 22:09:18</td><tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>PK_SYS_GROUP_DICT</td><td>535</td><td>NORMAL</td><td>VALID</td><td>116</td><td>1</td><td>535</td><td>4</td><td>UNIQUE</td><td>1</td><td>04/20/21 22:09:18</td><tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>PK_T_COMMODITY_INFO</td><td>1912</td><td>NORMAL</td><td>VALID</td><td>125</td><td>1</td><td>1912</td><td>16</td><td>UNIQUE</td><td>1</td><td>04/24/21 14:08:42</td><tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>UX_T_COMMODITY_INFO</td><td>1912</td><td>NORMAL</td><td>VALID</td><td>157</td><td>1</td><td>1912</td><td>24</td><td>UNIQUE</td><td>1</td><td>04/24/21 14:08:42</td><tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>IDX_T_COMMODITY_INFO_COMPANY_ID</td><td>1912</td><td>NORMAL</td><td>VALID</td><td>94</td><td>1</td><td>3</td><td>15</td><td>NONUNIQUE</td><td>1</td><td>04/24/21 14:08:41</td><tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>IX_T_ORDERED_COMPANY_ID</td><td>1835</td><td>NORMAL</td><td>VALID</td><td>43</td><td>1</td><td>2</td><td>24</td><td>NONUNIQUE</td><td>1</td><td>07/01/21 22:07:47</td><tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>PK_T_ORDERED</td><td>1835</td><td>NORMAL</td><td>VALID</td><td>45</td><td>1</td><td>1835</td><td>10</td><td>UNIQUE</td><td>1</td><td>07/01/21 22:07:48</td><tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>IX_T_ORDERS_COMPANY_ID</td><td>1835</td><td>NORMAL</td><td>VALID</td><td>35</td><td>1</td><td>2</td><td>19</td><td>NONUNIQUE</td><td>1</td><td>06/25/21 22:05:45</td><tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>PK_T_ORDERS</td><td>1835</td><td>NORMAL</td><td>VALID</td><td>36</td><td>1</td><td>1835</td><td>10</td><td>UNIQUE</td><td>1</td><td>06/25/21 22:05:45</td><tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>PK_T_PRODUCTION_PROGRESS</td><td>1835</td><td>NORMAL</td><td>VALID</td><td>45</td><td>1</td><td>1835</td><td>10</td><td>UNIQUE</td><td>1</td><td>06/30/21 22:04:44</td><tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>IX_T_PRODU_PROGRESS_GOC</td><td>1835</td><td>NORMAL</td><td>VALID</td><td>91</td><td>1</td><td>1835</td><td>17</td><td>NONUNIQUE</td><td>1</td><td>07/03/21 09:34:44</td><tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PK_T_SUPPLIER_INFO</td><td>841</td><td>NORMAL</td><td>VALID</td><td>149</td><td>1</td><td>841</td><td>8</td><td>UNIQUE</td><td>1</td><td>06/21/21 22:09:00</td><tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>IDX_T_SUPPLIER_INFO_COMPANY_ID</td><td>841</td><td>NORMAL</td><td>VALID</td><td>115</td><td>1</td><td>9</td><td>9</td><td>NONUNIQUE</td><td>1</td><td>06/21/21 22:09:00</td><tr>
+</table></br>
+<b>Index columns</b>
+<table><tr><th>OWNER</th><th>table_name</th><th>table_name</th><th>column_name</th><th>column_position</th><th>DESCEND</th></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>IX_GROUPDICT_UNIQUE</td><td>GROUP_DICT_VALUE</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>IX_GROUPDICT_UNIQUE</td><td>GROUP_DICT_TYPE</td><td>2</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>IX_GROUP_DICT_TYPE</td><td>GROUP_DICT_TYPE</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>SYS_GROUP_DICT</td><td>PK_SYS_GROUP_DICT</td><td>GROUP_DICT_ID</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>IDX_T_COMMODITY_INFO_COMPANY_ID</td><td>COMPANY_ID</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>PK_T_COMMODITY_INFO</td><td>COMMODITY_INFO_ID</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>UX_T_COMMODITY_INFO</td><td>COMPANY_ID</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_COMMODITY_INFO</td><td>UX_T_COMMODITY_INFO</td><td>GOO_ID</td><td>2</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>IX_T_ORDERED_COMPANY_ID</td><td>COMPANY_ID</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERED</td><td>PK_T_ORDERED</td><td>ORDER_ID</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>IX_T_ORDERS_COMPANY_ID</td><td>COMPANY_ID</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_ORDERS</td><td>PK_T_ORDERS</td><td>ORDERS_ID</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>IX_T_PRODU_PROGRESS_GOC</td><td>GOO_ID</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>IX_T_PRODU_PROGRESS_GOC</td><td>ORDER_ID</td><td>2</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>IX_T_PRODU_PROGRESS_GOC</td><td>COMPANY_ID</td><td>3</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_PRODUCTION_PROGRESS</td><td>PK_T_PRODUCTION_PROGRESS</td><td>PRODUCT_GRESS_ID</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>IDX_T_SUPPLIER_INFO_COMPANY_ID</td><td>COMPANY_ID</td><td>1</td><td>ASC</td></tr>
+<tr><td>SCMDATA</td><td>T_SUPPLIER_INFO</td><td>PK_T_SUPPLIER_INFO</td><td>SUPPLIER_INFO_ID</td><td>1</td><td>ASC</td></tr>
+</table></br>
+<b>Partition Indexes Summary</b>
+<table><tr><th>OWNER</th><th>table_name</th><th>table_name</th><th>partitioning_type</th><th>partition_count</th></tr>
+</table></br>
+<b>Partition Indexes Details</b>
+<table><tr><th>OWNER</th><th>index_name</th><th>partition_name</th><th>status</th><th>blevel</th><th>leaf_blocks</th><th>tablespace_name</th></tr>
+</table></br>
+<b>Awrsqrpt Contents</b>
+<div>
+<div>
+在DBA_HIST_XXXX中找不到SQL:8tupapvvv8ucg的信息.
+ORA-20020: Database/Instance/Snapshot mismatch
+</div>
+</div>
+</body></html>
+sqlid
+---------
+8tupapvvv8ucg

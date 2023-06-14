@@ -1,0 +1,9 @@
+declare
+begin
+insert into bwptest1.sys_port_method (METHOD_ID, PORT_NAME, METHOD_NAME, REQ_PARAM, RESP_PARAM, FIXED_PARAM, ERR_PARAM, METHOD_TYPE, PARAM_FORMAT, SUCCESS_PARAM)
+values ('method_itf_a_supp_141', 'port_itf_a_supp_141', '/list/node/node_a_supp_141', null, null, null, null, 'get', 'json', null);
+
+insert into bwptest1.sys_port_method (METHOD_ID, PORT_NAME, METHOD_NAME, REQ_PARAM, RESP_PARAM, FIXED_PARAM, ERR_PARAM, METHOD_TYPE, PARAM_FORMAT, SUCCESS_PARAM)
+values ('method_itf_a_supp_140', 'port_itf_a_supp_140', '/list/node/node_a_supp_140', null, null, null, null, 'get', 'json', null);
+
+end;

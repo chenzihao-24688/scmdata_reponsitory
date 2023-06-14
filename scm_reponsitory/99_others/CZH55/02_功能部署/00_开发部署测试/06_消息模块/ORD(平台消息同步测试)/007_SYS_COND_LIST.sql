@@ -1,0 +1,30 @@
+﻿BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select max(1) flag from dual where SCMDATA.pkg_plat_comm.F_UserHasAction(%user_id%,%default_company_id% ,'77','G')=1]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_g_530''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_g_530''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_g_530'',,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+

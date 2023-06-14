@@ -1,0 +1,11 @@
+select rowid,t.* from nbw.sys_item_list t where t.item_id  in ('a_product_118','a_product_120_1','a_product_120_2'); 
+/*select rowid,t.* from nbw.sys_element t where t.element_id in ('look_a_product_118_6');
+select rowid,t.* from nbw.sys_look_up t where t.element_id in ('look_a_product_118_6');
+select rowid,t.* from nbw.sys_item_element_rela t where t.element_id in ('look_a_product_118_6'); */
+
+select rowid,t.* from nbw.sys_element t where t.element_id in ('pick_a_product_118_6');
+select rowid,t.* from nbw.sys_pick_list t where t.element_id in ('pick_a_product_118_6');
+select rowid,t.* from nbw.sys_item_element_rela t where t.element_id in ('pick_a_product_118_6'); 
+
+
+

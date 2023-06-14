@@ -1,0 +1,87 @@
+-- Create table
+create table T_SUPPLIER_BASE_ITF
+(
+  sup_id_base     VARCHAR2(32),
+  sup_name        VARCHAR2(200),
+  legalperson     VARCHAR2(32),
+  linkman         VARCHAR2(32),
+  phonenumber     VARCHAR2(20),
+  address         VARCHAR2(140),
+  sup_type        VARCHAR2(20),
+  inserttime      DATE,
+  lastmodifytime  DATE,
+  lastpublishtime DATE,
+  sup_status      VARCHAR2(1),
+  countyid        NUMBER(10),
+  provinceid      NUMBER(10),
+  cityno          NUMBER(10),
+  tax_id          VARCHAR2(50),
+  company_type    VARCHAR2(30),
+  itf_id          VARCHAR2(32) not null,
+  supplier_code   VARCHAR2(32)
+)
+tablespace SCMDATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  )
+nologging;
+-- Add comments to the columns 
+comment on column T_SUPPLIER_BASE_ITF.sup_id_base
+  is '回传编号(MDM供应商档案编号)';
+comment on column T_SUPPLIER_BASE_ITF.sup_name
+  is '供应商名称';
+comment on column T_SUPPLIER_BASE_ITF.legalperson
+  is '法人';
+comment on column T_SUPPLIER_BASE_ITF.linkman
+  is '联系人';
+comment on column T_SUPPLIER_BASE_ITF.phonenumber
+  is '手机号码';
+comment on column T_SUPPLIER_BASE_ITF.address
+  is '公司地址';
+comment on column T_SUPPLIER_BASE_ITF.sup_type
+  is '供应商类型';
+comment on column T_SUPPLIER_BASE_ITF.inserttime
+  is '创建时间';
+comment on column T_SUPPLIER_BASE_ITF.lastmodifytime
+  is '上一次修改时间';
+comment on column T_SUPPLIER_BASE_ITF.lastpublishtime
+  is '上一次发布时间';
+comment on column T_SUPPLIER_BASE_ITF.sup_status
+  is '供应商状态';
+comment on column T_SUPPLIER_BASE_ITF.countyid
+  is '区县编号';
+comment on column T_SUPPLIER_BASE_ITF.provinceid
+  is '省编号';
+comment on column T_SUPPLIER_BASE_ITF.cityno
+  is '市编号';
+comment on column T_SUPPLIER_BASE_ITF.tax_id
+  is '统一社会信用代码';
+comment on column T_SUPPLIER_BASE_ITF.company_type
+  is '公司类型';
+comment on column T_SUPPLIER_BASE_ITF.itf_id
+  is '接口编号';
+comment on column T_SUPPLIER_BASE_ITF.supplier_code
+  is '供应商编号';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table T_SUPPLIER_BASE_ITF
+  add constraint PK_ITF_ID primary key (ITF_ID)
+  using index 
+  tablespace SCMINDEX
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter index PK_ITF_ID nologging;

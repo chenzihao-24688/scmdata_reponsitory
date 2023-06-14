@@ -1,0 +1,140 @@
+﻿BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_RELA WHERE  COND_ID = ''cond_checkaction_a_supp_111_2'' AND CTL_ID = ''action_a_supp_111_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_RELA SET (CTL_TYPE,ITEM_ID,OBJ_TYPE,PAUSE,SEQ_NO) = (SELECT 1,q''[]'',91,0,1 FROM DUAL) WHERE  COND_ID = ''cond_checkaction_a_supp_111_2'' AND CTL_ID = ''action_a_supp_111_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_RELA (COND_ID,CTL_ID,CTL_TYPE,ITEM_ID,OBJ_TYPE,PAUSE,SEQ_NO) SELECT ''cond_checkaction_a_supp_111_2'',''action_a_supp_111_2'',1,q''[]'',91,0,1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_RELA WHERE  COND_ID = ''cond_associate_a_supp_110_3_auto'' AND CTL_ID = ''associate_a_supp_110_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_RELA SET (CTL_TYPE,ITEM_ID,OBJ_TYPE,PAUSE,SEQ_NO) = (SELECT 0,q''[a_supp_150]'',95,0,1 FROM DUAL) WHERE  COND_ID = ''cond_associate_a_supp_110_3_auto'' AND CTL_ID = ''associate_a_supp_110_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_RELA (COND_ID,CTL_ID,CTL_TYPE,ITEM_ID,OBJ_TYPE,PAUSE,SEQ_NO) SELECT ''cond_associate_a_supp_110_3_auto'',''associate_a_supp_110_3'',0,q''[a_supp_150]'',95,0,1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_RELA WHERE  COND_ID = ''cond_associate_a_supp_110_3_auto_1'' AND CTL_ID = ''associate_a_supp_110_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_RELA SET (CTL_TYPE,ITEM_ID,OBJ_TYPE,PAUSE,SEQ_NO) = (SELECT 0,q''[a_supp_160]'',95,0,1 FROM DUAL) WHERE  COND_ID = ''cond_associate_a_supp_110_3_auto_1'' AND CTL_ID = ''associate_a_supp_110_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_RELA (COND_ID,CTL_ID,CTL_TYPE,ITEM_ID,OBJ_TYPE,PAUSE,SEQ_NO) SELECT ''cond_associate_a_supp_110_3_auto_1'',''associate_a_supp_110_3'',0,q''[a_supp_160]'',95,0,1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_RELA WHERE  COND_ID = ''cond_associate_a_supp_110_3_auto'' AND CTL_ID = ''associate_a_supp_110_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_RELA SET (CTL_TYPE,ITEM_ID,OBJ_TYPE,PAUSE,SEQ_NO) = (SELECT 0,q''[a_supp_150]'',95,0,1 FROM DUAL) WHERE  COND_ID = ''cond_associate_a_supp_110_3_auto'' AND CTL_ID = ''associate_a_supp_110_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_RELA (COND_ID,CTL_ID,CTL_TYPE,ITEM_ID,OBJ_TYPE,PAUSE,SEQ_NO) SELECT ''cond_associate_a_supp_110_3_auto'',''associate_a_supp_110_3'',0,q''[a_supp_150]'',95,0,1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_RELA WHERE  COND_ID = ''cond_associate_a_supp_110_3_auto_1'' AND CTL_ID = ''associate_a_supp_110_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_RELA SET (CTL_TYPE,ITEM_ID,OBJ_TYPE,PAUSE,SEQ_NO) = (SELECT 0,q''[a_supp_160]'',95,0,1 FROM DUAL) WHERE  COND_ID = ''cond_associate_a_supp_110_3_auto_1'' AND CTL_ID = ''associate_a_supp_110_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_RELA (COND_ID,CTL_ID,CTL_TYPE,ITEM_ID,OBJ_TYPE,PAUSE,SEQ_NO) SELECT ''cond_associate_a_supp_110_3_auto_1'',''associate_a_supp_110_3'',0,q''[a_supp_160]'',95,0,1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL;
+     END IF;
+  END;
+END;
+/
+

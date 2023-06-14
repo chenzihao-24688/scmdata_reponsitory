@@ -1,0 +1,174 @@
+﻿BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[supplier_code,inside_supplier_code,supplier_company_name,supplier_company_abbreviation,legal_representative,company_create_date,certificate_validity_start,certificate_validity_end,regist_address,regist_price,social_credit_code,company_type,company_person,company_contact_person,company_contact_phone,company_address,taxpayer,company_say,up_certificate_file,organization_file,sharing_type]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''基本信息'' AND ITEM_ID = ''a_supp_111''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 4,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''基本信息'' AND ITEM_ID = ''a_supp_111''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 4,''基本信息'',''a_supp_111'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[public_accounts,public_payment,public_bank,public_id,public_phone,personal_account,personal_payment,personal_bank,personal_idcard,personal_phone,pay_type,settlement_type,reconciliation_user,reconciliation_phone]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''财务信息'' AND ITEM_ID = ''a_supp_111''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 4,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''财务信息'' AND ITEM_ID = ''a_supp_111''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 4,''财务信息'',''a_supp_111'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[contract_start_date,contract_stop_date,contract_file]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''合同管理'' AND ITEM_ID = ''a_supp_111''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 2,0,3,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''合同管理'' AND ITEM_ID = ''a_supp_111''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 2,''合同管理'',''a_supp_111'',0,3,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[cooperation_method_sp,cooperation_type_sp,cooperation_model_sp,production_mode_sp,cooperation_classification_sp,cooperation_subcategory_sp]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''能力评估'' AND ITEM_ID = ''a_supp_111''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 2,0,4,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''能力评估'' AND ITEM_ID = ''a_supp_111''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 2,''能力评估'',''a_supp_111'',0,4,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[logo,company_name,logn_name,CREATE_TIME,tips,licence_type,licence_num,is_open]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''基础资料'' AND ITEM_ID = ''a_supp_111_5''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 1,0,1,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''基础资料'' AND ITEM_ID = ''a_supp_111_5''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 1,''基础资料'',''a_supp_111_5'',0,1,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[AREA,ATTRIBUTOR,ADDRESS,COMPANY_TYPE,PRODUCT,RIVAL,ID_STATUS]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_DETAIL_GROUP WHERE  GROUP_NAME = ''其它资料'' AND ITEM_ID = ''a_supp_111_5''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_DETAIL_GROUP SET (COLUMN_NUMBER,PAUSE,SEQ_NO,CLO_NAMES) = (SELECT 2,0,2,:CV1 FROM DUAL) WHERE  GROUP_NAME = ''其它资料'' AND ITEM_ID = ''a_supp_111_5''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_DETAIL_GROUP (COLUMN_NUMBER,GROUP_NAME,ITEM_ID,PAUSE,SEQ_NO,CLO_NAMES) SELECT 2,''其它资料'',''a_supp_111_5'',0,2,:CV1 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1;
+     END IF;
+  END;
+END;
+/
+

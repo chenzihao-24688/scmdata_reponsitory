@@ -1,0 +1,16 @@
+SELECT COUNT(DISTINCT b.factory_ask_id)
+  FROM scmdata.t_factory_ask a
+  LEFT JOIN scmdata.t_factory_ask_oper_log b
+    ON b.ask_record_id = a.ask_record_id
+ WHERE a.factory_ask_id IN
+       (SELECT DISTINCT t.factory_ask_id
+          FROM scmdata.t_factory_ask t
+         INNER JOIN scmdata.t_factory_ask_oper_log lg
+            ON lg.ask_record_id = t.ask_record_id
+         WHERE lg.status_af_oper = 'FA01')
+   AND b.oper_code = 'BACK'
+   AND b.status_af_oper = 'FA02';
+
+
+SELECT t.company_name from scmdata.t_factory_ask t WHERE t.factory_ask_id = 'CA2107085888477314';
+SELECT rowid,t.* from nbw.sys_action t WHERE t.element_id = 'ac_a_check_101_3'; 

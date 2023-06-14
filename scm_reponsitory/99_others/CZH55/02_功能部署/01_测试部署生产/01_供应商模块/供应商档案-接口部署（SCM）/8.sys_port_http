@@ -1,0 +1,6 @@
+declare
+begin
+insert into nbw.sys_port_http (PORT_NAME, URL, ACTION_TAG, APP_KEY, APP_SECRET, TOKEN_SQL, PORT_TYPE)
+values ('port_a_supp_110_9', 'http://172.28.40.81:9090/lion/app_sanfu_retail/null', 0, 'CMS3', '428PSxZv+N8ZSE6L3Rkdug==', null, 11);
+
+end;

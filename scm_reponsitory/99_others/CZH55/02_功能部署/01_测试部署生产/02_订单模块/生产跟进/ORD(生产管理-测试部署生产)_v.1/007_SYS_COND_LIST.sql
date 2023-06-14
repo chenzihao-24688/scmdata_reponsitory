@@ -1,0 +1,2880 @@
+﻿BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select 0 flag from dual where 1=1]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_110_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',1,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_110_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_110_3'',1,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050106') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_action_a_product_118_1_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_action_a_product_118_1_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_action_a_product_118_1_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_2'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_3'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select '请确认结束所选订单，确定后该订单相关数据无法再修改！' msg from dual              ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_checkaction_a_product_110''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',1,q''[]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_checkaction_a_product_110''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_checkaction_a_product_110'',1,q''[]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_action_a_product_110_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_action_a_product_110_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_action_a_product_110_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010401') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_112_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_112_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_112_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_110_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_110_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_110_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select '请确认结束所选订单，确定后该订单相关数据无法再修改！' msg from dual              ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_checkaction_a_product_110''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',1,q''[]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_checkaction_a_product_110''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_checkaction_a_product_110'',1,q''[]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_action_a_product_110_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_action_a_product_110_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_action_a_product_110_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_action_a_product_110_1_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_action_a_product_110_1_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_action_a_product_110_1_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P00904') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_associate_a_product_101_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_associate_a_product_101_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_associate_a_product_101_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010402') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_assocaite_a_product_112_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_assocaite_a_product_112_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_assocaite_a_product_112_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_110_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_110_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_110_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_2'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_3'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010501') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_113_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_113_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_113_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050105') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_action_a_product_118_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_action_a_product_118_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_action_a_product_118_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010502') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_associate_a_product_113_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_associate_a_product_113_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_associate_a_product_113_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050105') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_action_a_product_118_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_action_a_product_118_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_action_a_product_118_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_action_a_product_101_4_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_action_a_product_101_4_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_action_a_product_101_4_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009030101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_130_1_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_130_1_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_130_1_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009030201') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_130_2_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_130_2_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_130_2_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_3'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009020202') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_action_a_product_120_2_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_action_a_product_120_2_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_action_a_product_120_2_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select '请确认是否审核所选订单扣款信息？' flag from dual where 1=1]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_130_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',1,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_130_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_130_1'',1,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select '请确认所选订单扣款信息是否撤销审核？' flag from dual where 1=1]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_130_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',1,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_130_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_130_2'',1,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009030102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_action_a_product_130_1_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_action_a_product_130_1_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_action_a_product_130_1_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009030202') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_action_a_product_130_2_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_action_a_product_130_2_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_action_a_product_130_2_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select '请确认撤销所选择的异常处理单？' flag from dual where 1=1]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_120_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',1,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_120_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_120_2'',1,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_2'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_3'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010401') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_112_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_112_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_112_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_110_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_110_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_110_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_2'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_3'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_2'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_2'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009020201') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_120_2_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_120_2_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_120_2_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010501') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_113_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_113_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_113_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010601') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_114_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_114_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_114_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010301') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_111_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_111_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_111_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010302') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_111_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_111_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_111_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_3'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010701') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_115_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_115_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_115_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010702') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_115_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_115_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_115_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_2'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P006010701') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_approve_101_0_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_approve_101_0_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_approve_101_0_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P006010702') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_approve_101_0_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_approve_101_0_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_approve_101_0_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010201') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_116_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_116_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_116_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_3'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_110_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_110_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_110_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_2'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_2'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009020101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_120_1_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_120_1_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_120_1_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_3'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009020103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_120_1_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_120_1_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_120_1_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009020104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_120_1_auto_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_120_1_auto_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_120_1_auto_2'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009020101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_120_1_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_120_1_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_120_1_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009020201') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_120_2_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_120_2_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_120_2_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_3'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009030101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_130_1_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_130_1_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_130_1_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009030201') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_130_2_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_130_2_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_130_2_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select '是否确定已选异常处理单？' msg from dual]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_120_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',1,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_120_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_120_1'',1,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009020102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_action_a_product_120_1_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_action_a_product_120_1_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_action_a_product_120_1_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010301') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_111_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_111_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_111_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010401') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_112_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_112_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_112_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009020103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_120_1_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_120_1_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_120_1_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009020104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_120_1_auto_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_120_1_auto_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_120_1_auto_2'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_110_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_110_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_110_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050102') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_110_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_110_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_110_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009010302') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_111_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_111_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_111_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009030301') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_130_3_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_130_3_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_130_3_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P009030302') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_130_3_auto_1''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_130_3_auto_1''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_130_3_auto_1'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050103') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_2''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_2''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_2'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050104') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto_3''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto_3''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto_3'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+
+BEGIN
+  DECLARE
+    JUDGE_N NUMBER(4);
+    EXE_SQL CLOB;
+    VALS    CLOB;
+  CV1 CLOB:=q'[select pkg_plat_comm.f_hasaction_application(%CURRENT_USERID%,%DEFAULT_COMPANY_ID%,'P0090101050101') as flag from dual ]';
+  CV2 CLOB:=q'[]';
+
+  BEGIN
+    EXE_SQL := 'SELECT COUNT(1) FROM BW3.SYS_COND_LIST WHERE COND_ID = ''cond_a_product_118_auto''';
+    EXECUTE IMMEDIATE EXE_SQL INTO JUDGE_N;
+    IF JUDGE_N > 0 THEN
+       EXE_SQL := 'UPDATE BW3.SYS_COND_LIST SET (COND_FIELD_NAME,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) = (SELECT q''[]'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL) WHERE COND_ID = ''cond_a_product_118_auto''';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     ELSE
+       EXE_SQL := 'INSERT INTO BW3.SYS_COND_LIST (COND_FIELD_NAME,COND_ID,COND_TYPE,DATA_SOURCE,MEMO,COND_SQL,SHOW_TEXT) SELECT q''[]'',''cond_a_product_118_auto'',0,q''[oracle_scmdata]'',q''[]'',:CV1,:CV2 FROM DUAL';
+       WHILE REGEXP_COUNT(EXE_SQL,',,') > 0 LOOP
+         EXE_SQL := REPLACE(EXE_SQL,',,',',NULL,');
+       END LOOP;
+       EXE_SQL := REPLACE(REPLACE(EXE_SQL,'SELECT ,','SELECT NULL,'),', FROM',',NULL FROM');
+       EXECUTE IMMEDIATE EXE_SQL USING CV1,CV2;
+     END IF;
+  END;
+END;
+/
+

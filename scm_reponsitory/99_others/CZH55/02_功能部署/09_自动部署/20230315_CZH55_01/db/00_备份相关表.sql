@@ -1,0 +1,9 @@
+create table scmdata.t_ask_record_bak_230315 as select * from scmdata.t_ask_record;
+create table scmdata.t_factory_ask_bak_230315 as select * from scmdata.t_factory_ask;
+create table scmdata.t_factory_report_bak_230315 as select * from scmdata.t_factory_report;
+create table scmdata.t_supplier_info_bak_230315 as select * from scmdata.t_supplier_info;
+create table scmdata.t_factory_ask_oper_log_bak_230315 as select * from scmdata.t_factory_ask_oper_log;
+create table scmdata.t_ask_scope_bak_230315 as select * from scmdata.t_ask_scope;
+create table scmdata.t_factory_report_ability_bak_230315 as select * from scmdata.t_factory_report_ability;
+create table scmdata.t_coop_scope_bak_230315 as select * from scmdata.t_coop_scope;
+create table scmdata.t_coop_factory_bak_230315 as select * from scmdata.t_coop_factory;
