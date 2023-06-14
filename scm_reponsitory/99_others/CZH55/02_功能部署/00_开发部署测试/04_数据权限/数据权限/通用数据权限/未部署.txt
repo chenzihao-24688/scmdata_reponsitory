@@ -1,2 +1,0 @@
-1.PTESTGetGlobalParamsSQL
-2.005_权限部署

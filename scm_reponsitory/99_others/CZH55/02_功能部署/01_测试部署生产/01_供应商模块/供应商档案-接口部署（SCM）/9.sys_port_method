@@ -1,6 +1,0 @@
-declare
-begin
-insert into nbw.sys_port_method (METHOD_ID, PORT_NAME, METHOD_NAME, REQ_PARAM, RESP_PARAM, FIXED_PARAM, ERR_PARAM, METHOD_TYPE, PARAM_FORMAT, SUCCESS_PARAM)
-values ('method_a_supp_110_9', 'port_a_supp_110_9', '/list/node/node_itf_a_supp_140', null, null, null, null, 'get', 'json', null);
-
-end;

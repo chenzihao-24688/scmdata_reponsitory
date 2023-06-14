@@ -1,9 +1,0 @@
-declare
-begin
-insert into bwptest1.sys_item (ITEM_ID, ITEM_TYPE, CAPTION_SQL, DATA_SOURCE, BASE_TABLE, KEY_FIELD, NAME_FIELD, SETTING_ID, REPORT_TITLE, SUB_SCRIPTS, PAUSE, LINK_FIELD, HELP_ID, TAG_ID, CONFIG_PARAMS, TIME_OUT, OFFLINE_FLAG, PANEL_ID, INIT_SHOW, BADGE_SQL, BADGE_FLAG, SHOW_ROWID)
-values ('itf_a_supp_140', 'list', '供应商主档接口导入', 'oracle_mdmdata', 't_supplier_base_itf', 'itf_id', null, null, null, null, 0, null, null, null, null, null, null, null, null, null, null, null);
-
-insert into bwptest1.sys_item (ITEM_ID, ITEM_TYPE, CAPTION_SQL, DATA_SOURCE, BASE_TABLE, KEY_FIELD, NAME_FIELD, SETTING_ID, REPORT_TITLE, SUB_SCRIPTS, PAUSE, LINK_FIELD, HELP_ID, TAG_ID, CONFIG_PARAMS, TIME_OUT, OFFLINE_FLAG, PANEL_ID, INIT_SHOW, BADGE_SQL, BADGE_FLAG, SHOW_ROWID)
-values ('itf_a_supp_141', 'list', '供应商档案-合作范围接口导入', 'oracle_mdmdata', 't_supplier_coop_itf', 'itf_id', null, null, null, null, 0, null, null, null, null, null, null, null, null, null, null, null);
-
-end;
