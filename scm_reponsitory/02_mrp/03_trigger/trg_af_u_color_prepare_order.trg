@@ -1,4 +1,4 @@
-ï»¿CREATE OR REPLACE TRIGGER MRP.trg_af_u_color_prepare_order
+CREATE OR REPLACE TRIGGER MRP.trg_af_u_color_prepare_order
   AFTER  UPDATE OF prepare_status, expect_arrival_time, order_num ON mrp.color_prepare_order
   FOR EACH ROW
 DECLARE
@@ -7,59 +7,59 @@ BEGIN
   IF :old.prepare_status = 0 AND :new.prepare_status = 1 THEN 
     NULL;
   ELSE   
-  --å•æ®å˜æ›´æº¯æº
-  scmdata.pkg_plat_log.p_get_document_change_trace_params(p_company_id    => 'a972dd1ffe3b3a10e0533c281cac8fd7',
+  --µ¥¾Ý±ä¸üËÝÔ´
+  scmdata.pkg_plat_log.p_get_document_change_trace_params(p_company_id    => 'b6cc680ad0f599cde0531164a8c0337f',
                                                           p_document_id   => :old.prepare_order_id,
                                                           po_document_rec => v_document_rec);
    END IF;                                                       
 
-  --1.å¤‡æ–™çŠ¶æ€
+  --1.±¸ÁÏ×´Ì¬
   IF scmdata.pkg_plat_comm.f_is_check_fields_eq(p_old_field => :old.prepare_status,
                                                 p_new_field => :new.prepare_status) = 0 THEN
-    --1.1 æŽ¥å• å¾…æŽ¥å• => ç”Ÿäº§ä¸­
+    --1.1 ½Óµ¥ ´ý½Óµ¥ => Éú²úÖÐ
     IF :old.prepare_status = 1 AND :new.prepare_status = 2 THEN
-      scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'a972dd1ffe3b3a10e0533c281cac8fd7',
+      scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'b6cc680ad0f599cde0531164a8c0337f',
                                                   p_apply_module       => 'prematerial_221',
-                                                  p_apply_module_desc  => 'è‰²å¸ƒå¤‡æ–™å•',
+                                                  p_apply_module_desc  => 'É«²¼±¸ÁÏµ¥',
                                                   p_base_table         => 'COLOR_PREPARE_ORDER',
                                                   p_apply_pk_id        => :old.prepare_order_id,
                                                   p_action_type        => 'UPDATE',
                                                   p_log_dict_type      => v_document_rec.data_source_parent_code,
                                                   p_log_type           => v_document_rec.data_source_child_code,
-                                                  p_log_msg            => 'å¤‡æ–™å•å·ï¼š' ||
+                                                  p_log_msg            => '±¸ÁÏµ¥ºÅ£º' ||
                                                                           :old.prepare_order_id ||
-                                                                          'è¢«æŽ¥å•',
+                                                                          '±»½Óµ¥',
                                                   p_operate_field      => 'PREPARE_STATUS',
                                                   p_field_type         => 'NUMBER',
                                                   p_field_desc         => NULL,
                                                   p_old_code           => 1,
                                                   p_new_code           => 2,
-                                                  p_old_value          => 'å¾…æŽ¥å•',
-                                                  p_new_value          => 'ç”Ÿäº§ä¸­',
+                                                  p_old_value          => '´ý½Óµ¥',
+                                                  p_new_value          => 'Éú²úÖÐ',
                                                   p_operate_company_id => v_document_rec.operate_company_id,
                                                   p_user_id            => v_document_rec.update_id,
                                                   p_memo               => NULL,
                                                   p_memo_desc          => NULL,
                                                   p_type               => 2);
     ELSIF :old.prepare_status in (1,0) AND :new.prepare_status = 4 THEN
-      --1.2 å–æ¶ˆå¤‡æ–™å• å¾…æŽ¥å•/å¾…å®¡æ ¸ => å·²å–æ¶ˆ
-      scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'a972dd1ffe3b3a10e0533c281cac8fd7',
+      --1.2 È¡Ïû±¸ÁÏµ¥ ´ý½Óµ¥/´ýÉóºË => ÒÑÈ¡Ïû
+      scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'b6cc680ad0f599cde0531164a8c0337f',
                                                   p_apply_module       => 'a_prematerial_221_1',
-                                                  p_apply_module_desc  => 'è‰²å¸ƒå¤‡æ–™å•æ˜Žç»†',
+                                                  p_apply_module_desc  => 'É«²¼±¸ÁÏµ¥Ã÷Ï¸',
                                                   p_base_table         => 'COLOR_PREPARE_ORDER',
                                                   p_apply_pk_id        => :old.prepare_order_id,
                                                   p_action_type        => 'UPDATE',
                                                   p_log_dict_type      => v_document_rec.data_source_parent_code,
                                                   p_log_type           => v_document_rec.data_source_child_code,
-                                                  p_log_msg            => 'å–æ¶ˆå¤‡æ–™å•å·ï¼š' ||
+                                                  p_log_msg            => 'È¡Ïû±¸ÁÏµ¥ºÅ£º' ||
                                                                           :old.prepare_order_id,
                                                   p_operate_field      => 'PREPARE_STATUS',
                                                   p_field_type         => 'NUMBER',
                                                   p_field_desc         => NULL,
                                                   p_old_code           => 1,
                                                   p_new_code           => 4,
-                                                  p_old_value          => CASE WHEN :old.prepare_status = 1 THEN 'å¾…æŽ¥å•' WHEN :old.prepare_status = 0 THEN 'å¾…å®¡æ ¸' END,
-                                                  p_new_value          => 'å·²å–æ¶ˆ',
+                                                  p_old_value          => CASE WHEN :old.prepare_status = 1 THEN '´ý½Óµ¥' WHEN :old.prepare_status = 0 THEN '´ýÉóºË' END,
+                                                  p_new_value          => 'ÒÑÈ¡Ïû',
                                                   p_operate_company_id => v_document_rec.operate_company_id,
                                                   p_user_id            => v_document_rec.update_id,
                                                   p_memo               => NULL,
@@ -67,24 +67,24 @@ BEGIN
                                                   p_type               => 2);
     
     ELSIF :old.prepare_status = 2 AND :new.prepare_status = 4 THEN
-      --1.3 å–æ¶ˆç”Ÿäº§å• å¤‡æ–™å•çŠ¶æ€ï¼šç”Ÿäº§ä¸­ => å·²å–æ¶ˆ
-      scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'a972dd1ffe3b3a10e0533c281cac8fd7',
+      --1.3 È¡ÏûÉú²úµ¥ ±¸ÁÏµ¥×´Ì¬£ºÉú²úÖÐ => ÒÑÈ¡Ïû
+      scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'b6cc680ad0f599cde0531164a8c0337f',
                                                   p_apply_module       => 'a_prematerial_222',
-                                                  p_apply_module_desc  => 'è‰²å¸ƒå¤‡æ–™å•',
+                                                  p_apply_module_desc  => 'É«²¼±¸ÁÏµ¥',
                                                   p_base_table         => 'COLOR_PREPARE_PRODUCT_ORDER',
                                                   p_apply_pk_id        => :old.prepare_order_id,
                                                   p_action_type        => 'UPDATE',
                                                   p_log_dict_type      => v_document_rec.data_source_parent_code,
                                                   p_log_type           => v_document_rec.data_source_child_code,
-                                                  p_log_msg            => 'å–æ¶ˆç”Ÿäº§å•å·ï¼š' ||
+                                                  p_log_msg            => 'È¡ÏûÉú²úµ¥ºÅ£º' ||
                                                                           :old.product_order_id,
                                                   p_operate_field      => 'PREPARE_STATUS',
                                                   p_field_type         => 'NUMBER',
                                                   p_field_desc         => NULL,
                                                   p_old_code           => 2,
                                                   p_new_code           => 4,
-                                                  p_old_value          => 'ç”Ÿäº§ä¸­',
-                                                  p_new_value          => 'å·²å–æ¶ˆ',
+                                                  p_old_value          => 'Éú²úÖÐ',
+                                                  p_new_value          => 'ÒÑÈ¡Ïû',
                                                   p_operate_company_id => v_document_rec.operate_company_id,
                                                   p_user_id            => v_document_rec.update_id,
                                                   p_memo               => NULL,
@@ -92,24 +92,24 @@ BEGIN
                                                   p_type               => 2);
     
     ELSIF :old.prepare_status = 2 AND :new.prepare_status = 3 THEN
-      --è®¢å•å®Œæˆ ç”Ÿäº§ä¸­ => å·²å®Œæˆ
-      scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'a972dd1ffe3b3a10e0533c281cac8fd7',
+      --¶©µ¥Íê³É Éú²úÖÐ => ÒÑÍê³É
+      scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'b6cc680ad0f599cde0531164a8c0337f',
                                                   p_apply_module       => 'a_prematerial_222',
-                                                  p_apply_module_desc  => 'è‰²å¸ƒå¤‡æ–™å•',
+                                                  p_apply_module_desc  => 'É«²¼±¸ÁÏµ¥',
                                                   p_base_table         => 'COLOR_PREPARE_PRODUCT_ORDER',
                                                   p_apply_pk_id        => :old.prepare_order_id,
                                                   p_action_type        => 'UPDATE',
                                                   p_log_dict_type      => v_document_rec.data_source_parent_code,
                                                   p_log_type           => v_document_rec.data_source_child_code,
-                                                  p_log_msg            => 'å®Œæˆç”Ÿäº§å•å·ï¼š' ||
+                                                  p_log_msg            => 'Íê³ÉÉú²úµ¥ºÅ£º' ||
                                                                           :old.product_order_id,
                                                   p_operate_field      => 'PREPARE_STATUS',
                                                   p_field_type         => 'NUMBER',
                                                   p_field_desc         => NULL,
                                                   p_old_code           => 2,
                                                   p_new_code           => 3,
-                                                  p_old_value          => 'ç”Ÿäº§ä¸­',
-                                                  p_new_value          => 'å·²å®Œæˆ',
+                                                  p_old_value          => 'Éú²úÖÐ',
+                                                  p_new_value          => 'ÒÑÍê³É',
                                                   p_operate_company_id => v_document_rec.operate_company_id,
                                                   p_user_id            => v_document_rec.update_id,
                                                   p_memo               => NULL,
@@ -120,27 +120,27 @@ BEGIN
     END IF;
   END IF;
 
-  --2.é¢„è®¡åˆ°ä»“æ—¥æœŸ
+  --2.Ô¤¼Æµ½²ÖÈÕÆÚ
   IF scmdata.pkg_plat_comm.f_is_check_fields_eq(p_old_field => :old.expect_arrival_time,
                                                 p_new_field => :new.expect_arrival_time) = 0 THEN
-    scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'a972dd1ffe3b3a10e0533c281cac8fd7',
+    scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'b6cc680ad0f599cde0531164a8c0337f',
                                                 p_apply_module       => 'a_prematerial_221_1',
-                                                p_apply_module_desc  => 'è‰²å¸ƒå¤‡æ–™å•æ˜Žç»†',
+                                                p_apply_module_desc  => 'É«²¼±¸ÁÏµ¥Ã÷Ï¸',
                                                 p_base_table         => 'COLOR_PREPARE_ORDER',
                                                 p_apply_pk_id        => :old.prepare_order_id,
                                                 p_action_type        => 'UPDATE',
                                                 p_log_dict_type      => v_document_rec.data_source_parent_code,
                                                 p_log_type           => v_document_rec.data_source_child_code,
-                                                p_log_msg            => 'å¤‡æ–™å•å·ï¼š' ||
-                                                                        :old.prepare_order_id || 'ï¼›' ||
+                                                p_log_msg            => '±¸ÁÏµ¥ºÅ£º' ||
+                                                                        :old.prepare_order_id || '£»' ||
                                                                         chr(10) ||
-                                                                        'é¢„è®¡åˆ°ä»“æ—¥æœŸï¼š' ||
+                                                                        'Ô¤¼Æµ½²ÖÈÕÆÚ£º' ||
                                                                         to_char(:new.expect_arrival_time,
                                                                                 'yyyy-mm-dd') ||
                                                                         ' 12:00:00' ||
-                                                                        'ã€æ“ä½œå‰ï¼š' ||
+                                                                        '¡¾²Ù×÷Ç°£º' ||
                                                                         to_char(:old.expect_arrival_time,
-                                                                                'yyyy-mm-dd hh24:mi:ss') || 'ã€‘' || 'ï¼›',
+                                                                                'yyyy-mm-dd hh24:mi:ss') || '¡¿' || '£»',
                                                 p_operate_field      => 'EXPECT_ARRIVAL_TIME',
                                                 p_field_type         => 'DATE',
                                                 p_field_desc         => NULL,
@@ -153,25 +153,25 @@ BEGIN
                                                 p_type               => 2);
   END IF;
 
-  --3.è®¢å•é‡
+  --3.¶©µ¥Á¿
   IF scmdata.pkg_plat_comm.f_is_check_fields_eq(p_old_field => :old.order_num,
                                                 p_new_field => :new.order_num) = 0 THEN
   
-    scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'a972dd1ffe3b3a10e0533c281cac8fd7',
+    scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'b6cc680ad0f599cde0531164a8c0337f',
                                                 p_apply_module       => 'a_prematerial_221_1',
-                                                p_apply_module_desc  => 'è‰²å¸ƒå¤‡æ–™å•æ˜Žç»†',
+                                                p_apply_module_desc  => 'É«²¼±¸ÁÏµ¥Ã÷Ï¸',
                                                 p_base_table         => 'COLOR_PREPARE_ORDER',
                                                 p_apply_pk_id        => :old.prepare_order_id,
                                                 p_action_type        => 'UPDATE',
                                                 p_log_dict_type      => v_document_rec.data_source_parent_code,
                                                 p_log_type           => v_document_rec.data_source_child_code,
-                                                p_log_msg            => 'å¤‡æ–™å•å·ï¼š' ||
-                                                                        :old.prepare_order_id || 'ï¼›' ||
+                                                p_log_msg            => '±¸ÁÏµ¥ºÅ£º' ||
+                                                                        :old.prepare_order_id || '£»' ||
                                                                         chr(10) ||
-                                                                        'è®¢å•é‡ï¼š' ||
+                                                                        '¶©µ¥Á¿£º' ||
                                                                         :new.order_num ||
-                                                                        'ã€æ“ä½œå‰ï¼š' ||
-                                                                        :old.order_num || 'ã€‘' || 'ï¼›',
+                                                                        '¡¾²Ù×÷Ç°£º' ||
+                                                                        :old.order_num || '¡¿' || '£»',
                                                 p_operate_field      => 'ORDER_NUM',
                                                 p_field_type         => 'NUMBER',
                                                 p_field_desc         => NULL,
@@ -186,4 +186,3 @@ BEGIN
 
 END trg_af_u_color_prepare_order;
 /
-

@@ -1,33 +1,33 @@
-ï»¿CREATE OR REPLACE PACKAGE MRP.pkg_color_prepare_order_manager IS
+CREATE OR REPLACE PACKAGE MRP.pkg_color_prepare_order_manager IS
 
   -- Author  : CZH55
   -- Created : 2023/4/25 17:39:55
-  -- Purpose : æˆå“ã€ç‰©æ–™ä¾›åº”å•†è‰²å¸ƒå¤‡æ–™å•ç®¡ç†-ä¸šåŠ¡ç¨‹åºåŒ…
+  -- Purpose : ³ÉÆ·¡¢ÎïÁÏ¹©Ó¦ÉÌÉ«²¼±¸ÁÏµ¥¹ÜÀí-ÒµÎñ³ÌĞò°ü
 
-  --è‰²å¸ƒå¤‡æ–™å• ä¸»è¡¨æŸ¥è¯¢  
+  --É«²¼±¸ÁÏµ¥ Ö÷±í²éÑ¯  
   FUNCTION f_query_color_prepare_order_header(p_company_id     VARCHAR2,
                                               p_prepare_object INT,
                                               p_prepare_status INT)
     RETURN CLOB;
 
-  --è‰²å¸ƒå¤‡æ–™ç”Ÿäº§å• ä¸»è¡¨æŸ¥è¯¢  
+  --É«²¼±¸ÁÏÉú²úµ¥ Ö÷±í²éÑ¯  
   FUNCTION f_query_color_prepare_product_order_header(p_company_id     VARCHAR2,
                                                       p_prepare_object INT)
     RETURN CLOB;
 
-  --ä¸»è¡¨ æ›´æ–°è‰²å¸ƒå¤‡æ–™å•
-  --å…³è”ç”Ÿäº§å•
+  --Ö÷±í ¸üĞÂÉ«²¼±¸ÁÏµ¥
+  --¹ØÁªÉú²úµ¥
   PROCEDURE p_generate_color_prepare_order(p_group_key        VARCHAR2,
                                            p_product_order_id VARCHAR2,
                                            p_company_id       VARCHAR2,
                                            p_user_id          VARCHAR2);
 
-  --ä»è¡¨ æ›´æ–°è‰²å¸ƒå¤‡æ–™å•
-  --å…³è”ç”Ÿäº§å•
+  --´Ó±í ¸üĞÂÉ«²¼±¸ÁÏµ¥
+  --¹ØÁªÉú²úµ¥
   PROCEDURE p_generate_color_prepare_order_sub(p_cpo_rec          mrp.color_prepare_order%ROWTYPE,
                                                p_user_id          VARCHAR2,
                                                p_product_order_id VARCHAR2);
-  --ç”Ÿæˆè‰²å¸ƒå¤‡æ–™ç”Ÿäº§å•
+  --Éú³ÉÉ«²¼±¸ÁÏÉú²úµ¥
   PROCEDURE p_generate_color_prepare_product_order(p_cpo_rec          mrp.color_prepare_order%ROWTYPE,
                                                    p_product_order_id VARCHAR2,
                                                    p_order_num        NUMBER,
@@ -35,12 +35,12 @@
                                                    p_relate_skc       VARCHAR2,
                                                    p_company_id       VARCHAR2,
                                                    p_user_id          VARCHAR2);
-  --ä¸»è¡¨ æ¥å•æŒ‰é’®
+  --Ö÷±í ½Óµ¥°´Å¥
   PROCEDURE p_receive_orders(p_company_id VARCHAR2,
                              p_user_id    VARCHAR2,
                              p_cpo_rec    mrp.color_prepare_order%ROWTYPE);
 
-  --ä»è¡¨ æ¥å•æŒ‰é’®
+  --´Ó±í ½Óµ¥°´Å¥
   PROCEDURE p_receive_orders_sub(p_company_id VARCHAR2,
                                  p_user_id    VARCHAR2,
                                  p_cpop_id    VARCHAR2,
@@ -49,24 +49,24 @@
                                  p_order_cnt  NUMBER,
                                  p_relate_skc VARCHAR2);
 
-  --æˆå“ä¾›åº”å•† å¯å¸ƒè½¬è‰²å¸ƒ
+  --³ÉÆ·¹©Ó¦ÉÌ Å÷²¼×ªÉ«²¼
   PROCEDURE p_fabric_gray_convert_color(p_cpop_rec mrp.color_prepare_product_order%ROWTYPE,
                                         p_user_id  VARCHAR2);
-  --ç‰©æ–™ä¾›åº”å•† å¯å¸ƒè½¬è‰²å¸ƒ
+  --ÎïÁÏ¹©Ó¦ÉÌ Å÷²¼×ªÉ«²¼
   PROCEDURE p_material_fabric_gray_convert_color(p_cpop_rec mrp.color_prepare_product_order%ROWTYPE,
                                                  p_user_id  VARCHAR2);
 
-  --è·å–ç‰©æ–™spu
+  --»ñÈ¡ÎïÁÏspu
   FUNCTION f_get_material_spu(p_material_sku      VARCHAR2,
                               p_sup_code          VARCHAR2 DEFAULT NULL,
                               p_is_inner_material INT) RETURN VARCHAR2;
 
-  --è·å–ç‰©æ–™ä¾›åº”å•† ç‰©æ–™spu
+  --»ñÈ¡ÎïÁÏ¹©Ó¦ÉÌ ÎïÁÏspu
   FUNCTION f_get_mt_material_spu(p_material_sku VARCHAR2) RETURN VARCHAR2;
 
-  --è·å–å“ç‰Œä»“ã€ä¾›åº”å•†ä»“æ•°
-  --1 å“ç‰Œä»“
-  --2 ä¾›åº”å•†ä»“
+  --»ñÈ¡Æ·ÅÆ²Ö¡¢¹©Ó¦ÉÌ²ÖÊı
+  --1 Æ·ÅÆ²Ö
+  --2 ¹©Ó¦ÉÌ²Ö
   FUNCTION f_get_brand_stock(p_company_id          VARCHAR2,
                              p_prepare_object      INT,
                              p_pro_supplier_code   VARCHAR2 DEFAULT NULL,
@@ -75,29 +75,29 @@
                              p_material_spu        VARCHAR2,
                              p_store_type          INT) RETURN NUMBER;
 
-  --è·å–å“ç‰Œä»“ã€ä¾›åº”å•†ä»“æ•°  DYY
+  --»ñÈ¡Æ·ÅÆ²Ö¡¢¹©Ó¦ÉÌ²ÖÊı  DYY
   FUNCTION f_get_stock_num(p_company_id          VARCHAR2,
-                           p_sup_mode            INT, --0 æˆå“ 1 ç‰©æ–™
+                           p_sup_mode            INT, --0 ³ÉÆ· 1 ÎïÁÏ
                            p_type                VARCHAR2, --sku/spu
                            p_pro_supplier_code   VARCHAR2 DEFAULT NULL,
                            p_mater_supplier_code VARCHAR2,
                            p_unit                VARCHAR2,
                            p_material_id         VARCHAR2,
-                           p_store_type          INT --1 å“ç‰Œä»“ 2 ä¾›åº”å•†ä»“
+                           p_store_type          INT --1 Æ·ÅÆ²Ö 2 ¹©Ó¦ÉÌ²Ö
                            ) RETURN NUMBER;
 
-  --è·æˆå“ä¾›åº”å•† å–æŸ“æŸç‡
+  --»ñ³ÉÆ·¹©Ó¦ÉÌ È¡È¾ËğÂÊ
   FUNCTION f_get_dye_loss_late(p_pro_supplier_code   VARCHAR2 DEFAULT NULL,
                                p_mater_supplier_code VARCHAR2,
                                p_material_sku        VARCHAR2,
                                p_is_inner_material   INT) RETURN NUMBER;
 
-  --ç‰©æ–™ä¾›åº”å•† è·å–æŸ“æŸç‡
+  --ÎïÁÏ¹©Ó¦ÉÌ »ñÈ¡È¾ËğÂÊ
   FUNCTION f_get_mt_dye_loss_late(p_mater_supplier_code VARCHAR2,
                                   p_material_sku        VARCHAR2)
     RETURN NUMBER;
 
-  --æ ¡éªŒâ€œå“ç‰Œä»“/ä¾›åº”å•†ä»“ å¯å¸ƒåº“å­˜â€è½¬åŒ–ä¸ºè‰²å¸ƒæ˜¯å¦å¤Ÿç”¨
+  --Ğ£Ñé¡°Æ·ÅÆ²Ö/¹©Ó¦ÉÌ²Ö Å÷²¼¿â´æ¡±×ª»¯ÎªÉ«²¼ÊÇ·ñ¹»ÓÃ
   PROCEDURE p_check_color_fabric_is_enough(p_brand_stock      NUMBER,
                                            p_plan_product_num NUMBER,
                                            p_sup_store_num    NUMBER DEFAULT 0,
@@ -106,7 +106,7 @@
                                            po_is_enough_flag  OUT INT,
                                            po_num             OUT NUMBER);
 
-  --æ®å¤‡æ–™å¯¹è±¡ï¼ˆæˆå“ã€ç‰©æ–™ä¾›åº”å•†ï¼‰ç”Ÿæˆã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨ã€‘ä¿¡æ¯
+  --¾İ±¸ÁÏ¶ÔÏó£¨³ÉÆ·¡¢ÎïÁÏ¹©Ó¦ÉÌ£©Éú³É¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í¡¿ĞÅÏ¢
   PROCEDURE p_generate_brand_inout_bound_by_pro(p_cpop_rec     mrp.color_prepare_product_order%ROWTYPE,
                                                 p_store_type   INT,
                                                 p_material_spu VARCHAR2,
@@ -114,14 +114,14 @@
                                                 p_user_id      VARCHAR2,
                                                 po_bound_num   OUT VARCHAR2);
 
-  --ç‰©æ–™ä¾›åº”å•†ç”Ÿæˆã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨ã€‘ä¿¡æ¯
+  --ÎïÁÏ¹©Ó¦ÉÌÉú³É¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í¡¿ĞÅÏ¢
   PROCEDURE p_generate_brand_inout_bound_by_mt(p_cpop_rec     mrp.color_prepare_product_order%ROWTYPE,
                                                p_store_type   INT,
                                                p_material_spu VARCHAR2,
                                                p_num          NUMBER,
                                                p_user_id      VARCHAR2,
                                                po_bound_num   OUT VARCHAR2);
-  --å“ç‰Œä»“-ç”Ÿæˆå¯å¸ƒå‡ºå…¥åº“å•
+  --Æ·ÅÆ²Ö-Éú³ÉÅ÷²¼³öÈë¿âµ¥
   PROCEDURE p_generate_brand_inout_bound(p_cpop_rec     mrp.color_prepare_product_order%ROWTYPE,
                                          p_store_type   INT,
                                          p_material_spu VARCHAR2,
@@ -129,20 +129,20 @@
                                          p_user_id      VARCHAR2,
                                          po_bound_num   OUT VARCHAR2);
 
-  --æˆå“ä¾›åº”å•† ä¾›åº”å•†ä»“-ç”Ÿæˆå¯å¸ƒå‡ºå…¥åº“å•
+  --³ÉÆ·¹©Ó¦ÉÌ ¹©Ó¦ÉÌ²Ö-Éú³ÉÅ÷²¼³öÈë¿âµ¥
   PROCEDURE p_generate_sup_brand_inout_bound_by_pro(p_cpop_rec     mrp.color_prepare_product_order%ROWTYPE,
                                                     p_store_type   INT,
                                                     p_material_spu VARCHAR2,
                                                     p_sup_num      NUMBER,
                                                     p_user_id      VARCHAR2);
 
-  --ç‰©æ–™ä¾›åº”å•† ä¾›åº”å•†ä»“-ç”Ÿæˆå¯å¸ƒå‡ºå…¥åº“å•
+  --ÎïÁÏ¹©Ó¦ÉÌ ¹©Ó¦ÉÌ²Ö-Éú³ÉÅ÷²¼³öÈë¿âµ¥
   PROCEDURE p_generate_sup_brand_inout_bound_by_mt(p_cpop_rec     mrp.color_prepare_product_order%ROWTYPE,
                                                    p_store_type   INT,
                                                    p_material_spu VARCHAR2,
                                                    p_sup_num      NUMBER,
                                                    p_user_id      VARCHAR2);
-  --ä¾›åº”å•†ä»“-ç”Ÿæˆå¯å¸ƒå‡ºå…¥åº“å•
+  --¹©Ó¦ÉÌ²Ö-Éú³ÉÅ÷²¼³öÈë¿âµ¥
   PROCEDURE p_generate_sup_brand_inout_bound(p_cpop_rec      mrp.color_prepare_product_order%ROWTYPE,
                                              p_store_type    INT,
                                              p_material_spu  VARCHAR2,
@@ -150,31 +150,31 @@
                                              p_dye_loss_late NUMBER,
                                              p_user_id       VARCHAR2);
 
-  --æ›´æ–°ã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»†ã€‘ç›¸åº”æ•°æ®
+  --¸üĞÂ¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸¡¿ÏàÓ¦Êı¾İ
   PROCEDURE p_generate_grey_stock(p_sgiob_rec   mrp.supplier_grey_in_out_bound%ROWTYPE,
                                   p_inout_stock NUMBER,
                                   p_user_id     VARCHAR2);
 
-  --ç‰©æ–™ä¾›åº”å•† æ›´æ–°ã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»†ã€‘ç›¸åº”æ•°æ®
+  --ÎïÁÏ¹©Ó¦ÉÌ ¸üĞÂ¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸¡¿ÏàÓ¦Êı¾İ
   PROCEDURE p_generate_material_grey_stock(p_mgiob_rec   mrp.material_grey_in_out_bound%ROWTYPE,
                                            p_inout_stock NUMBER,
                                            p_user_id     VARCHAR2);
 
-  --å–æ¶ˆå¤‡æ–™å•
+  --È¡Ïû±¸ÁÏµ¥
   PROCEDURE p_cancle_color_prepare_order(p_prepare_order_id   VARCHAR2,
                                          p_cancel_reason      VARCHAR2,
                                          p_company_id         VARCHAR2,
                                          p_operate_company_id VARCHAR2,
                                          p_user_id            VARCHAR2);
 
-  --ä¿®æ”¹è®¢å•æ•°é‡
+  --ĞŞ¸Ä¶©µ¥ÊıÁ¿
   PROCEDURE p_update_order_num(p_prepare_order_id   VARCHAR2,
                                p_order_num          VARCHAR2,
                                p_company_id         VARCHAR2,
                                p_operate_company_id VARCHAR2,
                                p_user_id            VARCHAR2);
 
-  --ä¿®æ”¹é¢„è®¡åˆ°ä»“æ—¥æœŸ
+  --ĞŞ¸ÄÔ¤¼Æµ½²ÖÈÕÆÚ
   PROCEDURE p_update_expect_arrival_time(p_prepare_order_id    VARCHAR2,
                                          p_prepare_status      INT,
                                          p_expect_arrival_time DATE,
@@ -182,14 +182,14 @@
                                          p_operate_company_id  VARCHAR2,
                                          p_user_id             VARCHAR2);
 
-  --ç”Ÿäº§å• å–æ¶ˆè®¢å•
+  --Éú²úµ¥ È¡Ïû¶©µ¥
   PROCEDURE p_cancel_product_order(p_product_order_id   VARCHAR2,
                                    p_cancel_reason      VARCHAR2,
                                    p_company_id         VARCHAR2,
                                    p_operate_company_id VARCHAR2,
                                    p_user_id            VARCHAR2);
 
-  --å®Œæˆè®¢å•
+  --Íê³É¶©µ¥
   PROCEDURE p_finish_product_order(p_product_order_id     VARCHAR2,
                                    p_cur_finished_num     VARCHAR2,
                                    p_is_finished_preorder NUMBER,
@@ -197,52 +197,51 @@
                                    p_operate_company_id   VARCHAR2,
                                    p_user_id              VARCHAR2);
 
-  --æˆå“ä¾›åº”å•† è‰²å¸ƒå…¥åº“
+  --³ÉÆ·¹©Ó¦ÉÌ É«²¼Èë¿â
   PROCEDURE p_color_cloth_storage(p_cppo_rec   mrp.color_prepare_product_order%ROWTYPE,
                                   p_company_id VARCHAR2,
                                   p_user_id    VARCHAR2,
                                   p_batch_num  NUMBER,
                                   po_bound_num OUT VARCHAR2);
 
-  --ç‰©æ–™ä¾›åº”å•† è‰²å¸ƒå…¥åº“
+  --ÎïÁÏ¹©Ó¦ÉÌ É«²¼Èë¿â
   PROCEDURE p_material_color_cloth_storage(p_cppo_rec   mrp.color_prepare_product_order%ROWTYPE,
                                            p_company_id VARCHAR2,
                                            p_user_id    VARCHAR2,
                                            p_batch_num  NUMBER,
                                            po_bound_num OUT VARCHAR2);
 
-  --æ˜¯å¦æ‰¾åˆ°è‰²å¸ƒåº“å­˜
-  --åŒºåˆ†å¤‡æ–™å¯¹è±¡ 
-  --p_prepare_objectï¼š0 æˆå“ä¾›åº”å•† 1 ç‰©æ–™ä¾›åº”å•†
+  --ÊÇ·ñÕÒµ½É«²¼¿â´æ
+  --Çø·Ö±¸ÁÏ¶ÔÏó 
+  --p_prepare_object£º0 ³ÉÆ·¹©Ó¦ÉÌ 1 ÎïÁÏ¹©Ó¦ÉÌ
   FUNCTION f_is_find_color_stock(p_pro_supplier_code   VARCHAR2 DEFAULT NULL,
                                  p_mater_supplier_code VARCHAR2,
                                  p_material_sku        VARCHAR2,
                                  p_unit                VARCHAR2,
                                  p_prepare_object      INT) RETURN NUMBER;
 
-  --æˆå“ä¾›åº”å•† è‰²å¸ƒä»“åº“å­˜
+  --³ÉÆ·¹©Ó¦ÉÌ É«²¼²Ö¿â´æ
   PROCEDURE p_sync_supplier_color_cloth_stock(p_sciob_rec  mrp.supplier_color_in_out_bound%ROWTYPE,
                                               p_company_id VARCHAR2,
                                               p_user_id    VARCHAR2);
 
-  --ç‰©æ–™ä¾›åº”å•† è‰²å¸ƒä»“åº“å­˜
+  --ÎïÁÏ¹©Ó¦ÉÌ É«²¼²Ö¿â´æ
   PROCEDURE p_sync_material_color_cloth_stock(p_mciob_rec  mrp.material_color_in_out_bound%ROWTYPE,
                                               p_company_id VARCHAR2,
                                               p_user_id    VARCHAR2);
 
-  --å¤‡æ–™è¿›åº¦æŸ¥è¯¢  
+  --±¸ÁÏ½ø¶È²éÑ¯  
   FUNCTION f_query_prepare_order_process(p_order_num VARCHAR2) RETURN CLOB;
 
-  --å¤‡æ–™çŠ¶æ€åŒæ­¥è‡³ç”Ÿäº§è¿›åº¦è¡¨
+  --±¸ÁÏ×´Ì¬Í¬²½ÖÁÉú²ú½ø¶È±í
   PROCEDURE p_sync_prepare_status(p_order_num  VARCHAR2,
                                   p_company_id VARCHAR2);
 
 END pkg_color_prepare_order_manager;
 /
-
 CREATE OR REPLACE PACKAGE BODY MRP.pkg_color_prepare_order_manager IS
 
-  --è‰²å¸ƒå¤‡æ–™å• ä¸»è¡¨æŸ¥è¯¢  
+  --É«²¼±¸ÁÏµ¥ Ö÷±í²éÑ¯  
   FUNCTION f_query_color_prepare_order_header(p_company_id     VARCHAR2,
                                               p_prepare_object INT,
                                               p_prepare_status INT)
@@ -251,25 +250,25 @@ CREATE OR REPLACE PACKAGE BODY MRP.pkg_color_prepare_order_manager IS
   BEGIN
     v_sql := q'[
 SELECT va.group_key,
-       va.material_name           cr_material_name_n, --ç‰©æ–™åç§°
-       va.is_delay                cr_is_delay_n, --æ˜¯å¦é€¾æœŸ
+       va.material_name           cr_material_name_n, --ÎïÁÏÃû³Æ
+       va.is_delay                cr_is_delay_n, --ÊÇ·ñÓâÆÚ
        mp.file_unique             cr_features_n,
-       va.supplier_color          cr_supplier_color_n, --é¢œè‰²   
-       va.supplier_shades         cr_supplier_shades_n, --è‰²å·
-       va.unit                    cr_unit_n, --å•ä½   
-       va.order_cnt               cr_order_cnt_n, --è®¢å•æ•°
-       va.order_num               cr_order_num_n, --è®¢å•æ•°é‡
+       va.supplier_color          cr_supplier_color_n, --ÑÕÉ«   
+       va.supplier_shades         cr_supplier_shades_n, --É«ºÅ
+       va.unit                    cr_unit_n, --µ¥Î»   
+       va.order_cnt               cr_order_cnt_n, --¶©µ¥Êı
+       va.order_num               cr_order_num_n, --¶©µ¥ÊıÁ¿
        ]' || (CASE
                WHEN p_prepare_status IN (3) THEN
-                ' va.finish_num cr_finish_num_n, --å·²å®Œæˆæ•°é‡
-                  va.finish_num/va.order_num cr_finish_rate_n, --å®Œæˆç‡'
+                ' va.finish_num cr_finish_num_n, --ÒÑÍê³ÉÊıÁ¿
+                  va.finish_num/va.order_num cr_finish_rate_n, --Íê³ÉÂÊ'
                ELSE
                 NULL
              END) || q'[
-       va.practical_door_with     cr_practical_door_with_n, --å®ç”¨é—¨å¹…
-       va.gram_weight             cr_gram_weight_n, --å…‹é‡
-       va.material_specifications cr_material_specifications_n, --è§„æ ¼    
-       va.material_sku            cr_material_sku_n --ç‰©æ–™sku
+       va.practical_door_with     cr_practical_door_with_n, --ÊµÓÃÃÅ·ù
+       va.gram_weight             cr_gram_weight_n, --¿ËÖØ
+       va.material_specifications cr_material_specifications_n, --¹æ¸ñ    
+       va.material_sku            cr_material_sku_n --ÎïÁÏsku
   FROM ]' || (CASE
                WHEN p_prepare_object = 0 THEN
                 'scmdata.t_supplier_info'
@@ -299,30 +298,30 @@ SELECT va.group_key,
     RETURN v_sql;
   END f_query_color_prepare_order_header;
 
-  --è‰²å¸ƒå¤‡æ–™ç”Ÿäº§å• ä¸»è¡¨æŸ¥è¯¢  
+  --É«²¼±¸ÁÏÉú²úµ¥ Ö÷±í²éÑ¯  
   FUNCTION f_query_color_prepare_product_order_header(p_company_id     VARCHAR2,
                                                       p_prepare_object INT)
     RETURN CLOB IS
     v_sql CLOB;
   BEGIN
-    v_sql := q'[SELECT t.product_order_id, --è‰²å¸ƒç”Ÿäº§å•å·
-       t.supplier_material_name cr_material_name_n, --ä¾›åº”å•†ç‰©æ–™åç§°
+    v_sql := q'[SELECT t.product_order_id, --É«²¼Éú²úµ¥ºÅ
+       t.supplier_material_name cr_material_name_n, --¹©Ó¦ÉÌÎïÁÏÃû³Æ
        decode(sign(to_number(SYSDATE - va.min_expect_arrival_time)),
               1,
-              'æ˜¯',
-              'å¦') cr_is_delay_n, --æ˜¯å¦é€¾æœŸ å¾…åš
-       mp.file_unique cr_features_n, --ç‰¹å¾å›¾ï¼Œå›¾ç‰‡IDï¼Œç¬¬ä¸€å¼ 
-       t.supplier_color cr_supplier_color_n, --ä¾›åº”å•†é¢œè‰²
-       t.supplier_shades cr_supplier_shades_n, --ä¾›åº”å•†è‰²å·
-       t.unit cr_unit_n, --å•ä½
-       t.contain_color_prepare_num cr_order_cnt_n, --å«è‰²å¸ƒå¤‡æ–™å•æ•°
-       t.plan_product_quantity cr_order_num_n, --è®¡åˆ’ç”Ÿäº§æ•°é‡
-       t.batch_finish_num cr_finish_num_n, --å·²å®Œæˆæ•°é‡
-       t.batch_finish_percent cr_finish_rate_n, --å®Œæˆç‡
-       t.practical_door_with cr_practical_door_with_n, --å®ç”¨é—¨å¹…
-       t.gram_weight cr_gram_weight_n, --å…‹é‡
-       t.material_specifications cr_material_specifications_n, --ç‰©æ–™è§„æ ¼  
-       t.material_sku cr_material_sku_n --ç‰©æ–™SKU
+              'ÊÇ',
+              '·ñ') cr_is_delay_n, --ÊÇ·ñÓâÆÚ ´ı×ö
+       mp.file_unique cr_features_n, --ÌØÕ÷Í¼£¬Í¼Æ¬ID£¬µÚÒ»ÕÅ
+       t.supplier_color cr_supplier_color_n, --¹©Ó¦ÉÌÑÕÉ«
+       t.supplier_shades cr_supplier_shades_n, --¹©Ó¦ÉÌÉ«ºÅ
+       t.unit cr_unit_n, --µ¥Î»
+       t.contain_color_prepare_num cr_order_cnt_n, --º¬É«²¼±¸ÁÏµ¥Êı
+       t.plan_product_quantity cr_order_num_n, --¼Æ»®Éú²úÊıÁ¿
+       t.batch_finish_num cr_finish_num_n, --ÒÑÍê³ÉÊıÁ¿
+       t.batch_finish_percent cr_finish_rate_n, --Íê³ÉÂÊ
+       t.practical_door_with cr_practical_door_with_n, --ÊµÓÃÃÅ·ù
+       t.gram_weight cr_gram_weight_n, --¿ËÖØ
+       t.material_specifications cr_material_specifications_n, --ÎïÁÏ¹æ¸ñ  
+       t.material_sku cr_material_sku_n --ÎïÁÏSKU
   FROM ]' || (CASE
                WHEN p_prepare_object = 0 THEN
                 'scmdata.t_supplier_info'
@@ -361,8 +360,8 @@ SELECT va.group_key,
     RETURN v_sql;
   END f_query_color_prepare_product_order_header;
 
-  --ä¸»è¡¨ æ›´æ–°è‰²å¸ƒå¤‡æ–™å•
-  --å…³è”ç”Ÿäº§å•
+  --Ö÷±í ¸üĞÂÉ«²¼±¸ÁÏµ¥
+  --¹ØÁªÉú²úµ¥
   PROCEDURE p_generate_color_prepare_order(p_group_key        VARCHAR2,
                                            p_product_order_id VARCHAR2,
                                            p_company_id       VARCHAR2,
@@ -384,8 +383,8 @@ SELECT va.group_key,
     END LOOP;
   END p_generate_color_prepare_order;
 
-  --ä»è¡¨ æ›´æ–°è‰²å¸ƒå¤‡æ–™å•
-  --å…³è”ç”Ÿäº§å•
+  --´Ó±í ¸üĞÂÉ«²¼±¸ÁÏµ¥
+  --¹ØÁªÉú²úµ¥
   PROCEDURE p_generate_color_prepare_order_sub(p_cpo_rec          mrp.color_prepare_order%ROWTYPE,
                                                p_user_id          VARCHAR2,
                                                p_product_order_id VARCHAR2) IS
@@ -403,7 +402,7 @@ SELECT va.group_key,
     mrp.pkg_color_prepare_order.p_update_color_prepare_order(p_color_rec => v_cpo_rec);
   END p_generate_color_prepare_order_sub;
 
-  --ç”Ÿæˆè‰²å¸ƒå¤‡æ–™ç”Ÿäº§å•
+  --Éú³ÉÉ«²¼±¸ÁÏÉú²úµ¥
   PROCEDURE p_generate_color_prepare_product_order(p_cpo_rec          mrp.color_prepare_order%ROWTYPE,
                                                    p_product_order_id VARCHAR2,
                                                    p_order_num        NUMBER,
@@ -413,55 +412,55 @@ SELECT va.group_key,
                                                    p_user_id          VARCHAR2) IS
     v_cpop_rec mrp.color_prepare_product_order%ROWTYPE;
   BEGIN
-    v_cpop_rec.product_order_id        := p_product_order_id; --è‰²å¸ƒç”Ÿäº§å•å·
-    v_cpop_rec.product_status          := 1; --ç”Ÿäº§å•çŠ¶æ€ï¼Œ1ç”Ÿäº§ä¸­ï¼Œ2å·²å®Œæˆï¼Œ3å·²å–æ¶ˆ
-    v_cpop_rec.prepare_object          := p_cpo_rec.prepare_object; --å¤‡æ–™å¯¹è±¡
-    v_cpop_rec.material_sku            := p_cpo_rec.material_sku; --ç‰©æ–™SKU
-    v_cpop_rec.pro_supplier_code       := p_cpo_rec.pro_supplier_code; --æˆå“ä¾›åº”å•†ç¼–å·
-    v_cpop_rec.mater_supplier_code     := p_cpo_rec.mater_supplier_code; --ç‰©æ–™ä¾›åº”å•†ç¼–å·
-    v_cpop_rec.whether_inner_mater     := p_cpo_rec.whether_inner_mater; --æ˜¯å¦å†…éƒ¨ç‰©æ–™ï¼Œ0å¦1æ˜¯
-    v_cpop_rec.material_name           := p_cpo_rec.material_name; --ç‰©æ–™åç§°
-    v_cpop_rec.material_color          := p_cpo_rec.material_color; --ç‰©æ–™é¢œè‰²
-    v_cpop_rec.unit                    := p_cpo_rec.unit; --å•ä½
-    v_cpop_rec.supplier_material_name  := p_cpo_rec.supplier_material_name; --ä¾›åº”å•†ç‰©æ–™åç§°
-    v_cpop_rec.supplier_color          := p_cpo_rec.supplier_color; --ä¾›åº”å•†é¢œè‰²
-    v_cpop_rec.supplier_shades         := p_cpo_rec.supplier_shades; --ä¾›åº”å•†è‰²å·
-    v_cpop_rec.practical_door_with     := p_cpo_rec.practical_door_with; --å®ç”¨é—¨å¹…
-    v_cpop_rec.gram_weight             := p_cpo_rec.gram_weight; --å…‹é‡
-    v_cpop_rec.material_specifications := p_cpo_rec.material_specifications; --ç‰©æ–™è§„æ ¼
-    v_cpop_rec.features                := p_cpo_rec.features; --ç‰¹å¾å›¾ï¼Œå›¾ç‰‡IDï¼Œç¬¬ä¸€å¼ 
-    v_cpop_rec.ingredients             := p_cpo_rec.ingredients; --ç‰©æ–™æˆä»½ï¼Œæˆä»½IDï¼Œé¡µé¢æ— æ˜¾ç¤º
+    v_cpop_rec.product_order_id        := p_product_order_id; --É«²¼Éú²úµ¥ºÅ
+    v_cpop_rec.product_status          := 1; --Éú²úµ¥×´Ì¬£¬1Éú²úÖĞ£¬2ÒÑÍê³É£¬3ÒÑÈ¡Ïû
+    v_cpop_rec.prepare_object          := p_cpo_rec.prepare_object; --±¸ÁÏ¶ÔÏó
+    v_cpop_rec.material_sku            := p_cpo_rec.material_sku; --ÎïÁÏSKU
+    v_cpop_rec.pro_supplier_code       := p_cpo_rec.pro_supplier_code; --³ÉÆ·¹©Ó¦ÉÌ±àºÅ
+    v_cpop_rec.mater_supplier_code     := p_cpo_rec.mater_supplier_code; --ÎïÁÏ¹©Ó¦ÉÌ±àºÅ
+    v_cpop_rec.whether_inner_mater     := p_cpo_rec.whether_inner_mater; --ÊÇ·ñÄÚ²¿ÎïÁÏ£¬0·ñ1ÊÇ
+    v_cpop_rec.material_name           := p_cpo_rec.material_name; --ÎïÁÏÃû³Æ
+    v_cpop_rec.material_color          := p_cpo_rec.material_color; --ÎïÁÏÑÕÉ«
+    v_cpop_rec.unit                    := p_cpo_rec.unit; --µ¥Î»
+    v_cpop_rec.supplier_material_name  := p_cpo_rec.supplier_material_name; --¹©Ó¦ÉÌÎïÁÏÃû³Æ
+    v_cpop_rec.supplier_color          := p_cpo_rec.supplier_color; --¹©Ó¦ÉÌÑÕÉ«
+    v_cpop_rec.supplier_shades         := p_cpo_rec.supplier_shades; --¹©Ó¦ÉÌÉ«ºÅ
+    v_cpop_rec.practical_door_with     := p_cpo_rec.practical_door_with; --ÊµÓÃÃÅ·ù
+    v_cpop_rec.gram_weight             := p_cpo_rec.gram_weight; --¿ËÖØ
+    v_cpop_rec.material_specifications := p_cpo_rec.material_specifications; --ÎïÁÏ¹æ¸ñ
+    v_cpop_rec.features                := p_cpo_rec.features; --ÌØÕ÷Í¼£¬Í¼Æ¬ID£¬µÚÒ»ÕÅ
+    v_cpop_rec.ingredients             := p_cpo_rec.ingredients; --ÎïÁÏ³É·İ£¬³É·İID£¬Ò³ÃæÎŞÏÔÊ¾
   
-    v_cpop_rec.plan_product_quantity     := p_order_num; --è®¡åˆ’ç”Ÿäº§æ•°é‡
-    v_cpop_rec.contain_color_prepare_num := p_order_cnt; --å«è‰²å¸ƒå¤‡æ–™å•æ•°
+    v_cpop_rec.plan_product_quantity     := p_order_num; --¼Æ»®Éú²úÊıÁ¿
+    v_cpop_rec.contain_color_prepare_num := p_order_cnt; --º¬É«²¼±¸ÁÏµ¥Êı
   
-    --v_cpop_rec.actual_finish_num := p_cpo_rec.actual_finish_num; --å®é™…å®Œæˆæ•°é‡
+    --v_cpop_rec.actual_finish_num := p_cpo_rec.actual_finish_num; --Êµ¼ÊÍê³ÉÊıÁ¿
   
-    v_cpop_rec.receive_id           := p_user_id; --æ¥å•äºº
-    v_cpop_rec.receive_time         := SYSDATE; --æ¥å•æ—¥æœŸ
-    v_cpop_rec.finish_id            := NULL; --æ€»å®Œæˆäºº
-    v_cpop_rec.finish_num           := NULL; --æ€»å®Œæˆæ•°é‡
-    v_cpop_rec.finish_time          := NULL; --æ€»å®Œæˆæ—¥æœŸ
-    v_cpop_rec.batch_finish_num     := 0; --åˆ†æ‰¹å®Œæˆç´¯è®¡æ•°é‡
-    v_cpop_rec.batch_finish_percent := 0; --åˆ†æ‰¹å®Œæˆç´¯è®¡ç™¾åˆ†æ¯”
-    v_cpop_rec.complete_num         := p_order_num; --å¾…å®Œæˆæ•°é‡
-    v_cpop_rec.relate_skc           := p_relate_skc; --å…³è”SKC
+    v_cpop_rec.receive_id           := p_user_id; --½Óµ¥ÈË
+    v_cpop_rec.receive_time         := SYSDATE; --½Óµ¥ÈÕÆÚ
+    v_cpop_rec.finish_id            := NULL; --×ÜÍê³ÉÈË
+    v_cpop_rec.finish_num           := NULL; --×ÜÍê³ÉÊıÁ¿
+    v_cpop_rec.finish_time          := NULL; --×ÜÍê³ÉÈÕÆÚ
+    v_cpop_rec.batch_finish_num     := 0; --·ÖÅúÍê³ÉÀÛ¼ÆÊıÁ¿
+    v_cpop_rec.batch_finish_percent := 0; --·ÖÅúÍê³ÉÀÛ¼Æ°Ù·Ö±È
+    v_cpop_rec.complete_num         := p_order_num; --´ıÍê³ÉÊıÁ¿
+    v_cpop_rec.relate_skc           := p_relate_skc; --¹ØÁªSKC
   
-    /*v_cpop_rec.cancel_id     := p_cpo_rec.cancel_id; --å–æ¶ˆäºº
-    v_cpop_rec.cancel_time   := p_cpo_rec.cancel_time; --å–æ¶ˆæ—¥æœŸ
-    v_cpop_rec.cancel_reason := p_cpo_rec.cancel_reason; --å–æ¶ˆåŸå› */
+    /*v_cpop_rec.cancel_id     := p_cpo_rec.cancel_id; --È¡ÏûÈË
+    v_cpop_rec.cancel_time   := p_cpo_rec.cancel_time; --È¡ÏûÈÕÆÚ
+    v_cpop_rec.cancel_reason := p_cpo_rec.cancel_reason; --È¡ÏûÔ­Òò*/
   
-    v_cpop_rec.company_id  := p_company_id; --ä¼ä¸šç¼–ç 
-    v_cpop_rec.create_id   := p_user_id; --åˆ›å»ºè€…
-    v_cpop_rec.create_time := SYSDATE; --åˆ›å»ºæ—¶é—´
-    v_cpop_rec.update_id   := p_user_id; --æ›´æ–°è€…
-    v_cpop_rec.update_time := SYSDATE; --æ›´æ–°æ—¶é—´
-    v_cpop_rec.whether_del := 0; --æ˜¯å¦åˆ é™¤ï¼Œ0å¦1æ˜¯
+    v_cpop_rec.company_id  := p_company_id; --ÆóÒµ±àÂë
+    v_cpop_rec.create_id   := p_user_id; --´´½¨Õß
+    v_cpop_rec.create_time := SYSDATE; --´´½¨Ê±¼ä
+    v_cpop_rec.update_id   := p_user_id; --¸üĞÂÕß
+    v_cpop_rec.update_time := SYSDATE; --¸üĞÂÊ±¼ä
+    v_cpop_rec.whether_del := 0; --ÊÇ·ñÉ¾³ı£¬0·ñ1ÊÇ
   
     mrp.pkg_color_prepare_product_order.p_insert_color_prepare_product_order(p_color_rec => v_cpop_rec);
   END p_generate_color_prepare_product_order;
 
-  --ä¸»è¡¨ æ¥å•æŒ‰é’®
+  --Ö÷±í ½Óµ¥°´Å¥
   PROCEDURE p_receive_orders(p_company_id VARCHAR2,
                              p_user_id    VARCHAR2,
                              p_cpo_rec    mrp.color_prepare_order%ROWTYPE) IS
@@ -471,7 +470,7 @@ SELECT va.group_key,
     v_order_cnt NUMBER := 0;
     v_skc_strs  VARCHAR2(500);
   BEGIN
-    --è‰²å¸ƒç”Ÿäº§å•å·                   
+    --É«²¼Éú²úµ¥ºÅ                   
     v_cpop_id := mrp.pkg_plat_comm.f_get_docuno(pi_table_name  => 'COLOR_PREPARE_PRODUCT_ORDER',
                                                 pi_column_name => 'PRODUCT_ORDER_ID',
                                                 pi_pre         => (CASE
@@ -485,7 +484,7 @@ SELECT va.group_key,
                                                                   to_char(trunc(SYSDATE),
                                                                           'YYYYMMDD'),
                                                 pi_serail_num  => 5);
-    --1.ç”Ÿæˆè‰²å¸ƒå¤‡æ–™ç”Ÿäº§å•
+    --1.Éú³ÉÉ«²¼±¸ÁÏÉú²úµ¥
     SELECT SUM(t.order_num),
            COUNT(t.prepare_order_id),
            listagg(t.goods_skc, '/')
@@ -503,9 +502,9 @@ SELECT va.group_key,
                                            p_company_id       => p_company_id,
                                            p_user_id          => p_user_id);
   
-    --2.æ›´æ–°è‰²å¸ƒå¤‡æ–™å•
+    --2.¸üĞÂÉ«²¼±¸ÁÏµ¥
     BEGIN
-      --å•æ®å˜æ›´æº¯æº
+      --µ¥¾İ±ä¸üËİÔ´
       scmdata.pkg_plat_log.p_document_change_trace(p_company_id              => 'a972dd1ffe3b3a10e0533c281cac8fd7',
                                                    p_document_id             => p_cpo_rec.prepare_order_id,
                                                    p_data_source_parent_code => 'PREMATERIAL_MANA_LOG',
@@ -513,26 +512,26 @@ SELECT va.group_key,
                                                    p_operate_company_id      => p_company_id,
                                                    p_user_id                 => p_user_id);
     
-      --æ›´æ–°è‰²å¸ƒå¤‡æ–™å•
+      --¸üĞÂÉ«²¼±¸ÁÏµ¥
       p_generate_color_prepare_order(p_group_key        => p_cpo_rec.group_key,
                                      p_product_order_id => v_cpop_id,
                                      p_company_id       => p_company_id,
                                      p_user_id          => p_user_id);
     END;
   
-    --3.æ ¹æ®ç”Ÿæˆçš„ã€è‰²å¸ƒå¤‡æ–™ç”Ÿäº§å•è¡¨ã€‘ä¿¡æ¯ï¼Œç”Ÿæˆã€å¯å¸ƒå‡ºå…¥åº“å•è¡¨ã€‘ä¿¡æ¯    
+    --3.¸ù¾İÉú³ÉµÄ¡¾É«²¼±¸ÁÏÉú²úµ¥±í¡¿ĞÅÏ¢£¬Éú³É¡¾Å÷²¼³öÈë¿âµ¥±í¡¿ĞÅÏ¢    
     SELECT t.*
       INTO v_cpop_rec
       FROM mrp.color_prepare_product_order t
      WHERE t.product_order_id = v_cpop_id;
   
-    --4.åŒºåˆ†å¤‡æ–™å¯¹è±¡ è¿›è¡Œå¯è½¬è‰²  
+    --4.Çø·Ö±¸ÁÏ¶ÔÏó ½øĞĞÅ÷×ªÉ«  
     IF v_cpop_rec.prepare_object = 0 THEN
-      --æˆå“ä¾›åº”å•†
+      --³ÉÆ·¹©Ó¦ÉÌ
       p_fabric_gray_convert_color(p_cpop_rec => v_cpop_rec,
                                   p_user_id  => p_user_id);
     ELSIF v_cpop_rec.prepare_object = 1 THEN
-      --ç‰©æ–™ä¾›åº”å•†
+      --ÎïÁÏ¹©Ó¦ÉÌ
       p_material_fabric_gray_convert_color(p_cpop_rec => v_cpop_rec,
                                            p_user_id  => p_user_id);
     ELSE
@@ -540,7 +539,7 @@ SELECT va.group_key,
     END IF;
   END p_receive_orders;
 
-  --ä»è¡¨ æ¥å•æŒ‰é’®
+  --´Ó±í ½Óµ¥°´Å¥
   PROCEDURE p_receive_orders_sub(p_company_id VARCHAR2,
                                  p_user_id    VARCHAR2,
                                  p_cpop_id    VARCHAR2,
@@ -550,7 +549,7 @@ SELECT va.group_key,
                                  p_relate_skc VARCHAR2) IS
     v_cpop_rec mrp.color_prepare_product_order%ROWTYPE;
   BEGIN
-    --1.ç”Ÿæˆè‰²å¸ƒå¤‡æ–™ç”Ÿäº§å•
+    --1.Éú³ÉÉ«²¼±¸ÁÏÉú²úµ¥
     p_generate_color_prepare_product_order(p_cpo_rec          => p_cpo_rec,
                                            p_product_order_id => p_cpop_id,
                                            p_order_num        => p_order_num,
@@ -558,14 +557,14 @@ SELECT va.group_key,
                                            p_relate_skc       => p_relate_skc,
                                            p_company_id       => p_company_id,
                                            p_user_id          => p_user_id);
-    --2.æ ¹æ®ç”Ÿæˆçš„ã€è‰²å¸ƒå¤‡æ–™ç”Ÿäº§å•è¡¨ã€‘ä¿¡æ¯ï¼Œç”Ÿæˆã€å¯å¸ƒå‡ºå…¥åº“å•è¡¨ã€‘ä¿¡æ¯    
+    --2.¸ù¾İÉú³ÉµÄ¡¾É«²¼±¸ÁÏÉú²úµ¥±í¡¿ĞÅÏ¢£¬Éú³É¡¾Å÷²¼³öÈë¿âµ¥±í¡¿ĞÅÏ¢    
     SELECT t.*
       INTO v_cpop_rec
       FROM mrp.color_prepare_product_order t
      WHERE t.product_order_id = p_cpop_id;
   
-    --3.åŒºåˆ†å¤‡æ–™å¯¹è±¡ è¿›è¡Œå¯è½¬è‰²
-    --æˆå“ä¾›åº”å•†
+    --3.Çø·Ö±¸ÁÏ¶ÔÏó ½øĞĞÅ÷×ªÉ«
+    --³ÉÆ·¹©Ó¦ÉÌ
     IF v_cpop_rec.prepare_object = 0 THEN
       p_fabric_gray_convert_color(p_cpop_rec => v_cpop_rec,
                                   p_user_id  => p_user_id);
@@ -577,23 +576,23 @@ SELECT va.group_key,
     END IF;
   END p_receive_orders_sub;
 
-  --æˆå“ä¾›åº”å•† å¯å¸ƒè½¬è‰²å¸ƒ
+  --³ÉÆ·¹©Ó¦ÉÌ Å÷²¼×ªÉ«²¼
   PROCEDURE p_fabric_gray_convert_color(p_cpop_rec mrp.color_prepare_product_order%ROWTYPE,
                                         p_user_id  VARCHAR2) IS
     v_material_spu  VARCHAR2(256);
     v_brand_stock   NUMBER(18, 2);
     v_dye_loss_late NUMBER(11, 2);
-    v_num           NUMBER; --å“ç‰Œä»“æ•°
+    v_num           NUMBER; --Æ·ÅÆ²ÖÊı
     v_flag          INT;
     v_sgiob_rec     mrp.supplier_grey_in_out_bound%ROWTYPE;
-    vo_bound_num    VARCHAR2(32); --å¯å¸ƒå‡ºå…¥åº“å•å•å·
+    vo_bound_num    VARCHAR2(32); --Å÷²¼³öÈë¿âµ¥µ¥ºÅ
   BEGIN
-    --1.1 è·å–ç‰©æ–™spu
+    --1.1 »ñÈ¡ÎïÁÏspu
     v_material_spu := f_get_material_spu(p_material_sku      => p_cpop_rec.material_sku,
                                          p_sup_code          => p_cpop_rec.pro_supplier_code,
                                          p_is_inner_material => p_cpop_rec.whether_inner_mater);
   
-    --1.2 è·å–å“ç‰Œä»“æ•°
+    --1.2 »ñÈ¡Æ·ÅÆ²ÖÊı
     v_brand_stock := f_get_brand_stock(p_company_id          => p_cpop_rec.company_id,
                                        p_prepare_object      => p_cpop_rec.prepare_object,
                                        p_pro_supplier_code   => p_cpop_rec.pro_supplier_code,
@@ -602,7 +601,7 @@ SELECT va.group_key,
                                        p_material_spu        => v_material_spu,
                                        p_store_type          => 1);
   
-    --1.3è·å–æŸ“æŸç‡
+    --1.3»ñÈ¡È¾ËğÂÊ
     v_dye_loss_late := f_get_dye_loss_late(p_pro_supplier_code   => (CASE
                                                                       WHEN p_cpop_rec.whether_inner_mater = 1 THEN
                                                                        NULL
@@ -613,17 +612,17 @@ SELECT va.group_key,
                                            p_material_sku        => p_cpop_rec.material_sku,
                                            p_is_inner_material   => p_cpop_rec.whether_inner_mater);
   
-    --1.4 æ ¡éªŒå“ç‰Œä»“æ•°æ˜¯å¦å¤§äº0
-    --å¤§äº0ï¼Œåˆ™å“ç‰Œä»“æœ‰åº“å­˜     
+    --1.4 Ğ£ÑéÆ·ÅÆ²ÖÊıÊÇ·ñ´óÓÚ0
+    --´óÓÚ0£¬ÔòÆ·ÅÆ²ÖÓĞ¿â´æ     
     IF v_brand_stock > 0 THEN
-      --æ ¡éªŒâ€œå“ç‰Œä»“å¯å¸ƒåº“å­˜â€è½¬åŒ–ä¸ºè‰²å¸ƒæ˜¯å¦å¤Ÿç”¨
+      --Ğ£Ñé¡°Æ·ÅÆ²ÖÅ÷²¼¿â´æ¡±×ª»¯ÎªÉ«²¼ÊÇ·ñ¹»ÓÃ
       p_check_color_fabric_is_enough(p_brand_stock      => v_brand_stock,
                                      p_plan_product_num => p_cpop_rec.plan_product_quantity,
                                      p_dye_loss_late    => v_dye_loss_late,
                                      p_store_type       => 1,
                                      po_is_enough_flag  => v_flag,
                                      po_num             => v_num);
-      --æˆå“ä¾›åº”å•†ç”Ÿæˆå“ç‰Œä»“ å‡ºå…¥åº“å•
+      --³ÉÆ·¹©Ó¦ÉÌÉú³ÉÆ·ÅÆ²Ö ³öÈë¿âµ¥
       p_generate_brand_inout_bound(p_cpop_rec     => p_cpop_rec,
                                    p_store_type   => 1,
                                    p_material_spu => v_material_spu,
@@ -631,24 +630,24 @@ SELECT va.group_key,
                                    p_user_id      => p_user_id,
                                    po_bound_num   => vo_bound_num);
     
-      --æ˜¯ï¼Œåˆ™æ ¹æ®ç”Ÿæˆçš„ã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨ã€‘ä¿¡æ¯ï¼Œæ›´æ–°ã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»†ã€‘ç›¸åº”æ•°æ®
+      --ÊÇ£¬Ôò¸ù¾İÉú³ÉµÄ¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í¡¿ĞÅÏ¢£¬¸üĞÂ¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸¡¿ÏàÓ¦Êı¾İ
       SELECT gs.*
         INTO v_sgiob_rec
         FROM mrp.supplier_grey_in_out_bound gs
        WHERE gs.bound_num = vo_bound_num
          AND gs.whether_del = 0;
     
-      --æ›´æ–°æˆå“ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»†
+      --¸üĞÂ³ÉÆ·¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸
       p_generate_grey_stock(p_sgiob_rec   => v_sgiob_rec,
-                            p_inout_stock => v_num, --å‡ºå…¥åº“æ•°
+                            p_inout_stock => v_num, --³öÈë¿âÊı
                             p_user_id     => p_user_id);
     
-      --åˆ¤æ–­å“ç‰Œä»“åº“å­˜æ˜¯å¦å¤Ÿç”¨
+      --ÅĞ¶ÏÆ·ÅÆ²Ö¿â´æÊÇ·ñ¹»ÓÃ
       IF v_flag = 1 THEN
         NULL;
       ELSE
-        --å¦ï¼Œåˆ™å“ç‰Œä»“åº“å­˜ä¸å¤Ÿï¼Œç»§ç»­ä»ä¾›åº”å•†ä»“æ‰£
-        --ç”Ÿæˆä¾›åº”å•†ä»“ å‡ºå…¥åº“å•
+        --·ñ£¬ÔòÆ·ÅÆ²Ö¿â´æ²»¹»£¬¼ÌĞø´Ó¹©Ó¦ÉÌ²Ö¿Û
+        --Éú³É¹©Ó¦ÉÌ²Ö ³öÈë¿âµ¥
         p_generate_sup_brand_inout_bound(p_cpop_rec      => p_cpop_rec,
                                          p_store_type    => 2,
                                          p_material_spu  => v_material_spu,
@@ -658,8 +657,8 @@ SELECT va.group_key,
       
       END IF;
     ELSE
-      --1.5 å¦åˆ™ï¼Œå“ç‰Œä»“æ— åº“å­˜ï¼Œç›´æ¥ä»ä¾›åº”å•†ä»“æ‰£
-      --ç”Ÿæˆä¾›åº”å•†ä»“ å‡ºå…¥åº“å•
+      --1.5 ·ñÔò£¬Æ·ÅÆ²ÖÎŞ¿â´æ£¬Ö±½Ó´Ó¹©Ó¦ÉÌ²Ö¿Û
+      --Éú³É¹©Ó¦ÉÌ²Ö ³öÈë¿âµ¥
       p_generate_sup_brand_inout_bound(p_cpop_rec      => p_cpop_rec,
                                        p_store_type    => 2,
                                        p_material_spu  => v_material_spu,
@@ -670,21 +669,21 @@ SELECT va.group_key,
     END IF;
   END p_fabric_gray_convert_color;
 
-  --ç‰©æ–™ä¾›åº”å•† å¯å¸ƒè½¬è‰²å¸ƒ
+  --ÎïÁÏ¹©Ó¦ÉÌ Å÷²¼×ªÉ«²¼
   PROCEDURE p_material_fabric_gray_convert_color(p_cpop_rec mrp.color_prepare_product_order%ROWTYPE,
                                                  p_user_id  VARCHAR2) IS
     v_material_spu  VARCHAR2(256);
     v_brand_stock   NUMBER(18, 2);
     v_dye_loss_late NUMBER(11, 2);
     v_flag          INT;
-    v_num           NUMBER; --å“ç‰Œä»“æ•°
+    v_num           NUMBER; --Æ·ÅÆ²ÖÊı
     v_mgiob_rec     mrp.material_grey_in_out_bound%ROWTYPE;
-    vo_bound_num    VARCHAR2(32); --å¯å¸ƒå‡ºå…¥åº“å•å•å·
+    vo_bound_num    VARCHAR2(32); --Å÷²¼³öÈë¿âµ¥µ¥ºÅ
   BEGIN
-    --1.1 è·å–ç‰©æ–™spu
+    --1.1 »ñÈ¡ÎïÁÏspu
     v_material_spu := f_get_mt_material_spu(p_material_sku => p_cpop_rec.material_sku);
   
-    --1.2 è·å–å“ç‰Œä»“æ•°
+    --1.2 »ñÈ¡Æ·ÅÆ²ÖÊı
     v_brand_stock := f_get_brand_stock(p_company_id          => p_cpop_rec.company_id,
                                        p_prepare_object      => p_cpop_rec.prepare_object,
                                        p_mater_supplier_code => p_cpop_rec.mater_supplier_code,
@@ -692,21 +691,21 @@ SELECT va.group_key,
                                        p_material_spu        => v_material_spu,
                                        p_store_type          => 1);
   
-    --1.3è·å–æŸ“æŸç‡
+    --1.3»ñÈ¡È¾ËğÂÊ
     v_dye_loss_late := f_get_mt_dye_loss_late(p_mater_supplier_code => p_cpop_rec.mater_supplier_code,
                                               p_material_sku        => p_cpop_rec.material_sku);
   
-    --1.4 æ ¡éªŒå“ç‰Œä»“æ•°æ˜¯å¦å¤§äº0
-    --å¤§äº0ï¼Œåˆ™å“ç‰Œä»“æœ‰åº“å­˜     
+    --1.4 Ğ£ÑéÆ·ÅÆ²ÖÊıÊÇ·ñ´óÓÚ0
+    --´óÓÚ0£¬ÔòÆ·ÅÆ²ÖÓĞ¿â´æ     
     IF v_brand_stock > 0 THEN
-      --æ ¡éªŒâ€œå“ç‰Œä»“å¯å¸ƒåº“å­˜â€è½¬åŒ–ä¸ºè‰²å¸ƒæ˜¯å¦å¤Ÿç”¨
+      --Ğ£Ñé¡°Æ·ÅÆ²ÖÅ÷²¼¿â´æ¡±×ª»¯ÎªÉ«²¼ÊÇ·ñ¹»ÓÃ
       p_check_color_fabric_is_enough(p_brand_stock      => v_brand_stock,
                                      p_plan_product_num => p_cpop_rec.plan_product_quantity,
                                      p_dye_loss_late    => v_dye_loss_late,
                                      p_store_type       => 1,
                                      po_is_enough_flag  => v_flag,
                                      po_num             => v_num);
-      --ç‰©æ–™ä¾›åº”å•† ç”Ÿæˆå“ç‰Œä»“ å‡ºå…¥åº“å•
+      --ÎïÁÏ¹©Ó¦ÉÌ Éú³ÉÆ·ÅÆ²Ö ³öÈë¿âµ¥
       p_generate_brand_inout_bound(p_cpop_rec     => p_cpop_rec,
                                    p_store_type   => 1,
                                    p_material_spu => v_material_spu,
@@ -714,24 +713,24 @@ SELECT va.group_key,
                                    p_user_id      => p_user_id,
                                    po_bound_num   => vo_bound_num);
     
-      --æ˜¯ï¼Œåˆ™æ ¹æ®ç‰©æ–™ä¾›åº”å•† ç”Ÿæˆçš„ã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨ã€‘ä¿¡æ¯ï¼Œæ›´æ–°ã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»†ã€‘ç›¸åº”æ•°æ®   
+      --ÊÇ£¬Ôò¸ù¾İÎïÁÏ¹©Ó¦ÉÌ Éú³ÉµÄ¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í¡¿ĞÅÏ¢£¬¸üĞÂ¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸¡¿ÏàÓ¦Êı¾İ   
       SELECT gs.*
         INTO v_mgiob_rec
         FROM mrp.material_grey_in_out_bound gs
        WHERE gs.bound_num = vo_bound_num
          AND gs.whether_del = 0;
     
-      --æ›´æ–°ç‰©æ–™ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»†
+      --¸üĞÂÎïÁÏ¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸
       p_generate_material_grey_stock(p_mgiob_rec   => v_mgiob_rec,
-                                     p_inout_stock => v_num, --å‡ºå…¥åº“æ•°
+                                     p_inout_stock => v_num, --³öÈë¿âÊı
                                      p_user_id     => p_user_id);
     
-      --åˆ¤æ–­å“ç‰Œä»“åº“å­˜æ˜¯å¦å¤Ÿç”¨
+      --ÅĞ¶ÏÆ·ÅÆ²Ö¿â´æÊÇ·ñ¹»ÓÃ
       IF v_flag = 1 THEN
         NULL;
       ELSE
-        --å¦ï¼Œåˆ™å“ç‰Œä»“åº“å­˜ä¸å¤Ÿï¼Œç»§ç»­ä»ä¾›åº”å•†ä»“æ‰£
-        --æ®å¤‡æ–™å¯¹è±¡ï¼ˆæˆå“ã€ç‰©æ–™ä¾›åº”å•†ï¼‰ç”Ÿæˆä¾›åº”å•†ä»“ å‡ºå…¥åº“å•
+        --·ñ£¬ÔòÆ·ÅÆ²Ö¿â´æ²»¹»£¬¼ÌĞø´Ó¹©Ó¦ÉÌ²Ö¿Û
+        --¾İ±¸ÁÏ¶ÔÏó£¨³ÉÆ·¡¢ÎïÁÏ¹©Ó¦ÉÌ£©Éú³É¹©Ó¦ÉÌ²Ö ³öÈë¿âµ¥
         p_generate_sup_brand_inout_bound(p_cpop_rec      => p_cpop_rec,
                                          p_store_type    => 2,
                                          p_material_spu  => v_material_spu,
@@ -741,8 +740,8 @@ SELECT va.group_key,
       
       END IF;
     ELSE
-      --1.5 å¦åˆ™ï¼Œå“ç‰Œä»“æ— åº“å­˜ï¼Œç›´æ¥ä»ä¾›åº”å•†ä»“æ‰£
-      --æ®å¤‡æ–™å¯¹è±¡ï¼ˆæˆå“ã€ç‰©æ–™ä¾›åº”å•†ï¼‰ç”Ÿæˆä¾›åº”å•†ä»“ å‡ºå…¥åº“å•
+      --1.5 ·ñÔò£¬Æ·ÅÆ²ÖÎŞ¿â´æ£¬Ö±½Ó´Ó¹©Ó¦ÉÌ²Ö¿Û
+      --¾İ±¸ÁÏ¶ÔÏó£¨³ÉÆ·¡¢ÎïÁÏ¹©Ó¦ÉÌ£©Éú³É¹©Ó¦ÉÌ²Ö ³öÈë¿âµ¥
       p_generate_sup_brand_inout_bound(p_cpop_rec      => p_cpop_rec,
                                        p_store_type    => 2,
                                        p_material_spu  => v_material_spu,
@@ -753,7 +752,7 @@ SELECT va.group_key,
     END IF;
   END p_material_fabric_gray_convert_color;
 
-  --è·å–æˆå“ä¾›åº”å•† ç‰©æ–™spu
+  --»ñÈ¡³ÉÆ·¹©Ó¦ÉÌ ÎïÁÏspu
   FUNCTION f_get_material_spu(p_material_sku      VARCHAR2,
                               p_sup_code          VARCHAR2 DEFAULT NULL,
                               p_is_inner_material INT) RETURN VARCHAR2 IS
@@ -776,12 +775,12 @@ SELECT va.group_key,
     END IF;
     IF v_material_spu IS NULL THEN
       raise_application_error(-20002,
-                              'æ•°æ®æœ‰è¯¯ï¼šSPUä¸å¯ä¸ºç©ºï¼Œè¯·è”ç³»ç®¡ç†å‘˜ï¼');
+                              'Êı¾İÓĞÎó£ºSPU²»¿ÉÎª¿Õ£¬ÇëÁªÏµ¹ÜÀíÔ±£¡');
     END IF;
     RETURN v_material_spu;
   END f_get_material_spu;
 
-  --è·å–ç‰©æ–™ä¾›åº”å•† ç‰©æ–™spu
+  --»ñÈ¡ÎïÁÏ¹©Ó¦ÉÌ ÎïÁÏspu
   FUNCTION f_get_mt_material_spu(p_material_sku VARCHAR2) RETURN VARCHAR2 IS
     v_material_spu VARCHAR2(256);
   BEGIN
@@ -793,9 +792,9 @@ SELECT va.group_key,
     RETURN v_material_spu;
   END f_get_mt_material_spu;
 
-  --è·å–å“ç‰Œä»“ã€ä¾›åº”å•†ä»“æ•°
-  --1 å“ç‰Œä»“
-  --2 ä¾›åº”å•†ä»“
+  --»ñÈ¡Æ·ÅÆ²Ö¡¢¹©Ó¦ÉÌ²ÖÊı
+  --1 Æ·ÅÆ²Ö
+  --2 ¹©Ó¦ÉÌ²Ö
   FUNCTION f_get_brand_stock(p_company_id          VARCHAR2,
                              p_prepare_object      INT,
                              p_pro_supplier_code   VARCHAR2 DEFAULT NULL,
@@ -849,15 +848,15 @@ SELECT va.group_key,
     RETURN v_brand_stock;
   END f_get_brand_stock;
 
-  --è·å–å“ç‰Œä»“ã€ä¾›åº”å•†ä»“æ•°  DYY
+  --»ñÈ¡Æ·ÅÆ²Ö¡¢¹©Ó¦ÉÌ²ÖÊı  DYY
   FUNCTION f_get_stock_num(p_company_id          VARCHAR2,
-                           p_sup_mode            INT, --0 æˆå“ 1 ç‰©æ–™
+                           p_sup_mode            INT, --0 ³ÉÆ· 1 ÎïÁÏ
                            p_type                VARCHAR2, --sku/spu
                            p_pro_supplier_code   VARCHAR2 DEFAULT NULL,
                            p_mater_supplier_code VARCHAR2,
                            p_unit                VARCHAR2,
                            p_material_id         VARCHAR2,
-                           p_store_type          INT --1 å“ç‰Œä»“ 2 ä¾›åº”å•†ä»“
+                           p_store_type          INT --1 Æ·ÅÆ²Ö 2 ¹©Ó¦ÉÌ²Ö
                            ) RETURN NUMBER IS
     v_stock NUMBER(18, 2);
     v_sql   CLOB;
@@ -912,7 +911,7 @@ SELECT va.group_key,
     RETURN v_stock;
   END f_get_stock_num;
 
-  --æˆå“ä¾›åº”å•† è·å–æŸ“æŸç‡
+  --³ÉÆ·¹©Ó¦ÉÌ »ñÈ¡È¾ËğÂÊ
   FUNCTION f_get_dye_loss_late(p_pro_supplier_code   VARCHAR2 DEFAULT NULL,
                                p_mater_supplier_code VARCHAR2,
                                p_material_sku        VARCHAR2,
@@ -939,7 +938,7 @@ SELECT va.group_key,
     RETURN v_dye_loss_late;
   END f_get_dye_loss_late;
 
-  --ç‰©æ–™ä¾›åº”å•† è·å–æŸ“æŸç‡
+  --ÎïÁÏ¹©Ó¦ÉÌ »ñÈ¡È¾ËğÂÊ
   FUNCTION f_get_mt_dye_loss_late(p_mater_supplier_code VARCHAR2,
                                   p_material_sku        VARCHAR2)
     RETURN NUMBER IS
@@ -955,7 +954,7 @@ SELECT va.group_key,
     RETURN v_dye_loss_late;
   END f_get_mt_dye_loss_late;
 
-  --æ ¡éªŒâ€œå“ç‰Œä»“/ä¾›åº”å•†ä»“ å¯å¸ƒåº“å­˜â€è½¬åŒ–ä¸ºè‰²å¸ƒæ˜¯å¦å¤Ÿç”¨
+  --Ğ£Ñé¡°Æ·ÅÆ²Ö/¹©Ó¦ÉÌ²Ö Å÷²¼¿â´æ¡±×ª»¯ÎªÉ«²¼ÊÇ·ñ¹»ÓÃ
   PROCEDURE p_check_color_fabric_is_enough(p_brand_stock      NUMBER,
                                            p_plan_product_num NUMBER,
                                            p_sup_store_num    NUMBER DEFAULT 0,
@@ -966,14 +965,14 @@ SELECT va.group_key,
     v_num  NUMBER;
     v_flag INT;
   BEGIN
-    --å“ç‰Œä»“
+    --Æ·ÅÆ²Ö
     IF p_store_type = 1 THEN
-      --æ ¡éªŒâ€œå“ç‰Œä»“å¯å¸ƒåº“å­˜â€è½¬åŒ–ä¸ºè‰²å¸ƒæ˜¯å¦å¤Ÿç”¨ï¼š
-      --æ ¡éªŒå…¬å¼ï¼šã€å“ç‰Œä»“å¯å¸ƒåº“å­˜ã€‘ - ï¼ˆç”Ÿæˆçš„ã€è‰²å¸ƒå¤‡æ–™ç”Ÿäº§å•è¡¨-è®¡åˆ’ç”Ÿäº§æ•°é‡ã€‘/(1-ã€æŸ“æŸç‡/100ã€‘) â‰¥ 0 
+      --Ğ£Ñé¡°Æ·ÅÆ²ÖÅ÷²¼¿â´æ¡±×ª»¯ÎªÉ«²¼ÊÇ·ñ¹»ÓÃ£º
+      --Ğ£Ñé¹«Ê½£º¡¾Æ·ÅÆ²ÖÅ÷²¼¿â´æ¡¿ - £¨Éú³ÉµÄ¡¾É«²¼±¸ÁÏÉú²úµ¥±í-¼Æ»®Éú²úÊıÁ¿¡¿/(1-¡¾È¾ËğÂÊ/100¡¿) ¡İ 0 
       v_num := p_brand_stock -
                (p_plan_product_num / (1 - (p_dye_loss_late / 100)));
-      -- å½“â‰¥0æ—¶ æ•°é‡:ã€è‰²å¸ƒå¤‡æ–™ç”Ÿäº§å•è¡¨-è®¡åˆ’ç”Ÿäº§æ•°é‡ã€‘/(1-ã€æŸ“æŸç‡ã€‘ã€‘
-      --å½“<0æ—¶ æ•°é‡:ã€å“ç‰Œä»“å¯å¸ƒåº“å­˜ã€‘
+      -- µ±¡İ0Ê± ÊıÁ¿:¡¾É«²¼±¸ÁÏÉú²úµ¥±í-¼Æ»®Éú²úÊıÁ¿¡¿/(1-¡¾È¾ËğÂÊ¡¿¡¿
+      --µ±<0Ê± ÊıÁ¿:¡¾Æ·ÅÆ²ÖÅ÷²¼¿â´æ¡¿
       IF v_num >= 0 THEN
         v_flag := 1;
         v_num  := p_plan_product_num / (1 - (p_dye_loss_late / 100));
@@ -982,10 +981,10 @@ SELECT va.group_key,
         v_num  := p_brand_stock;
       END IF;
     ELSIF p_store_type = 2 THEN
-      --æ ¡éªŒâ€ä¾›åº”å•†ä»“å¯å¸ƒåº“å­˜â€œè½¬åŒ–ä¸ºè‰²å¸ƒæ˜¯å¦å¤Ÿç”¨ï¼š    
-      --æ ¡éªŒå…¬å¼ï¼šã€ä¾›åº”å•†ä»“å¯å¸ƒåº“å­˜ã€‘-ï¼ˆç”Ÿæˆçš„ã€è‰²å¸ƒå¤‡æ–™ç”Ÿäº§å•è¡¨-è®¡åˆ’ç”Ÿäº§æ•°é‡ã€‘/(1-ã€æŸ“æŸç‡/100ã€‘-ã€å“ç‰Œä»“å¯å¸ƒåº“å­˜ã€‘ ) â‰¥ 0 ï¼›  
-      --å½“â‰¥0æ—¶ï¼Œã€æ•°é‡ã€‘=ï¼ˆç”Ÿæˆçš„ã€è‰²å¸ƒå¤‡æ–™ç”Ÿäº§å•è¡¨-è®¡åˆ’ç”Ÿäº§æ•°é‡ã€‘/(1-ã€æŸ“æŸç‡/100ã€‘-ã€å“ç‰Œä»“å¯å¸ƒåº“å­˜ã€‘ )  ï¼›   
-      --å½“ï¼œ0æ—¶ï¼Œæ•°é‡=ã€ä¾›åº”å•†ä»“åº“å­˜æ•°ã€‘ï¼›
+      --Ğ£Ñé¡±¹©Ó¦ÉÌ²ÖÅ÷²¼¿â´æ¡°×ª»¯ÎªÉ«²¼ÊÇ·ñ¹»ÓÃ£º    
+      --Ğ£Ñé¹«Ê½£º¡¾¹©Ó¦ÉÌ²ÖÅ÷²¼¿â´æ¡¿-£¨Éú³ÉµÄ¡¾É«²¼±¸ÁÏÉú²úµ¥±í-¼Æ»®Éú²úÊıÁ¿¡¿/(1-¡¾È¾ËğÂÊ/100¡¿-¡¾Æ·ÅÆ²ÖÅ÷²¼¿â´æ¡¿ ) ¡İ 0 £»  
+      --µ±¡İ0Ê±£¬¡¾ÊıÁ¿¡¿=£¨Éú³ÉµÄ¡¾É«²¼±¸ÁÏÉú²úµ¥±í-¼Æ»®Éú²úÊıÁ¿¡¿/(1-¡¾È¾ËğÂÊ/100¡¿-¡¾Æ·ÅÆ²ÖÅ÷²¼¿â´æ¡¿ )  £»   
+      --µ±£¼0Ê±£¬ÊıÁ¿=¡¾¹©Ó¦ÉÌ²Ö¿â´æÊı¡¿£»
       v_num := p_sup_store_num -
                ((p_plan_product_num / (1 - (p_dye_loss_late / 100))) -
                p_brand_stock);
@@ -1004,7 +1003,7 @@ SELECT va.group_key,
     po_num            := v_num;
   END p_check_color_fabric_is_enough;
 
-  --æˆå“ä¾›åº”å•†ç”Ÿæˆã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨ã€‘ä¿¡æ¯
+  --³ÉÆ·¹©Ó¦ÉÌÉú³É¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í¡¿ĞÅÏ¢
   PROCEDURE p_generate_brand_inout_bound_by_pro(p_cpop_rec     mrp.color_prepare_product_order%ROWTYPE,
                                                 p_store_type   INT,
                                                 p_material_spu VARCHAR2,
@@ -1022,32 +1021,32 @@ SELECT va.group_key,
                                                             pi_serail_num  => 5);
     v_sgiob_rec.bound_num := v_bound_num;
   
-    v_sgiob_rec.ascription          := 0; --å‡ºå…¥åº“å½’å±ï¼Œ0å‡ºåº“1å…¥åº“
-    v_sgiob_rec.bound_type          := 4; --å¯å¸ƒå‡ºå…¥åº“ç±»å‹ï¼Œ1è‰²å¸ƒå¤‡æ–™å‡ºåº“/ 2ç›˜äºå‡ºåº“/ 3ä¸´æ—¶å¯è½¬è‰²å‡ºåº“/ 4å¯å¸ƒå¤‡æ–™å‡ºåº“ /11å“ç‰Œå¤‡æ–™å…¥åº“/ 12ä¾›åº”å•†ç°è´§å…¥åº“/ 13ç›˜ç›ˆå…¥åº“/ 14ä¸´æ—¶è¡¥å……å…¥åº“/15 ä¾›åº”å•†è‰²å¸ƒå…¥åº“
-    v_sgiob_rec.pro_supplier_code   := p_cpop_rec.pro_supplier_code; --æˆå“ä¾›åº”å•†ç¼–å·
-    v_sgiob_rec.mater_supplier_code := p_cpop_rec.mater_supplier_code; --ç‰©æ–™ä¾›åº”å•†ç¼–å·
-    v_sgiob_rec.material_spu        := p_material_spu; --ç‰©æ–™SPU
-    v_sgiob_rec.whether_inner_mater := p_cpop_rec.whether_inner_mater; --æ˜¯å¦å†…éƒ¨ç‰©æ–™ï¼Œ0å¦1æ˜¯
-    v_sgiob_rec.unit                := p_cpop_rec.unit; --å•ä½
-    v_sgiob_rec.num                 := p_num; --æ•°é‡
-    v_sgiob_rec.stock_type          := p_store_type; --ä»“åº“ç±»å‹ï¼Œ1å“ç‰Œä»“ï¼Œ2ä¾›åº”å•†ä»“
+    v_sgiob_rec.ascription          := 0; --³öÈë¿â¹éÊô£¬0³ö¿â1Èë¿â
+    v_sgiob_rec.bound_type          := 4; --Å÷²¼³öÈë¿âÀàĞÍ£¬1É«²¼±¸ÁÏ³ö¿â/ 2ÅÌ¿÷³ö¿â/ 3ÁÙÊ±Å÷×ªÉ«³ö¿â/ 4Å÷²¼±¸ÁÏ³ö¿â /11Æ·ÅÆ±¸ÁÏÈë¿â/ 12¹©Ó¦ÉÌÏÖ»õÈë¿â/ 13ÅÌÓ¯Èë¿â/ 14ÁÙÊ±²¹³äÈë¿â/15 ¹©Ó¦ÉÌÉ«²¼Èë¿â
+    v_sgiob_rec.pro_supplier_code   := p_cpop_rec.pro_supplier_code; --³ÉÆ·¹©Ó¦ÉÌ±àºÅ
+    v_sgiob_rec.mater_supplier_code := p_cpop_rec.mater_supplier_code; --ÎïÁÏ¹©Ó¦ÉÌ±àºÅ
+    v_sgiob_rec.material_spu        := p_material_spu; --ÎïÁÏSPU
+    v_sgiob_rec.whether_inner_mater := p_cpop_rec.whether_inner_mater; --ÊÇ·ñÄÚ²¿ÎïÁÏ£¬0·ñ1ÊÇ
+    v_sgiob_rec.unit                := p_cpop_rec.unit; --µ¥Î»
+    v_sgiob_rec.num                 := p_num; --ÊıÁ¿
+    v_sgiob_rec.stock_type          := p_store_type; --²Ö¿âÀàĞÍ£¬1Æ·ÅÆ²Ö£¬2¹©Ó¦ÉÌ²Ö
   
-    v_sgiob_rec.relate_num                := p_cpop_rec.product_order_id; --å…³è”å•å·
-    v_sgiob_rec.relate_num_type           := 1; --å…³è”å•å·ç±»å‹ï¼Œ1è‰²å¸ƒç”Ÿäº§å•/ 2å¯å¸ƒç›˜ç‚¹å•/ 3è‰²å¸ƒé¢†æ–™å•/ 4å¯å¸ƒç”Ÿäº§å•/5é¢æ–™é‡‡è´­å•/6è‰²å¸ƒå…¥åº“å•
-    v_sgiob_rec.relate_skc                := p_cpop_rec.relate_skc; --å…³è”SKC
-    v_sgiob_rec.company_id                := p_cpop_rec.company_id; --ä¸‰ç¦ä¼ä¸šçš„ã€ä¼ä¸šIDã€‘
-    v_sgiob_rec.create_id                 := p_user_id; --åˆ›å»ºè€…
-    v_sgiob_rec.create_time               := SYSDATE; --åˆ›å»ºæ—¶é—´
-    v_sgiob_rec.update_id                 := p_user_id; --æ›´æ–°è€…
-    v_sgiob_rec.update_time               := SYSDATE; --æ›´æ–°æ—¶é—´
-    v_sgiob_rec.whether_del               := 0; --æ˜¯å¦åˆ é™¤ï¼Œ0å¦1æ˜¯
-    v_sgiob_rec.relate_purchase_order_num := NULL; --å…³è”é‡‡è´­å•å·
+    v_sgiob_rec.relate_num                := p_cpop_rec.product_order_id; --¹ØÁªµ¥ºÅ
+    v_sgiob_rec.relate_num_type           := 1; --¹ØÁªµ¥ºÅÀàĞÍ£¬1É«²¼Éú²úµ¥/ 2Å÷²¼ÅÌµãµ¥/ 3É«²¼ÁìÁÏµ¥/ 4Å÷²¼Éú²úµ¥/5ÃæÁÏ²É¹ºµ¥/6É«²¼Èë¿âµ¥
+    v_sgiob_rec.relate_skc                := p_cpop_rec.relate_skc; --¹ØÁªSKC
+    v_sgiob_rec.company_id                := p_cpop_rec.company_id; --Èı¸£ÆóÒµµÄ¡¾ÆóÒµID¡¿
+    v_sgiob_rec.create_id                 := p_user_id; --´´½¨Õß
+    v_sgiob_rec.create_time               := SYSDATE; --´´½¨Ê±¼ä
+    v_sgiob_rec.update_id                 := p_user_id; --¸üĞÂÕß
+    v_sgiob_rec.update_time               := SYSDATE; --¸üĞÂÊ±¼ä
+    v_sgiob_rec.whether_del               := 0; --ÊÇ·ñÉ¾³ı£¬0·ñ1ÊÇ
+    v_sgiob_rec.relate_purchase_order_num := NULL; --¹ØÁª²É¹ºµ¥ºÅ
   
     mrp.pkg_supplier_grey_in_out_bound.p_insert_supplier_grey_in_out_bound(p_suppl_rec => v_sgiob_rec);
     po_bound_num := v_bound_num;
   END p_generate_brand_inout_bound_by_pro;
 
-  --ç‰©æ–™ä¾›åº”å•†ç”Ÿæˆã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨ã€‘ä¿¡æ¯
+  --ÎïÁÏ¹©Ó¦ÉÌÉú³É¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í¡¿ĞÅÏ¢
   PROCEDURE p_generate_brand_inout_bound_by_mt(p_cpop_rec     mrp.color_prepare_product_order%ROWTYPE,
                                                p_store_type   INT,
                                                p_material_spu VARCHAR2,
@@ -1065,31 +1064,31 @@ SELECT va.group_key,
                                                             pi_serail_num  => 5);
     v_mciob_rec.bound_num := v_bound_num;
   
-    v_mciob_rec.ascription          := 0; --å‡ºå…¥åº“å½’å±ï¼Œ0å‡ºåº“1å…¥åº“
-    v_mciob_rec.bound_type          := 4; --å¯å¸ƒå‡ºå…¥åº“ç±»å‹ï¼Œ1è‰²å¸ƒå¤‡æ–™å‡ºåº“/ 2ç›˜äºå‡ºåº“/ 3ä¸´æ—¶å¯è½¬è‰²å‡ºåº“/ 4å¯å¸ƒå¤‡æ–™å‡ºåº“ /11å“ç‰Œå¤‡æ–™å…¥åº“/ 12ä¾›åº”å•†ç°è´§å…¥åº“/ 13ç›˜ç›ˆå…¥åº“/ 14ä¸´æ—¶è¡¥å……å…¥åº“/15 ä¾›åº”å•†è‰²å¸ƒå…¥åº“       
-    v_mciob_rec.mater_supplier_code := p_cpop_rec.mater_supplier_code; --ç‰©æ–™ä¾›åº”å•†ç¼–å·
-    v_mciob_rec.material_spu        := p_material_spu; --ç‰©æ–™SPU
-    --v_mciob_rec.whether_inner_mater := p_cpop_rec.whether_inner_mater; --æ˜¯å¦å†…éƒ¨ç‰©æ–™ï¼Œ0å¦1æ˜¯
-    v_mciob_rec.unit       := p_cpop_rec.unit; --å•ä½
-    v_mciob_rec.num        := p_num; --æ•°é‡
-    v_mciob_rec.stock_type := p_store_type; --ä»“åº“ç±»å‹ï¼Œ1å“ç‰Œä»“ï¼Œ2ä¾›åº”å•†ä»“
+    v_mciob_rec.ascription          := 0; --³öÈë¿â¹éÊô£¬0³ö¿â1Èë¿â
+    v_mciob_rec.bound_type          := 4; --Å÷²¼³öÈë¿âÀàĞÍ£¬1É«²¼±¸ÁÏ³ö¿â/ 2ÅÌ¿÷³ö¿â/ 3ÁÙÊ±Å÷×ªÉ«³ö¿â/ 4Å÷²¼±¸ÁÏ³ö¿â /11Æ·ÅÆ±¸ÁÏÈë¿â/ 12¹©Ó¦ÉÌÏÖ»õÈë¿â/ 13ÅÌÓ¯Èë¿â/ 14ÁÙÊ±²¹³äÈë¿â/15 ¹©Ó¦ÉÌÉ«²¼Èë¿â       
+    v_mciob_rec.mater_supplier_code := p_cpop_rec.mater_supplier_code; --ÎïÁÏ¹©Ó¦ÉÌ±àºÅ
+    v_mciob_rec.material_spu        := p_material_spu; --ÎïÁÏSPU
+    --v_mciob_rec.whether_inner_mater := p_cpop_rec.whether_inner_mater; --ÊÇ·ñÄÚ²¿ÎïÁÏ£¬0·ñ1ÊÇ
+    v_mciob_rec.unit       := p_cpop_rec.unit; --µ¥Î»
+    v_mciob_rec.num        := p_num; --ÊıÁ¿
+    v_mciob_rec.stock_type := p_store_type; --²Ö¿âÀàĞÍ£¬1Æ·ÅÆ²Ö£¬2¹©Ó¦ÉÌ²Ö
   
-    v_mciob_rec.relate_num                := p_cpop_rec.product_order_id; --å…³è”å•å·
-    v_mciob_rec.relate_num_type           := 1; --å…³è”å•å·ç±»å‹ï¼Œ1è‰²å¸ƒç”Ÿäº§å•/ 2å¯å¸ƒç›˜ç‚¹å•/ 3è‰²å¸ƒé¢†æ–™å•/ 4å¯å¸ƒç”Ÿäº§å•/5é¢æ–™é‡‡è´­å•/6è‰²å¸ƒå…¥åº“å•
-    v_mciob_rec.relate_skc                := p_cpop_rec.relate_skc; --å…³è”SKC
-    v_mciob_rec.company_id                := p_cpop_rec.company_id; --ä¸‰ç¦ä¼ä¸šçš„ã€ä¼ä¸šIDã€‘
-    v_mciob_rec.create_id                 := p_user_id; --åˆ›å»ºè€…
-    v_mciob_rec.create_time               := SYSDATE; --åˆ›å»ºæ—¶é—´
-    v_mciob_rec.update_id                 := p_user_id; --æ›´æ–°è€…
-    v_mciob_rec.update_time               := SYSDATE; --æ›´æ–°æ—¶é—´
-    v_mciob_rec.whether_del               := 0; --æ˜¯å¦åˆ é™¤ï¼Œ0å¦1æ˜¯
-    v_mciob_rec.relate_purchase_order_num := NULL; --å…³è”é‡‡è´­å•å·
+    v_mciob_rec.relate_num                := p_cpop_rec.product_order_id; --¹ØÁªµ¥ºÅ
+    v_mciob_rec.relate_num_type           := 1; --¹ØÁªµ¥ºÅÀàĞÍ£¬1É«²¼Éú²úµ¥/ 2Å÷²¼ÅÌµãµ¥/ 3É«²¼ÁìÁÏµ¥/ 4Å÷²¼Éú²úµ¥/5ÃæÁÏ²É¹ºµ¥/6É«²¼Èë¿âµ¥
+    v_mciob_rec.relate_skc                := p_cpop_rec.relate_skc; --¹ØÁªSKC
+    v_mciob_rec.company_id                := p_cpop_rec.company_id; --Èı¸£ÆóÒµµÄ¡¾ÆóÒµID¡¿
+    v_mciob_rec.create_id                 := p_user_id; --´´½¨Õß
+    v_mciob_rec.create_time               := SYSDATE; --´´½¨Ê±¼ä
+    v_mciob_rec.update_id                 := p_user_id; --¸üĞÂÕß
+    v_mciob_rec.update_time               := SYSDATE; --¸üĞÂÊ±¼ä
+    v_mciob_rec.whether_del               := 0; --ÊÇ·ñÉ¾³ı£¬0·ñ1ÊÇ
+    v_mciob_rec.relate_purchase_order_num := NULL; --¹ØÁª²É¹ºµ¥ºÅ
   
     mrp.pkg_material_grey_in_out_bound.p_insert_material_grey_in_out_bound(p_mater_rec => v_mciob_rec);
     po_bound_num := v_bound_num;
   END p_generate_brand_inout_bound_by_mt;
 
-  --æˆå“ã€ç‰©æ–™ä¾›åº”å•† å“ç‰Œä»“-ç”Ÿæˆå¯å¸ƒå‡ºå…¥åº“å•
+  --³ÉÆ·¡¢ÎïÁÏ¹©Ó¦ÉÌ Æ·ÅÆ²Ö-Éú³ÉÅ÷²¼³öÈë¿âµ¥
   PROCEDURE p_generate_brand_inout_bound(p_cpop_rec     mrp.color_prepare_product_order%ROWTYPE,
                                          p_store_type   INT,
                                          p_material_spu VARCHAR2,
@@ -1100,7 +1099,7 @@ SELECT va.group_key,
   BEGIN
   
     IF p_cpop_rec.prepare_object = 0 THEN
-      --æˆå“ä¾›åº”å•† å“ç‰Œä»“ ç”Ÿæˆä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨
+      --³ÉÆ·¹©Ó¦ÉÌ Æ·ÅÆ²Ö Éú³É¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í
       p_generate_brand_inout_bound_by_pro(p_cpop_rec     => p_cpop_rec,
                                           p_store_type   => p_store_type,
                                           p_material_spu => p_material_spu,
@@ -1108,7 +1107,7 @@ SELECT va.group_key,
                                           p_user_id      => p_user_id,
                                           po_bound_num   => v_bound_num);
     ELSIF p_cpop_rec.prepare_object = 1 THEN
-      --ç‰©æ–™ä¾›åº”å•† å“ç‰Œä»“ ç”Ÿæˆä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨
+      --ÎïÁÏ¹©Ó¦ÉÌ Æ·ÅÆ²Ö Éú³É¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í
       p_generate_brand_inout_bound_by_mt(p_cpop_rec     => p_cpop_rec,
                                          p_store_type   => p_store_type,
                                          p_material_spu => p_material_spu,
@@ -1121,7 +1120,7 @@ SELECT va.group_key,
     po_bound_num := v_bound_num;
   END p_generate_brand_inout_bound;
 
-  --æˆå“ä¾›åº”å•† ä¾›åº”å•†ä»“-ç”Ÿæˆå¯å¸ƒå‡ºå…¥åº“å•
+  --³ÉÆ·¹©Ó¦ÉÌ ¹©Ó¦ÉÌ²Ö-Éú³ÉÅ÷²¼³öÈë¿âµ¥
   PROCEDURE p_generate_sup_brand_inout_bound_by_pro(p_cpop_rec     mrp.color_prepare_product_order%ROWTYPE,
                                                     p_store_type   INT,
                                                     p_material_spu VARCHAR2,
@@ -1130,15 +1129,15 @@ SELECT va.group_key,
     v_bound_num VARCHAR2(32);
     v_sgiob_rec mrp.supplier_grey_in_out_bound%ROWTYPE;
   BEGIN
-    --ä¾›åº”å•†ä»“ ç”Ÿæˆä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨
+    --¹©Ó¦ÉÌ²Ö Éú³É¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í
     v_bound_num := mrp.pkg_plat_comm.f_get_docuno(pi_table_name  => 'SUPPLIER_GREY_IN_OUT_BOUND',
                                                   pi_column_name => 'BOUND_NUM',
                                                   pi_pre         => 'CPCK' ||
                                                                     to_char(trunc(SYSDATE),
                                                                             'YYYYMMDD'),
-                                                  pi_serail_num  => 5); --å¯å¸ƒå‡ºå…¥åº“å•å·
+                                                  pi_serail_num  => 5); --Å÷²¼³öÈë¿âµ¥ºÅ
   
-    --æˆå“ä¾›åº”å•† ä¾›åº”å•†ä»“ ç”Ÿæˆä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨
+    --³ÉÆ·¹©Ó¦ÉÌ ¹©Ó¦ÉÌ²Ö Éú³É¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í
     p_generate_brand_inout_bound_by_pro(p_cpop_rec     => p_cpop_rec,
                                         p_store_type   => p_store_type,
                                         p_material_spu => p_material_spu,
@@ -1146,21 +1145,21 @@ SELECT va.group_key,
                                         p_user_id      => p_user_id,
                                         po_bound_num   => v_bound_num);
   
-    --æ˜¯ï¼Œåˆ™æ ¹æ®ç”Ÿæˆçš„ã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨ã€‘ä¿¡æ¯ï¼Œæ›´æ–°ã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»†ã€‘ç›¸åº”æ•°æ®
+    --ÊÇ£¬Ôò¸ù¾İÉú³ÉµÄ¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í¡¿ĞÅÏ¢£¬¸üĞÂ¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸¡¿ÏàÓ¦Êı¾İ
     SELECT gs.*
       INTO v_sgiob_rec
       FROM mrp.supplier_grey_in_out_bound gs
      WHERE gs.bound_num = v_bound_num
        AND gs.whether_del = 0;
   
-    --æ›´æ–°æˆå“ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»†
+    --¸üĞÂ³ÉÆ·¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸
     p_generate_grey_stock(p_sgiob_rec   => v_sgiob_rec,
-                          p_inout_stock => p_sup_num, --å‡ºå…¥åº“æ•°
+                          p_inout_stock => p_sup_num, --³öÈë¿âÊı
                           p_user_id     => p_user_id);
   
   END p_generate_sup_brand_inout_bound_by_pro;
 
-  --ç‰©æ–™ä¾›åº”å•† ä¾›åº”å•†ä»“-ç”Ÿæˆå¯å¸ƒå‡ºå…¥åº“å•
+  --ÎïÁÏ¹©Ó¦ÉÌ ¹©Ó¦ÉÌ²Ö-Éú³ÉÅ÷²¼³öÈë¿âµ¥
   PROCEDURE p_generate_sup_brand_inout_bound_by_mt(p_cpop_rec     mrp.color_prepare_product_order%ROWTYPE,
                                                    p_store_type   INT,
                                                    p_material_spu VARCHAR2,
@@ -1169,27 +1168,27 @@ SELECT va.group_key,
     v_bound_num VARCHAR2(32);
     v_mgiob_rec mrp.material_grey_in_out_bound%ROWTYPE;
   BEGIN
-    --ä¾›åº”å•†ä»“ ç”Ÿæˆä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨
+    --¹©Ó¦ÉÌ²Ö Éú³É¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í
     p_generate_brand_inout_bound_by_mt(p_cpop_rec     => p_cpop_rec,
                                        p_store_type   => p_store_type,
                                        p_material_spu => p_material_spu,
                                        p_num          => p_sup_num,
                                        p_user_id      => p_user_id,
                                        po_bound_num   => v_bound_num);
-    --æ˜¯ï¼Œåˆ™æ ¹æ®ç‰©æ–™ä¾›åº”å•† ç”Ÿæˆçš„ã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨ã€‘ä¿¡æ¯ï¼Œæ›´æ–°ã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»†ã€‘ç›¸åº”æ•°æ®   
+    --ÊÇ£¬Ôò¸ù¾İÎïÁÏ¹©Ó¦ÉÌ Éú³ÉµÄ¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í¡¿ĞÅÏ¢£¬¸üĞÂ¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸¡¿ÏàÓ¦Êı¾İ   
     SELECT gs.*
       INTO v_mgiob_rec
       FROM mrp.material_grey_in_out_bound gs
      WHERE gs.bound_num = v_bound_num
        AND gs.whether_del = 0;
-    --æ›´æ–°ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»†
+    --¸üĞÂ¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸
     p_generate_material_grey_stock(p_mgiob_rec   => v_mgiob_rec,
-                                   p_inout_stock => p_sup_num, --å‡ºå…¥åº“æ•°
+                                   p_inout_stock => p_sup_num, --³öÈë¿âÊı
                                    p_user_id     => p_user_id);
   
   END p_generate_sup_brand_inout_bound_by_mt;
 
-  --æˆå“ã€ç‰©æ–™ä¾›åº”å•† ä¾›åº”å•†ä»“-ç”Ÿæˆå¯å¸ƒå‡ºå…¥åº“å•
+  --³ÉÆ·¡¢ÎïÁÏ¹©Ó¦ÉÌ ¹©Ó¦ÉÌ²Ö-Éú³ÉÅ÷²¼³öÈë¿âµ¥
   PROCEDURE p_generate_sup_brand_inout_bound(p_cpop_rec      mrp.color_prepare_product_order%ROWTYPE,
                                              p_store_type    INT,
                                              p_material_spu  VARCHAR2,
@@ -1198,9 +1197,9 @@ SELECT va.group_key,
                                              p_user_id       VARCHAR2) IS
     v_sup_brand_stock NUMBER(18, 2);
     v_flag            INT;
-    v_sup_num         NUMBER; --ä¾›åº”å•†ä»“æ•° 
+    v_sup_num         NUMBER; --¹©Ó¦ÉÌ²ÖÊı 
   BEGIN
-    --è·å–ä¾›åº”å•†ä»“åº“å­˜æ•°
+    --»ñÈ¡¹©Ó¦ÉÌ²Ö¿â´æÊı
     v_sup_brand_stock := f_get_brand_stock(p_company_id          => p_cpop_rec.company_id,
                                            p_prepare_object      => p_cpop_rec.prepare_object,
                                            p_pro_supplier_code   => p_cpop_rec.pro_supplier_code,
@@ -1208,11 +1207,11 @@ SELECT va.group_key,
                                            p_unit                => p_cpop_rec.unit,
                                            p_material_spu        => p_material_spu,
                                            p_store_type          => p_store_type);
-    --åˆ¤æ–­ä¾›åº”å•†ä»“æ˜¯å¦æœ‰åº“å­˜ 
-    --æœ‰ï¼Œåˆ™æ‰§è¡Œä¸€ä¸‹é€»è¾‘
-    --æ— ï¼Œåˆ™ä¸ä½œå¤„ç†
+    --ÅĞ¶Ï¹©Ó¦ÉÌ²ÖÊÇ·ñÓĞ¿â´æ 
+    --ÓĞ£¬ÔòÖ´ĞĞÒ»ÏÂÂß¼­
+    --ÎŞ£¬Ôò²»×÷´¦Àí
     IF v_sup_brand_stock > 0 THEN
-      --æ ¡éªŒâ€œä¾›åº”å•†ä»“å¯å¸ƒåº“å­˜â€è½¬åŒ–ä¸ºè‰²å¸ƒæ˜¯å¦å¤Ÿç”¨
+      --Ğ£Ñé¡°¹©Ó¦ÉÌ²ÖÅ÷²¼¿â´æ¡±×ª»¯ÎªÉ«²¼ÊÇ·ñ¹»ÓÃ
       p_check_color_fabric_is_enough(p_brand_stock      => p_brand_stock,
                                      p_plan_product_num => p_cpop_rec.plan_product_quantity,
                                      p_sup_store_num    => v_sup_brand_stock,
@@ -1222,8 +1221,8 @@ SELECT va.group_key,
                                      po_num             => v_sup_num);
     
       IF p_cpop_rec.prepare_object = 0 THEN
-        --æˆå“ä¾›åº”å•† ä¾›åº”å•†ä»“ ç”Ÿæˆä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨
-        --æ›´æ–°ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»† 
+        --³ÉÆ·¹©Ó¦ÉÌ ¹©Ó¦ÉÌ²Ö Éú³É¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í
+        --¸üĞÂ¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸ 
         p_generate_sup_brand_inout_bound_by_pro(p_cpop_rec     => p_cpop_rec,
                                                 p_store_type   => p_store_type,
                                                 p_material_spu => p_material_spu,
@@ -1231,8 +1230,8 @@ SELECT va.group_key,
                                                 p_user_id      => p_user_id);
       
       ELSIF p_cpop_rec.prepare_object = 1 THEN
-        --ç‰©æ–™ä¾›åº”å•† ä¾›åº”å•†ä»“ ç”Ÿæˆä¾›åº”å•†åº“å­˜-å¯å¸ƒå‡ºå…¥åº“å•è¡¨
-        --æ›´æ–°ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»† 
+        --ÎïÁÏ¹©Ó¦ÉÌ ¹©Ó¦ÉÌ²Ö Éú³É¹©Ó¦ÉÌ¿â´æ-Å÷²¼³öÈë¿âµ¥±í
+        --¸üĞÂ¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸ 
         p_generate_sup_brand_inout_bound_by_mt(p_cpop_rec     => p_cpop_rec,
                                                p_store_type   => p_store_type,
                                                p_material_spu => p_material_spu,
@@ -1244,7 +1243,7 @@ SELECT va.group_key,
     END IF;
   END p_generate_sup_brand_inout_bound;
 
-  --æˆå“ä¾›åº”å•† æ›´æ–°ã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»†ã€‘ç›¸åº”æ•°æ®
+  --³ÉÆ·¹©Ó¦ÉÌ ¸üĞÂ¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸¡¿ÏàÓ¦Êı¾İ
   PROCEDURE p_generate_grey_stock(p_sgiob_rec   mrp.supplier_grey_in_out_bound%ROWTYPE,
                                   p_inout_stock NUMBER,
                                   p_user_id     VARCHAR2) IS
@@ -1253,40 +1252,40 @@ SELECT va.group_key,
     UPDATE mrp.supplier_grey_stock gs
        SET gs.total_stock = (CASE
                               WHEN p_sgiob_rec.ascription = 1 THEN
-                               gs.total_stock + p_inout_stock --å…¥åº“
+                               gs.total_stock + p_inout_stock --Èë¿â
                               WHEN p_sgiob_rec.ascription = 0 THEN
-                               gs.total_stock - p_inout_stock --å‡ºåº“
+                               gs.total_stock - p_inout_stock --³ö¿â
                               ELSE
                                0
                             END),
            gs.brand_stock = (CASE
-                            --å“ç‰Œä»“
+                            --Æ·ÅÆ²Ö
                               WHEN p_sgiob_rec.stock_type = 1 THEN
                                (CASE
                                  WHEN p_sgiob_rec.ascription = 1 THEN
-                                  gs.brand_stock + p_inout_stock --å…¥åº“
+                                  gs.brand_stock + p_inout_stock --Èë¿â
                                  WHEN p_sgiob_rec.ascription = 0 THEN
-                                  gs.brand_stock - p_inout_stock --å‡ºåº“
+                                  gs.brand_stock - p_inout_stock --³ö¿â
                                  ELSE
                                   0
                                END)
-                            --ä¾›åº”å•†ä»“
+                            --¹©Ó¦ÉÌ²Ö
                               WHEN p_sgiob_rec.stock_type = 2 THEN
                                gs.brand_stock
                               ELSE
                                0
                             END),
            gs.supplier_stock = (CASE
-                               --å“ç‰Œä»“
+                               --Æ·ÅÆ²Ö
                                  WHEN p_sgiob_rec.stock_type = 1 THEN
                                   gs.supplier_stock
-                               --ä¾›åº”å•†ä»“
+                               --¹©Ó¦ÉÌ²Ö
                                  WHEN p_sgiob_rec.stock_type = 2 THEN
                                   (CASE
                                     WHEN p_sgiob_rec.ascription = 1 THEN
-                                     gs.supplier_stock + p_inout_stock --å…¥åº“
+                                     gs.supplier_stock + p_inout_stock --Èë¿â
                                     WHEN p_sgiob_rec.ascription = 0 THEN
-                                     gs.supplier_stock - p_inout_stock --å‡ºåº“
+                                     gs.supplier_stock - p_inout_stock --³ö¿â
                                     ELSE
                                      0
                                   END)
@@ -1303,7 +1302,7 @@ SELECT va.group_key,
        AND gs.whether_del = 0;
   END p_generate_grey_stock;
 
-  --ç‰©æ–™ä¾›åº”å•† æ›´æ–°ã€ä¾›åº”å•†åº“å­˜-å¯å¸ƒä»“åº“å­˜æ˜ç»†ã€‘ç›¸åº”æ•°æ®
+  --ÎïÁÏ¹©Ó¦ÉÌ ¸üĞÂ¡¾¹©Ó¦ÉÌ¿â´æ-Å÷²¼²Ö¿â´æÃ÷Ï¸¡¿ÏàÓ¦Êı¾İ
   PROCEDURE p_generate_material_grey_stock(p_mgiob_rec   mrp.material_grey_in_out_bound%ROWTYPE,
                                            p_inout_stock NUMBER,
                                            p_user_id     VARCHAR2) IS
@@ -1312,40 +1311,40 @@ SELECT va.group_key,
     UPDATE mrp.material_grey_stock gs
        SET gs.total_stock = (CASE
                               WHEN p_mgiob_rec.ascription = 1 THEN
-                               gs.total_stock + p_inout_stock --å…¥åº“
+                               gs.total_stock + p_inout_stock --Èë¿â
                               WHEN p_mgiob_rec.ascription = 0 THEN
-                               gs.total_stock - p_inout_stock --å‡ºåº“
+                               gs.total_stock - p_inout_stock --³ö¿â
                               ELSE
                                0
                             END),
            gs.brand_stock = (CASE
-                            --å“ç‰Œä»“
+                            --Æ·ÅÆ²Ö
                               WHEN p_mgiob_rec.stock_type = 1 THEN
                                (CASE
                                  WHEN p_mgiob_rec.ascription = 1 THEN
-                                  gs.brand_stock + p_inout_stock --å…¥åº“
+                                  gs.brand_stock + p_inout_stock --Èë¿â
                                  WHEN p_mgiob_rec.ascription = 0 THEN
-                                  gs.brand_stock - p_inout_stock --å‡ºåº“
+                                  gs.brand_stock - p_inout_stock --³ö¿â
                                  ELSE
                                   0
                                END)
-                            --ä¾›åº”å•†ä»“
+                            --¹©Ó¦ÉÌ²Ö
                               WHEN p_mgiob_rec.stock_type = 2 THEN
                                gs.brand_stock
                               ELSE
                                0
                             END),
            gs.supplier_stock = (CASE
-                               --å“ç‰Œä»“
+                               --Æ·ÅÆ²Ö
                                  WHEN p_mgiob_rec.stock_type = 1 THEN
                                   gs.supplier_stock
-                               --ä¾›åº”å•†ä»“
+                               --¹©Ó¦ÉÌ²Ö
                                  WHEN p_mgiob_rec.stock_type = 2 THEN
                                   (CASE
                                     WHEN p_mgiob_rec.ascription = 1 THEN
-                                     gs.supplier_stock + p_inout_stock --å…¥åº“
+                                     gs.supplier_stock + p_inout_stock --Èë¿â
                                     WHEN p_mgiob_rec.ascription = 0 THEN
-                                     gs.supplier_stock - p_inout_stock --å‡ºåº“
+                                     gs.supplier_stock - p_inout_stock --³ö¿â
                                     ELSE
                                      0
                                   END)
@@ -1361,21 +1360,21 @@ SELECT va.group_key,
        AND gs.whether_del = 0;
   END p_generate_material_grey_stock;
 
-  --å–æ¶ˆå¤‡æ–™å•
+  --È¡Ïû±¸ÁÏµ¥
   PROCEDURE p_cancle_color_prepare_order(p_prepare_order_id   VARCHAR2,
                                          p_cancel_reason      VARCHAR2,
                                          p_company_id         VARCHAR2,
                                          p_operate_company_id VARCHAR2,
                                          p_user_id            VARCHAR2) IS
   BEGIN
-    --æ•°æ®æ ¡éªŒ
-    --å¤‡æ–™çŠ¶æ€
+    --Êı¾İĞ£Ñé
+    --±¸ÁÏ×´Ì¬
     mrp.pkg_color_prepare_order.p_check_prepare_status(p_prepare_order_id => p_prepare_order_id,
                                                        p_prepare_status   => 1);
-    --å–æ¶ˆåŸå› 
+    --È¡ÏûÔ­Òò
     mrp.pkg_color_prepare_order.p_check_cancel_reason(p_cancel_reason => p_cancel_reason);
   
-    --å•æ®å˜æ›´æº¯æº
+    --µ¥¾İ±ä¸üËİÔ´
     scmdata.pkg_plat_log.p_document_change_trace(p_company_id              => p_company_id,
                                                  p_document_id             => p_prepare_order_id,
                                                  p_data_source_parent_code => 'PREMATERIAL_MANA_LOG',
@@ -1383,29 +1382,29 @@ SELECT va.group_key,
                                                  p_operate_company_id      => p_operate_company_id,
                                                  p_user_id                 => p_user_id);
   
-    --å–æ¶ˆå¤‡æ–™å•
+    --È¡Ïû±¸ÁÏµ¥
     mrp.pkg_color_prepare_order.p_update_color_prepare_order_status(p_prepare_order_id => p_prepare_order_id,
                                                                     p_cancel_reason    => p_cancel_reason,
                                                                     p_user_id          => p_user_id);
   
   END p_cancle_color_prepare_order;
 
-  --ä¿®æ”¹è®¢å•æ•°é‡
+  --ĞŞ¸Ä¶©µ¥ÊıÁ¿
   PROCEDURE p_update_order_num(p_prepare_order_id   VARCHAR2,
                                p_order_num          VARCHAR2,
                                p_company_id         VARCHAR2,
                                p_operate_company_id VARCHAR2,
                                p_user_id            VARCHAR2) IS
   BEGIN
-    --æ•°æ®æ ¡éªŒ
-    --å¤‡æ–™çŠ¶æ€
+    --Êı¾İĞ£Ñé
+    --±¸ÁÏ×´Ì¬
     mrp.pkg_color_prepare_order.p_check_prepare_status(p_prepare_order_id => p_prepare_order_id,
                                                        p_prepare_status   => 1);
-    --è®¢å•æ•°é‡
+    --¶©µ¥ÊıÁ¿
     mrp.pkg_color_prepare_order.p_check_order_num(p_prepare_order_id => p_prepare_order_id,
                                                   p_order_num        => p_order_num);
   
-    --å•æ®å˜æ›´æº¯æº
+    --µ¥¾İ±ä¸üËİÔ´
     scmdata.pkg_plat_log.p_document_change_trace(p_company_id              => p_company_id,
                                                  p_document_id             => p_prepare_order_id,
                                                  p_data_source_parent_code => 'PREMATERIAL_MANA_LOG',
@@ -1420,7 +1419,7 @@ SELECT va.group_key,
      WHERE t.prepare_order_id = p_prepare_order_id;
   END p_update_order_num;
 
-  --ä¿®æ”¹é¢„è®¡åˆ°ä»“æ—¥æœŸ
+  --ĞŞ¸ÄÔ¤¼Æµ½²ÖÈÕÆÚ
   PROCEDURE p_update_expect_arrival_time(p_prepare_order_id    VARCHAR2,
                                          p_prepare_status      INT,
                                          p_expect_arrival_time DATE,
@@ -1428,16 +1427,16 @@ SELECT va.group_key,
                                          p_operate_company_id  VARCHAR2,
                                          p_user_id             VARCHAR2) IS
   BEGIN
-    --æ•°æ®æ ¡éªŒ
-    --å¤‡æ–™çŠ¶æ€
+    --Êı¾İĞ£Ñé
+    --±¸ÁÏ×´Ì¬
     mrp.pkg_color_prepare_order.p_check_prepare_status(p_prepare_order_id => p_prepare_order_id,
                                                        p_prepare_status   => p_prepare_status);
-    --é¢„è®¡åˆ°ä»“æ—¥æœŸ
+    --Ô¤¼Æµ½²ÖÈÕÆÚ
     mrp.pkg_color_prepare_order.p_check_expect_arrival_time(p_prepare_order_id    => p_prepare_order_id,
                                                             p_expect_arrival_time => to_char(p_expect_arrival_time,
                                                                                              'yyyy-mm-dd'));
   
-    --å•æ®å˜æ›´æº¯æº
+    --µ¥¾İ±ä¸üËİÔ´
     scmdata.pkg_plat_log.p_document_change_trace(p_company_id              => p_company_id,
                                                  p_document_id             => p_prepare_order_id,
                                                  p_data_source_parent_code => 'PREMATERIAL_MANA_LOG',
@@ -1456,22 +1455,22 @@ SELECT va.group_key,
      WHERE t.prepare_order_id = p_prepare_order_id;
   END p_update_expect_arrival_time;
 
-  --ç”Ÿäº§å•é€»è¾‘
-  --å–æ¶ˆè®¢å•
+  --Éú²úµ¥Âß¼­
+  --È¡Ïû¶©µ¥
   PROCEDURE p_cancel_product_order(p_product_order_id   VARCHAR2,
                                    p_cancel_reason      VARCHAR2,
                                    p_company_id         VARCHAR2,
                                    p_operate_company_id VARCHAR2,
                                    p_user_id            VARCHAR2) IS
   BEGIN
-    --æ•°æ®æ ¡éªŒ
-    --ç”Ÿäº§å•çŠ¶æ€
+    --Êı¾İĞ£Ñé
+    --Éú²úµ¥×´Ì¬
     mrp.pkg_color_prepare_product_order.p_check_product_status(p_product_order_id => p_product_order_id,
                                                                p_product_status   => 1);
-    --å–æ¶ˆåŸå› 
+    --È¡ÏûÔ­Òò
     mrp.pkg_color_prepare_order.p_check_cancel_reason(p_cancel_reason => p_cancel_reason);
   
-    --å•æ®å˜æ›´æº¯æº
+    --µ¥¾İ±ä¸üËİÔ´
     scmdata.pkg_plat_log.p_document_change_trace(p_company_id              => p_company_id,
                                                  p_document_id             => p_product_order_id,
                                                  p_data_source_parent_code => 'PREMATERIAL_MANA_LOG',
@@ -1479,7 +1478,7 @@ SELECT va.group_key,
                                                  p_operate_company_id      => p_operate_company_id,
                                                  p_user_id                 => p_user_id);
   
-    --å–æ¶ˆç”Ÿäº§å•
+    --È¡ÏûÉú²úµ¥
     UPDATE mrp.color_prepare_product_order t
        SET t.product_status = 3,
            t.cancel_id      = p_user_id,
@@ -1487,12 +1486,12 @@ SELECT va.group_key,
            t.cancel_reason  = p_cancel_reason
      WHERE t.product_order_id = p_product_order_id;
   
-    --å–æ¶ˆå¤‡æ–™å•
+    --È¡Ïû±¸ÁÏµ¥
     FOR cpo_rec IN (SELECT po.prepare_order_id
                       FROM mrp.color_prepare_order po
                      WHERE po.product_order_id = p_product_order_id) LOOP
     
-      --å•æ®å˜æ›´æº¯æº
+      --µ¥¾İ±ä¸üËİÔ´
       scmdata.pkg_plat_log.p_document_change_trace(p_company_id              => p_company_id,
                                                    p_document_id             => cpo_rec.prepare_order_id,
                                                    p_data_source_parent_code => 'PREMATERIAL_MANA_LOG',
@@ -1506,7 +1505,7 @@ SELECT va.group_key,
     END LOOP;
   END p_cancel_product_order;
 
-  --å®Œæˆè®¢å•
+  --Íê³É¶©µ¥
   PROCEDURE p_finish_product_order(p_product_order_id     VARCHAR2,
                                    p_cur_finished_num     VARCHAR2,
                                    p_is_finished_preorder NUMBER,
@@ -1514,82 +1513,82 @@ SELECT va.group_key,
                                    p_operate_company_id   VARCHAR2,
                                    p_user_id              VARCHAR2) IS
     v_cppo_rec               mrp.color_prepare_product_order%ROWTYPE;
-    v_batch_finish_num       NUMBER; --åˆ†æ‰¹å®Œæˆæ•°
-    v_batch_finish_percent   NUMBER; --åˆ†æ‰¹å®Œæˆç™¾åˆ†æ¯”
-    v_batch_finish_percent_d NUMBER; --åˆ†æ‰¹å®Œæˆç™¾åˆ†æ¯” å°æ•°
+    v_batch_finish_num       NUMBER; --·ÖÅúÍê³ÉÊı
+    v_batch_finish_percent   NUMBER; --·ÖÅúÍê³É°Ù·Ö±È
+    v_batch_finish_percent_d NUMBER; --·ÖÅúÍê³É°Ù·Ö±È Ğ¡Êı
   BEGIN
     SELECT *
       INTO v_cppo_rec
       FROM mrp.color_prepare_product_order t
      WHERE t.product_order_id = p_product_order_id;
   
-    --æ ¡éªŒç”Ÿäº§å•çŠ¶æ€
+    --Ğ£ÑéÉú²úµ¥×´Ì¬
     mrp.pkg_color_prepare_product_order.p_check_product_status(p_product_order_id => p_product_order_id,
                                                                p_product_status   => 1);
-    --æ•°æ®æ ¡éªŒ
+    --Êı¾İĞ£Ñé
     mrp.pkg_color_prepare_product_order.p_check_cur_finished_num(p_cur_finished_num => p_cur_finished_num);
     mrp.pkg_color_prepare_product_order.p_check_is_finished_preorder(p_is_finished_preorder => p_is_finished_preorder);
-    --æº¢çŸ­è£…Â±3% æ ¡éªŒ
+    --Òç¶Ì×°¡À3% Ğ£Ñé
     mrp.pkg_color_prepare_product_order.p_check_more_less_clause(p_cur_finished_num     => p_cur_finished_num,
                                                                  p_finished_num         => v_cppo_rec.batch_finish_num,
                                                                  p_order_num            => v_cppo_rec.plan_product_quantity,
                                                                  p_rate                 => 0.03,
                                                                  p_is_finished_preorder => p_is_finished_preorder);
-    --æ ¡éªŒé€šè¿‡ï¼Œåˆ™è½ä»¥ä¸‹è¡¨
-    --1.è‰²å¸ƒå¤‡æ–™åˆ†æ‰¹å®Œæˆå•è¡¨
+    --Ğ£ÑéÍ¨¹ı£¬ÔòÂäÒÔÏÂ±í
+    --1.É«²¼±¸ÁÏ·ÖÅúÍê³Éµ¥±í
     DECLARE
       v_cpbfo_rec mrp.color_prepare_batch_finish_order%ROWTYPE;
     BEGIN
       v_cpbfo_rec.prepare_batch_finish_id := mrp.pkg_plat_comm.f_get_docuno(pi_table_name  => 'COLOR_PREPARE_BATCH_FINISH_ORDER',
                                                                             pi_column_name => 'PREPARE_BATCH_FINISH_ID',
                                                                             pi_pre         => p_product_order_id,
-                                                                            pi_serail_num  => 2); --è‰²å¸ƒåˆ†æ‰¹å®Œæˆå•å·
-      v_cpbfo_rec.product_order_id        := p_product_order_id; --è‰²å¸ƒç”Ÿäº§å•å·
-      v_cpbfo_rec.batch_finish_time       := SYSDATE; --åˆ†æ‰¹å®Œæˆæ—¶é—´
-      v_cpbfo_rec.unit                    := v_cppo_rec.unit; --å•ä½
-      v_cpbfo_rec.batch_finish_num        := to_number(p_cur_finished_num); --åˆ†æ‰¹å®Œæˆæ•°é‡
+                                                                            pi_serail_num  => 2); --É«²¼·ÖÅúÍê³Éµ¥ºÅ
+      v_cpbfo_rec.product_order_id        := p_product_order_id; --É«²¼Éú²úµ¥ºÅ
+      v_cpbfo_rec.batch_finish_time       := SYSDATE; --·ÖÅúÍê³ÉÊ±¼ä
+      v_cpbfo_rec.unit                    := v_cppo_rec.unit; --µ¥Î»
+      v_cpbfo_rec.batch_finish_num        := to_number(p_cur_finished_num); --·ÖÅúÍê³ÉÊıÁ¿
       v_cpbfo_rec.batch_finish_percent    := round(to_number(p_cur_finished_num) /
                                                    v_cppo_rec.plan_product_quantity,
-                                                   4) * 100; --åˆ†æ‰¹å®Œæˆç™¾åˆ†æ¯”  ps:æš‚æ—¶ä¸plmç»Ÿä¸€ç™¾åˆ†æ¯”æ ¼å¼
-      v_cpbfo_rec.batch_finish_id         := p_user_id; --åˆ†æ‰¹å®Œæˆäºº
-      v_cpbfo_rec.create_id               := p_user_id; --åˆ›å»ºè€…
-      v_cpbfo_rec.create_time             := SYSDATE; --åˆ›å»ºæ—¶é—´
-      v_cpbfo_rec.update_id               := p_user_id; --æ›´æ–°è€…
-      v_cpbfo_rec.update_time             := SYSDATE; --æ›´æ–°æ—¶é—´
-      v_cpbfo_rec.whether_del             := 0; --æ˜¯å¦åˆ é™¤ï¼Œ0å¦1æ˜¯
+                                                   4) * 100; --·ÖÅúÍê³É°Ù·Ö±È  ps:ÔİÊ±ÓëplmÍ³Ò»°Ù·Ö±È¸ñÊ½
+      v_cpbfo_rec.batch_finish_id         := p_user_id; --·ÖÅúÍê³ÉÈË
+      v_cpbfo_rec.create_id               := p_user_id; --´´½¨Õß
+      v_cpbfo_rec.create_time             := SYSDATE; --´´½¨Ê±¼ä
+      v_cpbfo_rec.update_id               := p_user_id; --¸üĞÂÕß
+      v_cpbfo_rec.update_time             := SYSDATE; --¸üĞÂÊ±¼ä
+      v_cpbfo_rec.whether_del             := 0; --ÊÇ·ñÉ¾³ı£¬0·ñ1ÊÇ
     
       mrp.pkg_color_prepare_batch_finish_order.p_insert_color_prepare_batch_finish_order(p_color_rec => v_cpbfo_rec);
     END;
   
-    --åˆ†æ‰¹å®Œæˆæ•°
+    --·ÖÅúÍê³ÉÊı
     v_batch_finish_num := v_cppo_rec.batch_finish_num + p_cur_finished_num;
-    --åˆ†æ‰¹å®Œæˆç´¯è®¡ç™¾åˆ†æ¯”
+    --·ÖÅúÍê³ÉÀÛ¼Æ°Ù·Ö±È
     v_batch_finish_percent := round((v_batch_finish_num) /
                                     v_cppo_rec.plan_product_quantity,
                                     4) * 100;
   
     v_batch_finish_percent_d := v_batch_finish_percent / 100;
   
-    --2.ä¿®æ”¹è‰²å¸ƒå¤‡æ–™ç”Ÿäº§å•è¡¨ç›¸å…³æ•°æ®   
+    --2.ĞŞ¸ÄÉ«²¼±¸ÁÏÉú²úµ¥±íÏà¹ØÊı¾İ   
     BEGIN
       IF p_is_finished_preorder = 1 THEN
-        v_cppo_rec.product_status := 2; --ç”Ÿäº§å•çŠ¶æ€ï¼Œ1ç”Ÿäº§ä¸­ï¼Œ2å·²å®Œæˆï¼Œ3å·²å–æ¶ˆ
-        v_cppo_rec.finish_id      := p_user_id; --æ€»å®Œæˆäºº
-        v_cppo_rec.finish_num     := v_batch_finish_num; --æ€»å®Œæˆæ•°é‡
-        v_cppo_rec.finish_time    := SYSDATE; --æ€»å®Œæˆæ—¥æœŸ
-        v_cppo_rec.complete_num   := 0; --å¾…å®Œæˆæ•°é‡
+        v_cppo_rec.product_status := 2; --Éú²úµ¥×´Ì¬£¬1Éú²úÖĞ£¬2ÒÑÍê³É£¬3ÒÑÈ¡Ïû
+        v_cppo_rec.finish_id      := p_user_id; --×ÜÍê³ÉÈË
+        v_cppo_rec.finish_num     := v_batch_finish_num; --×ÜÍê³ÉÊıÁ¿
+        v_cppo_rec.finish_time    := SYSDATE; --×ÜÍê³ÉÈÕÆÚ
+        v_cppo_rec.complete_num   := 0; --´ıÍê³ÉÊıÁ¿
       
       ELSE
         v_cppo_rec.complete_num := v_cppo_rec.plan_product_quantity -
-                                   v_batch_finish_num; --å¾…å®Œæˆæ•°é‡
+                                   v_batch_finish_num; --´ıÍê³ÉÊıÁ¿
       END IF;
     
-      v_cppo_rec.batch_finish_num     := v_batch_finish_num; --åˆ†æ‰¹å®Œæˆç´¯è®¡æ•°é‡   
-      v_cppo_rec.batch_finish_percent := v_batch_finish_percent; --åˆ†æ‰¹å®Œæˆç´¯è®¡ç™¾åˆ†æ¯”
-      v_cppo_rec.update_id            := p_user_id; --æ›´æ–°è€…
-      v_cppo_rec.update_time          := SYSDATE; --æ›´æ–°æ—¶é—´
+      v_cppo_rec.batch_finish_num     := v_batch_finish_num; --·ÖÅúÍê³ÉÀÛ¼ÆÊıÁ¿   
+      v_cppo_rec.batch_finish_percent := v_batch_finish_percent; --·ÖÅúÍê³ÉÀÛ¼Æ°Ù·Ö±È
+      v_cppo_rec.update_id            := p_user_id; --¸üĞÂÕß
+      v_cppo_rec.update_time          := SYSDATE; --¸üĞÂÊ±¼ä
     
-      --å•æ®å˜æ›´æº¯æº
+      --µ¥¾İ±ä¸üËİÔ´
       scmdata.pkg_plat_log.p_document_change_trace(p_company_id              => p_company_id,
                                                    p_document_id             => p_product_order_id,
                                                    p_data_source_parent_code => 'PREMATERIAL_MANA_LOG',
@@ -1599,21 +1598,21 @@ SELECT va.group_key,
     
       mrp.pkg_color_prepare_product_order.p_update_color_prepare_product_order(p_color_rec => v_cppo_rec);
     END;
-    --3.è‰²å¸ƒå¤‡æ–™å•è¡¨
-    --å½“ã€æ˜¯å¦å®Œæˆå¤‡æ–™å•è¡¨ã€‘=æ˜¯æ—¶ï¼Œåˆ™è½è¡¨
-    --å¦åˆ™ï¼Œä¸ä½œå¤„ç†
+    --3.É«²¼±¸ÁÏµ¥±í
+    --µ±¡¾ÊÇ·ñÍê³É±¸ÁÏµ¥±í¡¿=ÊÇÊ±£¬ÔòÂä±í
+    --·ñÔò£¬²»×÷´¦Àí
     BEGIN
       FOR cpo_rec IN (SELECT *
                         FROM mrp.color_prepare_order t
                        WHERE t.product_order_id = p_product_order_id) LOOP
         IF p_is_finished_preorder = 1 THEN
-          cpo_rec.prepare_status := 3; --å¤‡æ–™çŠ¶æ€ï¼Œ0å¾…å®¡æ ¸ï¼Œ1å¾…æ¥å•ï¼Œ2ç”Ÿäº§ä¸­ï¼Œ3å·²å®Œæˆï¼Œ4å·²å–æ¶ˆ
-          cpo_rec.finish_id      := p_user_id; --å®Œæˆäºº
+          cpo_rec.prepare_status := 3; --±¸ÁÏ×´Ì¬£¬0´ıÉóºË£¬1´ı½Óµ¥£¬2Éú²úÖĞ£¬3ÒÑÍê³É£¬4ÒÑÈ¡Ïû
+          cpo_rec.finish_id      := p_user_id; --Íê³ÉÈË
           cpo_rec.finish_num     := v_batch_finish_percent_d *
-                                    cpo_rec.order_num; --å®Œæˆæ•°é‡
-          cpo_rec.finish_time    := SYSDATE; --å®Œæˆæ—¥æœŸ
+                                    cpo_rec.order_num; --Íê³ÉÊıÁ¿
+          cpo_rec.finish_time    := SYSDATE; --Íê³ÉÈÕÆÚ
         
-          --å•æ®å˜æ›´æº¯æº
+          --µ¥¾İ±ä¸üËİÔ´
           scmdata.pkg_plat_log.p_document_change_trace(p_company_id              => p_company_id,
                                                        p_document_id             => cpo_rec.prepare_order_id,
                                                        p_data_source_parent_code => 'PREMATERIAL_MANA_LOG',
@@ -1624,30 +1623,30 @@ SELECT va.group_key,
           NULL;
         END IF;
         cpo_rec.batch_finish_num     := v_batch_finish_percent_d *
-                                        cpo_rec.order_num; --åˆ†æ‰¹å®Œæˆç´¯è®¡æ•°é‡
-        cpo_rec.batch_finish_percent := v_batch_finish_percent; --åˆ†æ‰¹å®Œæˆç´¯è®¡ç™¾åˆ†æ¯”
+                                        cpo_rec.order_num; --·ÖÅúÍê³ÉÀÛ¼ÆÊıÁ¿
+        cpo_rec.batch_finish_percent := v_batch_finish_percent; --·ÖÅúÍê³ÉÀÛ¼Æ°Ù·Ö±È
         cpo_rec.complete_num         := cpo_rec.order_num *
-                                        (1 - v_batch_finish_percent_d); --å¾…å®Œæˆæ•°é‡
+                                        (1 - v_batch_finish_percent_d); --´ıÍê³ÉÊıÁ¿
       
-        cpo_rec.update_id   := p_user_id; --æ›´æ–°è€…
-        cpo_rec.update_time := SYSDATE; --æ›´æ–°æ—¶é—´   
+        cpo_rec.update_id   := p_user_id; --¸üĞÂÕß
+        cpo_rec.update_time := SYSDATE; --¸üĞÂÊ±¼ä   
         mrp.pkg_color_prepare_order.p_update_color_prepare_order(p_color_rec => cpo_rec);
       END LOOP;
     END;
-    --4.æ ¹æ®ã€å¤‡æ–™å¯¹è±¡ã€‘(0æˆå“ä¾›åº”å•†ï¼Œ1ç‰©æ–™ä¾›åº”å•†)ï¼Œè¿›è¡Œè½è¡¨ï¼ˆè‰²å¸ƒå‡ºå…¥åº“å•è¡¨ã€è‰²å¸ƒä»“åº“å­˜æ˜ç»†ï¼‰
+    --4.¸ù¾İ¡¾±¸ÁÏ¶ÔÏó¡¿(0³ÉÆ·¹©Ó¦ÉÌ£¬1ÎïÁÏ¹©Ó¦ÉÌ)£¬½øĞĞÂä±í£¨É«²¼³öÈë¿âµ¥±í¡¢É«²¼²Ö¿â´æÃ÷Ï¸£©
     DECLARE
       vo_bound_num VARCHAR2(32);
       v_sciob_rec  mrp.supplier_color_in_out_bound%ROWTYPE;
       v_mciob_rec  mrp.material_color_in_out_bound%ROWTYPE;
     BEGIN
       IF v_cppo_rec.prepare_object = 0 THEN
-        --4.1 è‰²å¸ƒå…¥åº“
+        --4.1 É«²¼Èë¿â
         p_color_cloth_storage(p_cppo_rec   => v_cppo_rec,
                               p_company_id => p_company_id,
                               p_user_id    => p_user_id,
                               p_batch_num  => v_batch_finish_num,
                               po_bound_num => vo_bound_num);
-        --4.2 è‰²å¸ƒä»“åº“å­˜æ˜ç»†
+        --4.2 É«²¼²Ö¿â´æÃ÷Ï¸
         SELECT *
           INTO v_sciob_rec
           FROM mrp.supplier_color_in_out_bound t
@@ -1657,13 +1656,13 @@ SELECT va.group_key,
                                           p_company_id => p_company_id,
                                           p_user_id    => p_user_id);
       ELSIF v_cppo_rec.prepare_object = 1 THEN
-        --4.3 è‰²å¸ƒå…¥åº“
+        --4.3 É«²¼Èë¿â
         p_material_color_cloth_storage(p_cppo_rec   => v_cppo_rec,
                                        p_company_id => p_company_id,
                                        p_user_id    => p_user_id,
                                        p_batch_num  => v_batch_finish_num,
                                        po_bound_num => vo_bound_num);
-        --4.4 è‰²å¸ƒä»“åº“å­˜æ˜ç»†
+        --4.4 É«²¼²Ö¿â´æÃ÷Ï¸
         SELECT *
           INTO v_mciob_rec
           FROM mrp.material_color_in_out_bound t
@@ -1678,7 +1677,7 @@ SELECT va.group_key,
     END;
   END p_finish_product_order;
 
-  --æˆå“ä¾›åº”å•† è‰²å¸ƒå…¥åº“
+  --³ÉÆ·¹©Ó¦ÉÌ É«²¼Èë¿â
   PROCEDURE p_color_cloth_storage(p_cppo_rec   mrp.color_prepare_product_order%ROWTYPE,
                                   p_company_id VARCHAR2,
                                   p_user_id    VARCHAR2,
@@ -1693,33 +1692,33 @@ SELECT va.group_key,
                                                                                         to_char(trunc(SYSDATE),
                                                                                                 'YYYYMMDD'),
                                                                       pi_serail_num  => 5);
-    v_sciob_rec.bound_num           := v_bound_num; --è‰²å¸ƒå‡ºå…¥åº“å•å·
-    v_sciob_rec.ascription          := 1; --å‡ºå…¥åº“å½’å±ï¼Œ0å‡ºåº“1å…¥åº“
-    v_sciob_rec.bound_type          := 10; --å‡ºå…¥åº“ç±»å‹ï¼Œ1è®¢å•å‡ºåº“ï¼Œ2ç›˜äºå‡ºåº“ï¼Œ3é¢†æ–™å‡ºåº“ï¼Œ10å“ç‰Œå¤‡æ–™å…¥åº“ï¼Œ11ä¾›åº”å•†ç°è´§å…¥åº“ï¼Œ12ä¸´æ—¶è¡¥å……å…¥åº“ï¼Œ13ç›˜ç›ˆå…¥åº“ï¼Œ14ä¸´æ—¶å¯è½¬è‰²å…¥åº“ 15 ä¾›åº”å•†è‰²å¸ƒå…¥åº“ 16 ä¾›åº”å•†ç°è´§å‡ºåº“
-    v_sciob_rec.pro_supplier_code   := p_cppo_rec.pro_supplier_code; --æˆå“ä¾›åº”å•†ç¼–å·
-    v_sciob_rec.mater_supplier_code := p_cppo_rec.mater_supplier_code; --ç‰©æ–™ä¾›åº”å•†ç¼–å·
-    v_sciob_rec.material_sku        := p_cppo_rec.material_sku; --ç‰©æ–™SKU
-    v_sciob_rec.whether_inner_mater := p_cppo_rec.whether_inner_mater; --æ˜¯å¦å†…éƒ¨ç‰©æ–™ï¼Œ0å¦1æ˜¯
-    v_sciob_rec.unit                := p_cppo_rec.unit; --å•ä½
-    v_sciob_rec.num                 := p_batch_num; --æ•°é‡ 
-    v_sciob_rec.stock_type          := 1; --ä»“åº“ç±»å‹ï¼Œ1å“ç‰Œä»“ï¼Œ2ä¾›åº”å•†ä»“
-    v_sciob_rec.relate_num          := p_cppo_rec.product_order_id; --å…³è”å•å·
-    v_sciob_rec.relate_num_type     := 1; --å…³è”å•å·ç±»å‹ï¼Œ1è‰²å¸ƒç”Ÿäº§å•/2è‰²å¸ƒç›˜ç‚¹å•/3è‰²å¸ƒé¢†æ–™å•/4é¢æ–™é‡‡è´­å•/5å¯å¸ƒå‡ºåº“å•
-    v_sciob_rec.relate_skc          := p_cppo_rec.relate_skc; --å…³è”SKC
-    v_sciob_rec.relate_purchase     := NULL; --å…³è”é‡‡è´­å•å·
-    v_sciob_rec.company_id          := p_company_id; --ä¼ä¸šç¼–ç 
-    v_sciob_rec.create_id           := p_user_id; --åˆ›å»ºè€…
-    v_sciob_rec.create_time         := SYSDATE; --åˆ›å»ºæ—¶é—´
-    v_sciob_rec.update_id           := p_user_id; --æ›´æ–°è€…
-    v_sciob_rec.update_time         := SYSDATE; --æ›´æ–°æ—¶é—´
-    v_sciob_rec.whether_del         := 0; --æ˜¯å¦åˆ é™¤ï¼Œ0å¦1æ˜¯
+    v_sciob_rec.bound_num           := v_bound_num; --É«²¼³öÈë¿âµ¥ºÅ
+    v_sciob_rec.ascription          := 1; --³öÈë¿â¹éÊô£¬0³ö¿â1Èë¿â
+    v_sciob_rec.bound_type          := 10; --³öÈë¿âÀàĞÍ£¬1¶©µ¥³ö¿â£¬2ÅÌ¿÷³ö¿â£¬3ÁìÁÏ³ö¿â£¬10Æ·ÅÆ±¸ÁÏÈë¿â£¬11¹©Ó¦ÉÌÏÖ»õÈë¿â£¬12ÁÙÊ±²¹³äÈë¿â£¬13ÅÌÓ¯Èë¿â£¬14ÁÙÊ±Å÷×ªÉ«Èë¿â 15 ¹©Ó¦ÉÌÉ«²¼Èë¿â 16 ¹©Ó¦ÉÌÏÖ»õ³ö¿â
+    v_sciob_rec.pro_supplier_code   := p_cppo_rec.pro_supplier_code; --³ÉÆ·¹©Ó¦ÉÌ±àºÅ
+    v_sciob_rec.mater_supplier_code := p_cppo_rec.mater_supplier_code; --ÎïÁÏ¹©Ó¦ÉÌ±àºÅ
+    v_sciob_rec.material_sku        := p_cppo_rec.material_sku; --ÎïÁÏSKU
+    v_sciob_rec.whether_inner_mater := p_cppo_rec.whether_inner_mater; --ÊÇ·ñÄÚ²¿ÎïÁÏ£¬0·ñ1ÊÇ
+    v_sciob_rec.unit                := p_cppo_rec.unit; --µ¥Î»
+    v_sciob_rec.num                 := p_batch_num; --ÊıÁ¿ 
+    v_sciob_rec.stock_type          := 1; --²Ö¿âÀàĞÍ£¬1Æ·ÅÆ²Ö£¬2¹©Ó¦ÉÌ²Ö
+    v_sciob_rec.relate_num          := p_cppo_rec.product_order_id; --¹ØÁªµ¥ºÅ
+    v_sciob_rec.relate_num_type     := 1; --¹ØÁªµ¥ºÅÀàĞÍ£¬1É«²¼Éú²úµ¥/2É«²¼ÅÌµãµ¥/3É«²¼ÁìÁÏµ¥/4ÃæÁÏ²É¹ºµ¥/5Å÷²¼³ö¿âµ¥
+    v_sciob_rec.relate_skc          := p_cppo_rec.relate_skc; --¹ØÁªSKC
+    v_sciob_rec.relate_purchase     := NULL; --¹ØÁª²É¹ºµ¥ºÅ
+    v_sciob_rec.company_id          := p_company_id; --ÆóÒµ±àÂë
+    v_sciob_rec.create_id           := p_user_id; --´´½¨Õß
+    v_sciob_rec.create_time         := SYSDATE; --´´½¨Ê±¼ä
+    v_sciob_rec.update_id           := p_user_id; --¸üĞÂÕß
+    v_sciob_rec.update_time         := SYSDATE; --¸üĞÂÊ±¼ä
+    v_sciob_rec.whether_del         := 0; --ÊÇ·ñÉ¾³ı£¬0·ñ1ÊÇ
   
     mrp.pkg_supplier_color_in_out_bound.p_insert_supplier_color_in_out_bound(p_suppl_rec => v_sciob_rec);
   
     po_bound_num := v_bound_num;
   END p_color_cloth_storage;
 
-  --ç‰©æ–™ä¾›åº”å•† è‰²å¸ƒå…¥åº“
+  --ÎïÁÏ¹©Ó¦ÉÌ É«²¼Èë¿â
   PROCEDURE p_material_color_cloth_storage(p_cppo_rec   mrp.color_prepare_product_order%ROWTYPE,
                                            p_company_id VARCHAR2,
                                            p_user_id    VARCHAR2,
@@ -1734,34 +1733,34 @@ SELECT va.group_key,
                                                                                         to_char(trunc(SYSDATE),
                                                                                                 'YYYYMMDD'),
                                                                       pi_serail_num  => 5);
-    v_mciob_rec.bound_num           := v_bound_num; --è‰²å¸ƒå‡ºå…¥åº“å•å·
-    v_mciob_rec.ascription          := 1; --å‡ºå…¥åº“å½’å±ï¼Œ0å‡ºåº“1å…¥åº“
-    v_mciob_rec.bound_type          := 10; --å‡ºå…¥åº“ç±»å‹ï¼Œ1è®¢å•å‡ºåº“ï¼Œ2ç›˜äºå‡ºåº“ï¼Œ3é¢†æ–™å‡ºåº“ï¼Œ10å“ç‰Œå¤‡æ–™å…¥åº“ï¼Œ11ä¾›åº”å•†ç°è´§å…¥åº“ï¼Œ12ä¸´æ—¶è¡¥å……å…¥åº“ï¼Œ13ç›˜ç›ˆå…¥åº“ï¼Œ14ä¸´æ—¶å¯è½¬è‰²å…¥åº“ 15 ä¾›åº”å•†è‰²å¸ƒå…¥åº“ 16 ä¾›åº”å•†ç°è´§å‡ºåº“
-    v_mciob_rec.mater_supplier_code := p_cppo_rec.mater_supplier_code; --ç‰©æ–™ä¾›åº”å•†ç¼–å·
-    v_mciob_rec.material_sku        := p_cppo_rec.material_sku; --ç‰©æ–™SKU
-    v_mciob_rec.unit                := p_cppo_rec.unit; --å•ä½
-    v_mciob_rec.num                 := p_batch_num; --æ•°é‡
-    v_mciob_rec.stock_type          := 1; --ä»“åº“ç±»å‹ï¼Œ1å“ç‰Œä»“ï¼Œ2ä¾›åº”å•†ä»“
-    v_mciob_rec.relate_num          := p_cppo_rec.product_order_id; --å…³è”å•å·
-    v_mciob_rec.relate_num_type     := 1; --å…³è”å•å·ç±»å‹ï¼Œ1è‰²å¸ƒç”Ÿäº§å•/2è‰²å¸ƒç›˜ç‚¹å•/3è‰²å¸ƒé¢†æ–™å•/4é¢æ–™é‡‡è´­å•/5å¯å¸ƒå‡ºåº“å•
-    v_mciob_rec.relate_skc          := p_cppo_rec.relate_skc; --å…³è”SKC
-    v_mciob_rec.relate_purchase     := NULL; --å…³è”é‡‡è´­å•å·
-    v_mciob_rec.company_id          := p_company_id; --ä¼ä¸šç¼–ç 
-    v_mciob_rec.create_id           := p_user_id; --åˆ›å»ºè€…
-    v_mciob_rec.create_time         := SYSDATE; --åˆ›å»ºæ—¶é—´
-    v_mciob_rec.update_id           := p_user_id; --æ›´æ–°è€…
-    v_mciob_rec.update_time         := SYSDATE; --æ›´æ–°æ—¶é—´
-    v_mciob_rec.whether_del         := 0; --æ˜¯å¦åˆ é™¤ï¼Œ0å¦1æ˜¯
-    v_mciob_rec.whether_inner_mater := p_cppo_rec.whether_inner_mater; --æ˜¯å¦å†…éƒ¨ç‰©æ–™ï¼Œ0å¦1æ˜¯
+    v_mciob_rec.bound_num           := v_bound_num; --É«²¼³öÈë¿âµ¥ºÅ
+    v_mciob_rec.ascription          := 1; --³öÈë¿â¹éÊô£¬0³ö¿â1Èë¿â
+    v_mciob_rec.bound_type          := 10; --³öÈë¿âÀàĞÍ£¬1¶©µ¥³ö¿â£¬2ÅÌ¿÷³ö¿â£¬3ÁìÁÏ³ö¿â£¬10Æ·ÅÆ±¸ÁÏÈë¿â£¬11¹©Ó¦ÉÌÏÖ»õÈë¿â£¬12ÁÙÊ±²¹³äÈë¿â£¬13ÅÌÓ¯Èë¿â£¬14ÁÙÊ±Å÷×ªÉ«Èë¿â 15 ¹©Ó¦ÉÌÉ«²¼Èë¿â 16 ¹©Ó¦ÉÌÏÖ»õ³ö¿â
+    v_mciob_rec.mater_supplier_code := p_cppo_rec.mater_supplier_code; --ÎïÁÏ¹©Ó¦ÉÌ±àºÅ
+    v_mciob_rec.material_sku        := p_cppo_rec.material_sku; --ÎïÁÏSKU
+    v_mciob_rec.unit                := p_cppo_rec.unit; --µ¥Î»
+    v_mciob_rec.num                 := p_batch_num; --ÊıÁ¿
+    v_mciob_rec.stock_type          := 1; --²Ö¿âÀàĞÍ£¬1Æ·ÅÆ²Ö£¬2¹©Ó¦ÉÌ²Ö
+    v_mciob_rec.relate_num          := p_cppo_rec.product_order_id; --¹ØÁªµ¥ºÅ
+    v_mciob_rec.relate_num_type     := 1; --¹ØÁªµ¥ºÅÀàĞÍ£¬1É«²¼Éú²úµ¥/2É«²¼ÅÌµãµ¥/3É«²¼ÁìÁÏµ¥/4ÃæÁÏ²É¹ºµ¥/5Å÷²¼³ö¿âµ¥
+    v_mciob_rec.relate_skc          := p_cppo_rec.relate_skc; --¹ØÁªSKC
+    v_mciob_rec.relate_purchase     := NULL; --¹ØÁª²É¹ºµ¥ºÅ
+    v_mciob_rec.company_id          := p_company_id; --ÆóÒµ±àÂë
+    v_mciob_rec.create_id           := p_user_id; --´´½¨Õß
+    v_mciob_rec.create_time         := SYSDATE; --´´½¨Ê±¼ä
+    v_mciob_rec.update_id           := p_user_id; --¸üĞÂÕß
+    v_mciob_rec.update_time         := SYSDATE; --¸üĞÂÊ±¼ä
+    v_mciob_rec.whether_del         := 0; --ÊÇ·ñÉ¾³ı£¬0·ñ1ÊÇ
+    v_mciob_rec.whether_inner_mater := p_cppo_rec.whether_inner_mater; --ÊÇ·ñÄÚ²¿ÎïÁÏ£¬0·ñ1ÊÇ
   
     mrp.pkg_material_color_in_out_bound.p_insert_material_color_in_out_bound(p_mater_rec => v_mciob_rec);
   
     po_bound_num := v_bound_num;
   END p_material_color_cloth_storage;
 
-  --æ˜¯å¦æ‰¾åˆ°è‰²å¸ƒåº“å­˜
-  --åŒºåˆ†å¤‡æ–™å¯¹è±¡ 
-  --p_prepare_objectï¼š0 æˆå“ä¾›åº”å•† 1 ç‰©æ–™ä¾›åº”å•†
+  --ÊÇ·ñÕÒµ½É«²¼¿â´æ
+  --Çø·Ö±¸ÁÏ¶ÔÏó 
+  --p_prepare_object£º0 ³ÉÆ·¹©Ó¦ÉÌ 1 ÎïÁÏ¹©Ó¦ÉÌ
   FUNCTION f_is_find_color_stock(p_pro_supplier_code   VARCHAR2 DEFAULT NULL,
                                  p_mater_supplier_code VARCHAR2,
                                  p_material_sku        VARCHAR2,
@@ -1790,14 +1789,14 @@ SELECT va.group_key,
     RETURN v_cnt;
   END f_is_find_color_stock;
 
-  --æˆå“ä¾›åº”å•† è‰²å¸ƒä»“åº“å­˜
+  --³ÉÆ·¹©Ó¦ÉÌ É«²¼²Ö¿â´æ
   PROCEDURE p_sync_supplier_color_cloth_stock(p_sciob_rec  mrp.supplier_color_in_out_bound%ROWTYPE,
                                               p_company_id VARCHAR2,
                                               p_user_id    VARCHAR2) IS
     v_sccs_rec supplier_color_cloth_stock%ROWTYPE;
     v_flag     INT;
   BEGIN
-    --æ˜¯å¦æ‰¾åˆ°è‰²å¸ƒåº“å­˜
+    --ÊÇ·ñÕÒµ½É«²¼¿â´æ
     v_flag := f_is_find_color_stock(p_pro_supplier_code   => p_sciob_rec.pro_supplier_code,
                                     p_mater_supplier_code => p_sciob_rec.mater_supplier_code,
                                     p_material_sku        => p_sciob_rec.material_sku,
@@ -1814,36 +1813,36 @@ SELECT va.group_key,
          AND t.material_sku = p_sciob_rec.material_sku
          AND t.unit = p_sciob_rec.unit;
     ELSE
-      v_sccs_rec.color_cloth_stock_id := mrp.pkg_plat_comm.f_get_uuid(); --ä¾›åº”å•†è‰²å¸ƒåº“å­˜ä¸»é”®
-      v_sccs_rec.pro_supplier_code    := p_sciob_rec.pro_supplier_code; --æˆå“ä¾›åº”å•†ç¼–å·
-      v_sccs_rec.mater_supplier_code  := p_sciob_rec.mater_supplier_code; --ç‰©æ–™ä¾›åº”å•†ç¼–å·
-      v_sccs_rec.material_sku         := p_sciob_rec.material_sku; --ç‰©æ–™SKU
-      v_sccs_rec.whether_inner_mater  := p_sciob_rec.whether_inner_mater; --æ˜¯å¦å†…éƒ¨ç‰©æ–™ï¼Œ0å¦1æ˜¯
-      v_sccs_rec.unit                 := p_sciob_rec.unit; --å•ä½
+      v_sccs_rec.color_cloth_stock_id := mrp.pkg_plat_comm.f_get_uuid(); --¹©Ó¦ÉÌÉ«²¼¿â´æÖ÷¼ü
+      v_sccs_rec.pro_supplier_code    := p_sciob_rec.pro_supplier_code; --³ÉÆ·¹©Ó¦ÉÌ±àºÅ
+      v_sccs_rec.mater_supplier_code  := p_sciob_rec.mater_supplier_code; --ÎïÁÏ¹©Ó¦ÉÌ±àºÅ
+      v_sccs_rec.material_sku         := p_sciob_rec.material_sku; --ÎïÁÏSKU
+      v_sccs_rec.whether_inner_mater  := p_sciob_rec.whether_inner_mater; --ÊÇ·ñÄÚ²¿ÎïÁÏ£¬0·ñ1ÊÇ
+      v_sccs_rec.unit                 := p_sciob_rec.unit; --µ¥Î»
       v_sccs_rec.total_stock          := nvl(v_sccs_rec.total_stock, 0) +
-                                         nvl(p_sciob_rec.num, 0); --æ€»åº“å­˜æ•°
+                                         nvl(p_sciob_rec.num, 0); --×Ü¿â´æÊı
       v_sccs_rec.brand_stock          := nvl(v_sccs_rec.brand_stock, 0) +
-                                         nvl(p_sciob_rec.num, 0); --å“ç‰Œä»“åº“å­˜æ•°
-      v_sccs_rec.supplier_stock       := 0; --ä¾›åº”å•†ä»“åº“å­˜æ•°
-      v_sccs_rec.company_id           := p_company_id; --ä¼ä¸šç¼–ç 
-      v_sccs_rec.create_id            := p_user_id; --åˆ›å»ºè€…
-      v_sccs_rec.create_time          := SYSDATE; --åˆ›å»ºæ—¶é—´
-      v_sccs_rec.update_id            := p_user_id; --æ›´æ–°è€…
-      v_sccs_rec.update_time          := SYSDATE; --æ›´æ–°æ—¶é—´
-      v_sccs_rec.whether_del          := 0; --æ˜¯å¦åˆ é™¤ï¼Œ0å¦1æ˜¯
+                                         nvl(p_sciob_rec.num, 0); --Æ·ÅÆ²Ö¿â´æÊı
+      v_sccs_rec.supplier_stock       := 0; --¹©Ó¦ÉÌ²Ö¿â´æÊı
+      v_sccs_rec.company_id           := p_company_id; --ÆóÒµ±àÂë
+      v_sccs_rec.create_id            := p_user_id; --´´½¨Õß
+      v_sccs_rec.create_time          := SYSDATE; --´´½¨Ê±¼ä
+      v_sccs_rec.update_id            := p_user_id; --¸üĞÂÕß
+      v_sccs_rec.update_time          := SYSDATE; --¸üĞÂÊ±¼ä
+      v_sccs_rec.whether_del          := 0; --ÊÇ·ñÉ¾³ı£¬0·ñ1ÊÇ
     
       mrp.pkg_supplier_color_cloth_stock.p_insert_supplier_color_cloth_stock(p_suppl_rec => v_sccs_rec);
     END IF;
   END p_sync_supplier_color_cloth_stock;
 
-  --ç‰©æ–™ä¾›åº”å•† è‰²å¸ƒä»“åº“å­˜
+  --ÎïÁÏ¹©Ó¦ÉÌ É«²¼²Ö¿â´æ
   PROCEDURE p_sync_material_color_cloth_stock(p_mciob_rec  mrp.material_color_in_out_bound%ROWTYPE,
                                               p_company_id VARCHAR2,
                                               p_user_id    VARCHAR2) IS
     v_mccs_rec material_color_cloth_stock%ROWTYPE;
     v_flag     INT;
   BEGIN
-    --æ˜¯å¦æ‰¾åˆ°è‰²å¸ƒåº“å­˜
+    --ÊÇ·ñÕÒµ½É«²¼¿â´æ
     v_flag := f_is_find_color_stock(p_mater_supplier_code => p_mciob_rec.mater_supplier_code,
                                     p_material_sku        => p_mciob_rec.material_sku,
                                     p_unit                => p_mciob_rec.unit,
@@ -1858,27 +1857,27 @@ SELECT va.group_key,
          AND t.material_sku = p_mciob_rec.material_sku
          AND t.unit = p_mciob_rec.unit;
     ELSE
-      v_mccs_rec.color_cloth_stock_id := mrp.pkg_plat_comm.f_get_uuid(); --ä¾›åº”å•†è‰²å¸ƒåº“å­˜ä¸»é”®
-      v_mccs_rec.mater_supplier_code  := p_mciob_rec.mater_supplier_code; --ç‰©æ–™ä¾›åº”å•†ç¼–å·
-      v_mccs_rec.material_sku         := p_mciob_rec.material_sku; --ç‰©æ–™SKU
-      v_mccs_rec.unit                 := p_mciob_rec.unit; --å•ä½
+      v_mccs_rec.color_cloth_stock_id := mrp.pkg_plat_comm.f_get_uuid(); --¹©Ó¦ÉÌÉ«²¼¿â´æÖ÷¼ü
+      v_mccs_rec.mater_supplier_code  := p_mciob_rec.mater_supplier_code; --ÎïÁÏ¹©Ó¦ÉÌ±àºÅ
+      v_mccs_rec.material_sku         := p_mciob_rec.material_sku; --ÎïÁÏSKU
+      v_mccs_rec.unit                 := p_mciob_rec.unit; --µ¥Î»
       v_mccs_rec.total_stock          := nvl(v_mccs_rec.total_stock, 0) +
-                                         nvl(p_mciob_rec.num, 0); --æ€»åº“å­˜æ•°
+                                         nvl(p_mciob_rec.num, 0); --×Ü¿â´æÊı
       v_mccs_rec.brand_stock          := nvl(v_mccs_rec.brand_stock, 0) +
-                                         nvl(p_mciob_rec.num, 0); --å“ç‰Œä»“åº“å­˜æ•°
-      v_mccs_rec.supplier_stock       := 0; --ä¾›åº”å•†ä»“åº“å­˜æ•°
-      v_mccs_rec.company_id           := p_company_id; --ä¼ä¸šç¼–ç 
-      v_mccs_rec.create_id            := p_user_id; --åˆ›å»ºè€…
-      v_mccs_rec.create_time          := SYSDATE; --åˆ›å»ºæ—¶é—´
-      v_mccs_rec.update_id            := p_user_id; --æ›´æ–°è€…
-      v_mccs_rec.update_time          := SYSDATE; --æ›´æ–°æ—¶é—´
-      v_mccs_rec.whether_del          := 0; --æ˜¯å¦åˆ é™¤ï¼Œ0å¦1æ˜¯
+                                         nvl(p_mciob_rec.num, 0); --Æ·ÅÆ²Ö¿â´æÊı
+      v_mccs_rec.supplier_stock       := 0; --¹©Ó¦ÉÌ²Ö¿â´æÊı
+      v_mccs_rec.company_id           := p_company_id; --ÆóÒµ±àÂë
+      v_mccs_rec.create_id            := p_user_id; --´´½¨Õß
+      v_mccs_rec.create_time          := SYSDATE; --´´½¨Ê±¼ä
+      v_mccs_rec.update_id            := p_user_id; --¸üĞÂÕß
+      v_mccs_rec.update_time          := SYSDATE; --¸üĞÂÊ±¼ä
+      v_mccs_rec.whether_del          := 0; --ÊÇ·ñÉ¾³ı£¬0·ñ1ÊÇ
     
       mrp.pkg_material_color_cloth_stock.p_insert_material_color_cloth_stock(p_mater_rec => v_mccs_rec);
     END IF;
   END p_sync_material_color_cloth_stock;
 
-  --å¤‡æ–™è¿›åº¦æŸ¥è¯¢  
+  --±¸ÁÏ½ø¶È²éÑ¯  
   FUNCTION f_query_prepare_order_process(p_order_num VARCHAR2) RETURN CLOB IS
     v_pick_sql     CLOB;
     v_purchase_sql CLOB;
@@ -1891,7 +1890,7 @@ SELECT va.group_key,
     RETURN v_sql;
   END f_query_prepare_order_process;
 
-  --å¤‡æ–™çŠ¶æ€åŒæ­¥è‡³ç”Ÿäº§è¿›åº¦è¡¨
+  --±¸ÁÏ×´Ì¬Í¬²½ÖÁÉú²ú½ø¶È±í
   PROCEDURE p_sync_prepare_status(p_order_num  VARCHAR2,
                                   p_company_id VARCHAR2) IS
     v_pcnt   INT;
@@ -1913,16 +1912,16 @@ SELECT va.group_key,
     v_cnt := v_pcnt + v_fcnt;
   
     IF v_cnt = 0 THEN
-      v_status := '00'; --æ— å¤‡æ–™
+      v_status := '00'; --ÎŞ±¸ÁÏ
     ELSE
-      --é¢†æ–™å•
+      --ÁìÁÏµ¥
       SELECT COUNT(1) cnt
         INTO v_pcnt
         FROM mrp.pick_list t
        WHERE t.relate_product_order_num = p_order_num
          AND t.pick_status = 0;
     
-      --é¢æ–™é‡‡è´­å•
+      --ÃæÁÏ²É¹ºµ¥
       SELECT SUM(va.cnt) cnt
         INTO v_fcnt
         FROM (SELECT COUNT(1) cnt
@@ -1933,13 +1932,13 @@ SELECT va.group_key,
       v_cnt := v_pcnt + v_fcnt;
     
       IF v_cnt > 0 THEN
-        v_status := '01'; --æœªå®Œæˆ
+        v_status := '01'; --Î´Íê³É
       ELSE
-        v_status := '02'; --å·²å®Œæˆ
+        v_status := '02'; --ÒÑÍê³É
       END IF;
     END IF;
   
-    --å°†å¤‡æ–™çŠ¶æ€åŒæ­¥è‡³ç”Ÿäº§è¿›åº¦è¡¨
+    --½«±¸ÁÏ×´Ì¬Í¬²½ÖÁÉú²ú½ø¶È±í
     UPDATE scmdata.t_production_progress t
        SET t.prepare_status = v_status
      WHERE t.product_gress_code = p_order_num
@@ -1948,4 +1947,3 @@ SELECT va.group_key,
   END p_sync_prepare_status;
 END pkg_color_prepare_order_manager;
 /
-

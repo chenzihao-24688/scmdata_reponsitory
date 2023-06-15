@@ -1,63 +1,63 @@
-ï»¿CREATE OR REPLACE TRIGGER MRP.trg_af_u_color_prepare_product_order
+CREATE OR REPLACE TRIGGER MRP.trg_af_u_color_prepare_product_order
   AFTER UPDATE OF product_status ON mrp.color_prepare_product_order
   FOR EACH ROW
 DECLARE
   v_document_rec scmdata.t_document_change_trace%ROWTYPE;
 BEGIN
-  --å•æ®å˜æ›´æº¯æº
-  scmdata.pkg_plat_log.p_get_document_change_trace_params(p_company_id    => 'a972dd1ffe3b3a10e0533c281cac8fd7',
+  --µ¥¾Ý±ä¸üËÝÔ´
+  scmdata.pkg_plat_log.p_get_document_change_trace_params(p_company_id    => 'b6cc680ad0f599cde0531164a8c0337f',
                                                           p_document_id   => :old.product_order_id,
                                                           po_document_rec => v_document_rec);
 
-  --ç”Ÿäº§å•çŠ¶æ€
+  --Éú²úµ¥×´Ì¬
   IF scmdata.pkg_plat_comm.f_is_check_fields_eq(p_old_field => :old.product_status,
                                                 p_new_field => :new.product_status) = 0 THEN
   
-    --1.1 å–æ¶ˆè®¢å• ç”Ÿäº§ä¸­ => å·²å–æ¶ˆ
+    --1.1 È¡Ïû¶©µ¥ Éú²úÖÐ => ÒÑÈ¡Ïû
     IF :old.product_status = 1 AND :new.product_status = 3 THEN
-      scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'a972dd1ffe3b3a10e0533c281cac8fd7',
+      scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'b6cc680ad0f599cde0531164a8c0337f',
                                                   p_apply_module       => 'a_prematerial_222',
-                                                  p_apply_module_desc  => 'è‰²å¸ƒå¤‡æ–™å•',
+                                                  p_apply_module_desc  => 'É«²¼±¸ÁÏµ¥',
                                                   p_base_table         => 'COLOR_PREPARE_PRODUCT_ORDER',
                                                   p_apply_pk_id        => :old.product_order_id,
                                                   p_action_type        => 'UPDATE',
                                                   p_log_dict_type      => v_document_rec.data_source_parent_code,
                                                   p_log_type           => v_document_rec.data_source_child_code,
-                                                  p_log_msg            => 'å–æ¶ˆç”Ÿäº§å•å·ï¼š' ||
+                                                  p_log_msg            => 'È¡ÏûÉú²úµ¥ºÅ£º' ||
                                                                           :old.product_order_id,
                                                   p_operate_field      => 'PRODUCT_STATUS',
                                                   p_field_type         => 'NUMBER',
                                                   p_field_desc         => NULL,
                                                   p_old_code           => 1,
                                                   p_new_code           => 3,
-                                                  p_old_value          => 'ç”Ÿäº§ä¸­',
-                                                  p_new_value          => 'å·²å–æ¶ˆ',
+                                                  p_old_value          => 'Éú²úÖÐ',
+                                                  p_new_value          => 'ÒÑÈ¡Ïû',
                                                   p_operate_company_id => v_document_rec.operate_company_id,
                                                   p_user_id            => v_document_rec.update_id,
                                                   p_memo               => NULL,
                                                   p_memo_desc          => NULL,
                                                   p_type               => 2);
-      --1.1 å®Œæˆç”Ÿäº§å• ç”Ÿäº§ä¸­ => å·²å®Œæˆ
+      --1.1 Íê³ÉÉú²úµ¥ Éú²úÖÐ => ÒÑÍê³É
       IF :old.product_status = 1 AND :new.product_status = 2 THEN
-        scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'a972dd1ffe3b3a10e0533c281cac8fd7',
+        scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'b6cc680ad0f599cde0531164a8c0337f',
                                                     p_apply_module       => 'a_prematerial_222',
-                                                    p_apply_module_desc  => 'è‰²å¸ƒå¤‡æ–™å•',
+                                                    p_apply_module_desc  => 'É«²¼±¸ÁÏµ¥',
                                                     p_base_table         => 'COLOR_PREPARE_PRODUCT_ORDER',
                                                     p_apply_pk_id        => :old.product_order_id,
                                                     p_action_type        => 'UPDATE',
                                                     p_log_dict_type      => v_document_rec.data_source_parent_code,
                                                     p_log_type           => v_document_rec.data_source_child_code,
-                                                    p_log_msg            => 'å®Œæˆç”Ÿäº§å•å·ï¼š' ||
-                                                                            :old.product_order_id || 'ï¼›' ||
+                                                    p_log_msg            => 'Íê³ÉÉú²úµ¥ºÅ£º' ||
+                                                                            :old.product_order_id || '£»' ||
                                                                             chr(10) ||
-                                                                            'å®Œæˆæ•°é‡ï¼š' ||
+                                                                            'Íê³ÉÊýÁ¿£º' ||
                                                                             to_char(to_number(:new.finish_num)) ||
-                                                                            'ã€æ“ä½œå‰:' ||
-                                                                            to_char(to_number(:old.finish_num)) || 'ã€‘' || 'ï¼›' ||
+                                                                            '¡¾²Ù×÷Ç°:' ||
+                                                                            to_char(to_number(:old.finish_num)) || '¡¿' || '£»' ||
                                                                             chr(10) ||
                                                                             (CASE
                                                                               WHEN :new.product_status = 2 THEN
-                                                                               'ã€ç”Ÿäº§å•çŠ¶æ€ã€‘:å·²å®Œæˆ' || 'ï¼›'
+                                                                               '¡¾Éú²úµ¥×´Ì¬¡¿:ÒÑÍê³É' || '£»'
                                                                               ELSE
                                                                                NULL
                                                                             END),
@@ -66,10 +66,10 @@ BEGIN
                                                     p_field_desc         => NULL,
                                                     p_old_code           => 1,
                                                     p_new_code           => 2,
-                                                    p_old_value          => 'ç”Ÿäº§ä¸­',
+                                                    p_old_value          => 'Éú²úÖÐ',
                                                     p_new_value          => (CASE
                                                                               WHEN :new.product_status = 2 THEN
-                                                                               'å·²å®Œæˆ'
+                                                                               'ÒÑÍê³É'
                                                                               ELSE
                                                                                NULL
                                                                             END),
@@ -83,24 +83,24 @@ BEGIN
       NULL;
     END IF;
   ELSE
-    --å®Œæˆæ•°é‡
+    --Íê³ÉÊýÁ¿
     IF scmdata.pkg_plat_comm.f_is_check_fields_eq(p_old_field => :old.batch_finish_num,
                                                   p_new_field => :new.batch_finish_num) = 0 THEN
-      scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'a972dd1ffe3b3a10e0533c281cac8fd7',
+      scmdata.pkg_plat_log.p_sync_record_plat_log(p_company_id         => 'b6cc680ad0f599cde0531164a8c0337f',
                                                   p_apply_module       => 'a_prematerial_222',
-                                                  p_apply_module_desc  => 'è‰²å¸ƒå¤‡æ–™å•',
+                                                  p_apply_module_desc  => 'É«²¼±¸ÁÏµ¥',
                                                   p_base_table         => 'COLOR_PREPARE_PRODUCT_ORDER',
                                                   p_apply_pk_id        => :old.product_order_id,
                                                   p_action_type        => 'UPDATE',
                                                   p_log_dict_type      => v_document_rec.data_source_parent_code,
                                                   p_log_type           => v_document_rec.data_source_child_code,
-                                                  p_log_msg            => 'å®Œæˆç”Ÿäº§å•å·ï¼š' ||
-                                                                          :old.product_order_id || 'ï¼›' ||
+                                                  p_log_msg            => 'Íê³ÉÉú²úµ¥ºÅ£º' ||
+                                                                          :old.product_order_id || '£»' ||
                                                                           chr(10) ||
-                                                                          'å®Œæˆæ•°é‡ï¼š' ||
+                                                                          'Íê³ÉÊýÁ¿£º' ||
                                                                           to_char(to_number(:new.batch_finish_num)) ||
-                                                                          'ã€æ“ä½œå‰:' ||
-                                                                          to_char(to_number(:old.batch_finish_num)) || 'ã€‘' || 'ï¼›',
+                                                                          '¡¾²Ù×÷Ç°:' ||
+                                                                          to_char(to_number(:old.batch_finish_num)) || '¡¿' || '£»',
                                                   p_operate_field      => 'PRODUCT_STATUS',
                                                   p_field_type         => 'NUMBER',
                                                   p_field_desc         => NULL,
@@ -117,4 +117,3 @@ BEGIN
   END IF;
 END trg_af_u_color_prepare_product_order;
 /
-
