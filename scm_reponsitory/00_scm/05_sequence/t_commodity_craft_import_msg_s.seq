@@ -1,0 +1,7 @@
+﻿create sequence SCMDATA.T_COMMODITY_CRAFT_IMPORT_MSG_S
+minvalue 1
+maxvalue 999999999999999999999999999
+start with 35
+increment by 1
+cache 2;
+

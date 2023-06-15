@@ -1,8 +1,0 @@
-﻿create sequence SCMDATA.SEQ_DEPT_ID
-minvalue 0
-maxvalue 99
-start with 52
-increment by 1
-cache 2
-cycle;
-

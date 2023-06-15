@@ -1,7 +1,0 @@
-﻿create sequence SCMDATA.SEQNO_ROLE_SECURITY_ID
-minvalue 1
-maxvalue 9999999999
-start with 4601
-increment by 1
-cache 200;
-

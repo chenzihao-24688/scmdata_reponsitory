@@ -1,0 +1,8 @@
+﻿create sequence SCMDATA.SYS_APP_ERROR_MSG_S
+minvalue 0
+maxvalue 99
+start with 100
+increment by 1
+cache 20
+cycle;
+

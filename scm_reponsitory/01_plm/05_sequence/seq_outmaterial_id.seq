@@ -1,0 +1,8 @@
+﻿create sequence PLM.SEQ_OUTMATERIAL_ID
+minvalue 0
+maxvalue 999
+start with 900
+increment by 1
+cache 20
+cycle;
+

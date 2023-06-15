@@ -1,8 +1,0 @@
-﻿create sequence SCMDATA.SEQ_RA
-minvalue 0
-maxvalue 99
-start with 40
-increment by 1
-cache 2
-cycle;
-
