@@ -1,8 +1,0 @@
-﻿create sequence SCMDATA.SEQ_SYS_HINT
-minvalue 0
-maxvalue 99
-start with 100
-increment by 1
-cache 20
-cycle;
-

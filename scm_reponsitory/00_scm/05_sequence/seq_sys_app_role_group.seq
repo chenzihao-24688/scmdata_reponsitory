@@ -1,0 +1,8 @@
+﻿create sequence SCMDATA.SEQ_SYS_APP_ROLE_GROUP
+minvalue 0
+maxvalue 999
+start with 110
+increment by 1
+cache 2
+cycle;
+

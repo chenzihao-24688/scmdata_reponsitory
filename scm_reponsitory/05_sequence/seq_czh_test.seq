@@ -1,8 +1,0 @@
-﻿create sequence SCMDATA.SEQ_CZH_TEST
-minvalue 0
-maxvalue 99
-start with 6
-increment by 1
-cache 2
-cycle;
-

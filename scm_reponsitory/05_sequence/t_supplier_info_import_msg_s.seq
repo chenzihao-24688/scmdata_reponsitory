@@ -1,7 +1,0 @@
-﻿create sequence SCMDATA.T_SUPPLIER_INFO_IMPORT_MSG_S
-minvalue 0
-maxvalue 999999999999999999999999
-start with 3028
-increment by 1
-cache 2;
-

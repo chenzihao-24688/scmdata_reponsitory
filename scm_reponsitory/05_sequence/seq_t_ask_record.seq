@@ -1,8 +1,0 @@
-﻿create sequence SCMDATA.SEQ_T_ASK_RECORD
-minvalue 0
-maxvalue 99
-start with 2
-increment by 1
-cache 2
-cycle;
-

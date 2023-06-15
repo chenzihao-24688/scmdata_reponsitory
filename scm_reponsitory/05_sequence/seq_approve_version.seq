@@ -1,8 +1,0 @@
-﻿create sequence SCMDATA.SEQ_APPROVE_VERSION
-minvalue 0
-maxvalue 99
-start with 18
-increment by 1
-cache 2
-cycle;
-

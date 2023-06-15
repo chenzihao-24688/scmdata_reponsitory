@@ -1,8 +1,0 @@
-﻿create sequence SCMDATA.SEQ_T_QC_APPOINTMENT
-minvalue 0
-maxvalue 99
-start with 20
-increment by 1
-cache 20
-cycle;
-

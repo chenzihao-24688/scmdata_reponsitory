@@ -1,0 +1,8 @@
+﻿create sequence SCMDATA.SEQ_DATA_PRIV_CODE
+minvalue 0
+maxvalue 2
+start with 2
+increment by 1
+cache 2
+cycle;
+

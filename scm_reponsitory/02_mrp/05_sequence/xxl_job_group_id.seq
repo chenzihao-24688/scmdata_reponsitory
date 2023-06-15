@@ -1,0 +1,7 @@
+﻿create sequence MRP.XXL_JOB_GROUP_ID
+minvalue 100
+maxvalue 9999999999
+start with 100
+increment by 1
+cache 20;
+

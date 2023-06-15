@@ -1,7 +1,0 @@
-﻿create sequence SCMDATA.SYS_COMPANY_IMPORT_MSG_S
-minvalue 1
-maxvalue 9999999999999999999999999999
-start with 11332
-increment by 1
-cache 2;
-

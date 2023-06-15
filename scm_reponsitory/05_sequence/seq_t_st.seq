@@ -1,8 +1,0 @@
-﻿create sequence SCMDATA.SEQ_T_ST
-minvalue 1
-maxvalue 9999999999999999999999999
-start with 77
-increment by 1
-cache 2
-order;
-

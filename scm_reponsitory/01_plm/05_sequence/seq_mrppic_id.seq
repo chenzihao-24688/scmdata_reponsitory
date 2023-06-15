@@ -1,0 +1,8 @@
+﻿create sequence PLM.SEQ_MRPPIC_ID
+minvalue 0
+maxvalue 99
+start with 60
+increment by 1
+cache 20
+cycle;
+
