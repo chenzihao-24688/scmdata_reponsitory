@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE pkg_color_prepare_order_manager IS
+CREATE OR REPLACE PACKAGE MRP.pkg_color_prepare_order_manager IS
 
   -- Author  : CZH55
   -- Created : 2023/4/25 17:39:55
@@ -239,7 +239,7 @@ CREATE OR REPLACE PACKAGE pkg_color_prepare_order_manager IS
 
 END pkg_color_prepare_order_manager;
 /
-CREATE OR REPLACE PACKAGE BODY pkg_color_prepare_order_manager IS
+CREATE OR REPLACE PACKAGE BODY MRP.pkg_color_prepare_order_manager IS
 
   --色布备料单 主表查询  
   FUNCTION f_query_color_prepare_order_header(p_company_id     VARCHAR2,
@@ -505,7 +505,7 @@ SELECT va.group_key,
     --2.更新色布备料单
     BEGIN
       --单据变更溯源
-      scmdata.pkg_plat_log.p_document_change_trace(p_company_id              => 'b6cc680ad0f599cde0531164a8c0337f',
+      scmdata.pkg_plat_log.p_document_change_trace(p_company_id              => 'a972dd1ffe3b3a10e0533c281cac8fd7',
                                                    p_document_id             => p_cpo_rec.prepare_order_id,
                                                    p_data_source_parent_code => 'PREMATERIAL_MANA_LOG',
                                                    p_data_source_child_code  => '00',
